@@ -14,7 +14,7 @@ export function Header() {
 
   return (
     <header className='w-full px-1 py-1 bg-footer'>
-      <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-5 mx-auto'>
+      <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-4 mx-auto'>
         <Link className='font-bold text-2xl' to='/'>
           <img src={img} className='h-14 object-contain' alt="DC logo" />
         </Link>
