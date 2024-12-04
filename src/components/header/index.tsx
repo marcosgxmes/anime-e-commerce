@@ -13,13 +13,13 @@ export function Header() {
   const { cartAmount } = useContext(CartContext)
 
   return (
-    <header className='w-full px-1 py-1 bg-footer'>
-      <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-4 mx-auto'>
-        <Link className='font-bold text-2xl' to='/'>
+    <header className='w-full p-1 bg-footer'>
+      <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-3 mx-auto'>
+        <Link to='/'>
           <img src={img} className='h-14 object-contain' alt="DC logo" />
         </Link>
 
-        <section className='p-4 rounded-full  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
+        <section className='p-3 rounded-full  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
           <input 
           className='w-full border-2 rounded-full h-8 px-3 outline-none border-none'
             placeholder='Pesquisar'

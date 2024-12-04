@@ -9,17 +9,17 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-8 bg-slate-200">
-      <h1 className="font-medium text-2xl text-center">Carrinho</h1>
+    <div className="w-full max-w-7xl h-screen mx-auto px-4 py-8 bg-slate-200">
+      <h1 className="font-medium text-2xl text-center mb-4">Carrinho de compras</h1>
 
 
       {cart.length === 0 && (
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center h-full justify-center'>
           <p className='font-medium'>Ops... seu carrinho está vazio!</p>
           <Link
-            className='bg-blue-600 my-3 p-1 px-3 text-white font-medium rounded hover:bg-colorTotal'
+            className='bg-blue-600 my-3 p-1 px-3 text-white font-medium rounded-lg hover:bg-colorTotal'
             to="/">
-            Comprar agora
+            Ver produtos
           </Link>
         </div>
       )}
