@@ -44,9 +44,9 @@ export function Home() {
   return (
     <div className='bg-slate-200 pb-6'>
       <main className="w-full max-w-7xl px-2 mx-auto">
-        <h1 className="font-bold text-2xl mb-6 py-6 text-center text-color">Mais Vendidos</h1>
+        <h1 className="font-bold text-2xl mb-2 py-6 text-center text-color">MAIS VENDIDOS</h1>
 
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-6 rounded-sm'>
+        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-6 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
@@ -75,7 +75,7 @@ export function Home() {
           ))}
         </div>
 
-        <h1 className="font-bold text-2xl mb-6 mt-20 text-center text-color">Sugestões para Você</h1>
+        <h1 className="font-bold text-2xl mb-6 mt-12 text-center text-color">DESTAQUES PARA VOCÊ</h1>
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly  bg-white p-6 rounded-sm'>
           {products.map((product) => (
