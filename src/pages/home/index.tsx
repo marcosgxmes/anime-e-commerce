@@ -97,7 +97,7 @@ export function Home() {
                 </strong>
 
                 <button
-                  className='bg-green-500 p-1 rounded-lg flex gap-2 py-2 px-4 text-white font-bold hover:bg-green-600' 
+                  className='bg-green-500 p-1 rounded-xl flex gap-2 py-2 px-4 text-white font-bold hover:bg-green-600' 
                   onClick={() => handleAddCartItem(product)}>
                   <BsCart size={20} color='#ffffff'/> Adicionar
                 </button>

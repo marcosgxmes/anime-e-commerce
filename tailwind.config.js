@@ -15,7 +15,9 @@ export default {
         header: "#333",
         verde: "#28c76f",
         backgroundButton: "#f2f2f2",
-        text: "#343d55"
+        text: "#343d55",
+        red: "#DA291C",
+        fontFamily: { Rototo: ["Roboto"]}
         
       }
     },

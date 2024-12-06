@@ -25,7 +25,7 @@ export function Header() {
             placeholder='Pesquisar'
           />
 
-          <button className='absolute h-8 right-0 px-8'>
+          <button className='absolute h-8 right-0 px-6'>
               <FiSearch size={22} color='#333' />
           </button>
         </section>
@@ -33,7 +33,7 @@ export function Header() {
         <Link className='relative' to='/cart'>
         <FiShoppingCart size={24} color="#fff" />
           {cartAmount > 0 && (
-            <span className='absolute -top-3 -right-3 px-2.5 bg-red-600/100 rounded-full w-5 h-5 flex items-center justify-center text-white text-xs'>
+            <span className='absolute -top-3 -right-3 px-2.5 bg-red rounded-full w-5 h-5 flex items-center justify-center text-white text-xs'>
               {cartAmount}
             </span>
           )}
