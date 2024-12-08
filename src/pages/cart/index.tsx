@@ -11,7 +11,7 @@ export function Cart() {
 
   return (
     <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-5 py-6 items-center bg-white">
-      <h1 className="font-medium text-2xl text-center mb-8 text-colorTotal">Carrinho de compras</h1>
+      <h1 className="w-full font-medium text-xl text-start mb-10 text-colorTotal border-b-2 border-gray-200">Seu carrinho</h1>
 
       {cart.length === 0 && (
         <div className='h-full flex flex-col gap-2 items-center'>
@@ -43,8 +43,8 @@ export function Cart() {
             <div className='w-full  flex flex-col items-start justify-between gap-3'>
               <div className='flex flex-col justify-between gap-5 h-full'>
                 <p className='font-bold text-lg'>{item.title}</p>
-                <div className='text-sm'>
-                  <p>Criador: Akira Toriyama</p>
+                <div className='text-sm font-medium'>
+                  <p>Criador: {item.creator}</p>
                   <p>Quantidade: {item.amount}</p>
                 </div>               
               </div>
@@ -91,19 +91,19 @@ export function Cart() {
 
 
       {cart.length !== 0 && (
-        <div className='w-full h-full max-w-5xl mt-2 flex flex-col justify-between items-center'>
-          <div className='w-full flex items-center justify-between mb-6 border-t pt-2 border-border'>
+        <div className='w-full h-full max-w-5xl mt-4 flex flex-col justify-between items-center'>
+          <div className='w-full flex items-center justify-between mb-6 border-t pt-1 border-border'>
             <p>Total a pagar :</p>
             <p className="font-bold text-right text-2xl text-verde">{total}</p>
           </div>
 
           <div className='flex gap-4  items-center justify-center'>
-            <button className='flex bg-colorTotal w-full text-white rounded-xl items-center justify-center gap-2 py-4 px-4'>
-              Continuar Comprando
+            <button className='flex w-32 bg-colorTotal text-white rounded-xl items-center justify-center gap-2 p-4'>
+              Continuar
             </button>
 
-            <button className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 py-5 px-4'>
-              Pagar com Pix
+            <button className='bg-black w-32 text-white rounded-xl flex items-center justify-center gap-2 p-4'>
+              Pix
               <FaPix size={20} color="#00bdae" />
             </button>
           </div>

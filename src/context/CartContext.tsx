@@ -21,6 +21,7 @@ interface CartProps {
   title: string;
   description: string;
   cover: string;
+  creator?: string;
   amount: number;
   total: number;
 }

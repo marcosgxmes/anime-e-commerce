@@ -24,6 +24,7 @@ export interface ProductsProps {
   description: string;
   price: number;
   cover: string;
+  creator?: string;
 }
 
 export function Home() {
@@ -49,7 +50,8 @@ export function Home() {
             title: doc.data().title,
             description: doc.data().description,
             price: doc.data().price,
-            cover: doc.data().cover
+            cover: doc.data().cover,
+            creator: doc.data().creator
 
           })
         ])
@@ -76,7 +78,7 @@ export function Home() {
   return (
     <div className='bg-slate-200 pb-6'>
       <main className="w-full max-w-7xl px-3 mx-auto">
-        <h1 className="font-bold text-2xl mb-2 py-6 text-center text-colorTotal">Mangás Populares</h1>
+        <h1 className="font-bold text-2xl mb-2 py-6 text-center text-colorTotal">Mais Vendidos</h1>
 
         <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-2 rounded-md'>
           {products.map((product) => (
@@ -86,7 +88,7 @@ export function Home() {
                   className='w-full rounded-lg max-h-70 mb-4 shadow-lg shadow-border-500/40'
                   src={product.cover}
                   alt={product.title} />
-                <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
+                <p className='font-medium text-md mb-3 text-color'>{product.title}</p>
               </Link>
 
               <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
