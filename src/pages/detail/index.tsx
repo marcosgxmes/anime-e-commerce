@@ -38,8 +38,6 @@ export function ProductDetail() {
     navigate("/cart")
   }
 
-
-
   return (
     <div>
       <main className='w-full max-w-7xl px-4 mx-auto my-6'>
@@ -76,7 +74,6 @@ export function ProductDetail() {
                   <BsCart size={20} color='#FFF' />
                   Adicionar ao carrinho
                 </button>
-
 
               </div>
             </div>

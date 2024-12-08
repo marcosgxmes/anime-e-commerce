@@ -7,10 +7,18 @@ import { FiSearch } from 'react-icons/fi'
 
 // CONTEXT
 import { CartContext } from '../../context/CartContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+
+
 
 export function Header() {
   const { cartAmount } = useContext(CartContext)
+  const [input, setInput] = useState("")
+
+
+  function handleSearchItem() {
+    
+  }
 
   return (
     <header className='w-full pr-2 sticky top-0 bg-footer'>
@@ -20,18 +28,24 @@ export function Header() {
         </Link>
 
         <section className='p-3 rounded-full  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
-          <input 
-          className='w-full border-2 rounded-full h-8 px-3 outline-none border-none'
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className='w-full border-2 rounded-full h-8 px-3 outline-none border-none'
             placeholder='Pesquisar'
           />
 
-          <button className='absolute h-8 right-0 px-6'>
-              <FiSearch size={22} color='#333' />
+          <button 
+            className='absolute h-8 right-0 px-6'
+            onClick={handleSearchItem}
+            >
+            
+            <FiSearch size={22} color='#333' />
           </button>
         </section>
 
         <Link className='relative' to='/cart'>
-        <FiShoppingCart size={24} color="#fff" />
+          <FiShoppingCart size={24} color="#fff" />
           {cartAmount > 0 && (
             <span className='absolute -top-3 -right-3 px-2.5 bg-red rounded-full w-5 h-5 flex items-center justify-center text-white text-xs'>
               {cartAmount}

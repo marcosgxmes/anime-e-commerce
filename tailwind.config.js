@@ -9,7 +9,7 @@ export default {
       colors: {
         colorTotal: "#004280",
         color: "#333",
-        border: " border: #cdcdcd",
+        border: "#cdcdcd",
         background: "#f2f2f2;",
         footer: "#102341",
         header: "#333",

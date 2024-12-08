@@ -10,17 +10,16 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-svh max-w-7xl mx-auto px-4 py-8 bg-slate-200">
-      <h1 className="font-medium text-2xl text-center mb-8">Carrinho de compras</h1>
-
+    <div className="w-full h-screen flex flex-col max-w-7xl mx-auto px-3 py-6 items-center bg-slate-200 ">
+      <h1 className="font-medium text-2xl text-center mb-8 text-colorTotal">Carrinho de compras</h1>
 
       {cart.length === 0 && (
-        <div className='flex flex-col gap-3 items-center justify-center'>
+        <div className='h-full flex flex-col gap-3 items-center justify-center '>
           <p className='font-medium'>Seu carrinho está vazio!</p>
           <Link
-            className='bg-blue-600 my-3 p-1 px-4 text-white font-medium rounded-lg hover:bg-colorTotal'
+            className='bg-blue-600 my-3 p-1 px-5 text-white font-medium rounded-lg hover:bg-colorTotal'
             to="/">
-            Ver produtos
+            Ver Produtos
           </Link>
         </div>
       )}
@@ -28,9 +27,9 @@ export function Cart() {
       {cart.map((item) => (
         <section
           key={item.id}
-          className="flex items-center justify-between border-b-2 mb-3 border-gray-300 lg:px-28">
+          className="flex justify-items-start w-full max-w-5xl border-b-2 mb-4 pb-1 border-gray-300 ">
 
-          <div className='flex items-center justify-between gap-4 p-1 w-full'>
+          <div className='flex  justify-between gap-4 w-full '>
             <Link to={`/product/${item.id}`}>
               <img
                 src={item.cover}
@@ -40,20 +39,22 @@ export function Cart() {
             </Link>
 
 
-            <div className='w-full flex flex-col items-start gap-5'>
+            <div className='w-full flex flex-col items-start gap-3'>
               <div >
-                <p className='font-bold'>{item.title}</p>
+                <p className='font-bold text-lg'>{item.title}</p>
               </div>
 
-              <div className='flex flex-col gap-1'>
+              <div className='flex flex-col gap-1 text-sm'>
                 <p>Quantidade :</p>
-                <div className="flex items-center justify-center gap-3 border-solid border p-2 rounded-md font-roboto bg-white">
+                <div className="flex items-center justify-center gap-2 border-solid border px-2 rounded-md font-roboto bg-white border-border">
                   <button
                     onClick={() => removeItemCart(item)}
                     className="p-1 rounded-md font-medium flex item-center justify-center">
                     <CiCircleMinus size={26} color='#333' />
                   </button>
+
                   {item.amount}
+
                   <button
                     onClick={() => addItemCart(item)}
                     className="p-1 rounded-md text-white font-medium flex item-center justify-center">
@@ -72,11 +73,10 @@ export function Cart() {
                 </strong>
 
                 <button
-                  className='p-1 flex items-center gap-2 text-colorTotal'
-                  onClick={() => deleteItemCart(item)}>
-                  Remover
-                  <BsTrash size={20} color='#004280' />
-
+                  className='p-1 flex items-center gap-1 text-colorTotal font-bold text-sm'
+                  onClick={() => deleteItemCart(item)}>     
+                  Remover             
+                  <BsTrash size={24} color='#004280' />                  
                 </button>
               </div>
             </div>
@@ -89,20 +89,20 @@ export function Cart() {
 
 
       {cart.length !== 0 && (
-        <div className='w-full mt-4 flex flex-col justify-between items-center lg:px-28'>
+        <div className='w-full max-w-5xl mt-4 flex flex-col justify-between items-center'>
           <div className='w-full flex items-center justify-between mb-6'>
             <p>Total a pagar :</p>
             <p className="font-bold text-right text-2xl text-verde">{total}</p>
           </div>
 
-          <div className='flex flex-col gap-3'>
-            <button className='bg-colorTotal px-8 text-white rounded-xl flex items-center gap-2 py-2'>
-              Continuar comprando
-            </button>
-
+          <div className='flex flex-col gap-4'>
             <button className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 py-2'>
               Pagar com Pix
-              <FaPix size={20} color="#3298d5" />
+              <FaPix size={20} color="#00bdae" />
+            </button>
+
+            <button className='bg-colorTotal px-8 text-white rounded-xl flex items-center gap-2 py-2'>
+              Continuar Comprando
             </button>
           </div>
         </div>
