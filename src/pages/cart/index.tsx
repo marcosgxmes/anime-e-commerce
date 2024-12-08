@@ -10,7 +10,7 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-7 py-6 items-center bg-gray">
+    <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-5 py-6 items-center bg-white">
       <h1 className="font-medium text-2xl text-center mb-8 text-colorTotal">Carrinho de compras</h1>
 
       {cart.length === 0 && (
@@ -28,7 +28,7 @@ export function Cart() {
         <section key={item.id}
           className="flex flex-col justify-items-start w-full max-w-5xl border mb-5 pb-1 border-gray-200 rounded-3xl bg-gray-50">
 
-          <div className='flex justify-between py-2 w-full border-2 px-4 bg-white border-gray-200 rounded-3xl'>
+          <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
             <div className='flex itens-center justify-center w-4/6'>
               <Link to={`/product/${item.id}`}>
                 <img
@@ -40,11 +40,13 @@ export function Cart() {
             </div>
 
 
-            <div className='w-full flex flex-col items-start justify-between gap-3'>
-              <div className='flex flex-col gap-5'>
+            <div className='w-full  flex flex-col items-start justify-between gap-3'>
+              <div className='flex flex-col justify-between gap-5 h-full'>
                 <p className='font-bold text-lg'>{item.title}</p>
-                <p className='text-sm'>Quantidade: {item.amount}</p>
-                <p className='text-sm'>Criador: Akira Toriyama</p>
+                <div className='text-sm'>
+                  <p>Criador: Akira Toriyama</p>
+                  <p>Quantidade: {item.amount}</p>
+                </div>               
               </div>
 
               <div className='w-full flex items-center justify-between border-t border-border pt-2'>
@@ -100,7 +102,7 @@ export function Cart() {
               Continuar Comprando
             </button>
 
-            <button className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 py-7 px-4'>
+            <button className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 py-5 px-4'>
               Pagar com Pix
               <FaPix size={20} color="#00bdae" />
             </button>
