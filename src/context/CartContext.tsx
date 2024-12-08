@@ -16,7 +16,7 @@ interface CartContextData {
 }
 
 interface CartProps {
-  id: number;
+  id: string;
   price: number;
   title: string;
   description: string;

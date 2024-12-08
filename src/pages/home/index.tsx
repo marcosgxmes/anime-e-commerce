@@ -1,15 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 import { useEffect, useState, useContext } from 'react'
 import { BsCart } from 'react-icons/bs'
 
-import { api } from '../../services/api'
+//import { api } from '../../services/api'
 import { CartContext } from '../../context/CartContext'
 
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 
+import {
+  collection,
+  //query,
+  getDocs,
+} from 'firebase/firestore'
+
+import { db } from '../../services/api'
+
 
 export interface ProductsProps {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
@@ -24,8 +34,28 @@ export function Home() {
   // CHAMANDO ARRAY DE PRODUTOS E SETANDO NO USESTATE
   useEffect(() => {
     async function getProducts() {
-      const response = await api.get("/products")
-      setProducts(response.data)
+      //const response = await api.get("/products")
+      //setProducts(response.data)
+
+      const mangasRef = collection(db, "mangas")
+
+      getDocs(mangasRef)
+      .then((snapshot) => {
+        let listMangas = [] as ProductsProps[]
+
+        snapshot.forEach( doc => [
+          listMangas.push({
+            id: doc.id,
+            title: doc.data().title,
+            description: doc.data().description,
+            price: doc.data().price,
+            cover: doc.data().cover
+
+          })
+        ])
+
+        setProducts(listMangas)
+      })
     }
 
     getProducts()

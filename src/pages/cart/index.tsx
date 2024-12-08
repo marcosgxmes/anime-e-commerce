@@ -10,14 +10,14 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-screen flex flex-col max-w-7xl mx-auto px-3 py-6 items-center bg-slate-200 ">
+    <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-3 py-6 items-center bg-slate-200 ">
       <h1 className="font-medium text-2xl text-center mb-8 text-colorTotal">Carrinho de compras</h1>
 
       {cart.length === 0 && (
-        <div className='h-full flex flex-col gap-3 items-center justify-center '>
-          <p className='font-medium'>Seu carrinho está vazio!</p>
+        <div className='h-full flex flex-col gap-2 items-center'>
+          <p className='font-medium mt-20'>Seu carrinho está vazio!</p>
           <Link
-            className='bg-blue-600 my-3 p-1 px-5 text-white font-medium rounded-lg hover:bg-colorTotal'
+            className='bg-blue-600 my-3 py-2 px-8 text-white font-medium rounded-lg hover:bg-colorTotal'
             to="/">
             Ver Produtos
           </Link>
@@ -27,7 +27,7 @@ export function Cart() {
       {cart.map((item) => (
         <section
           key={item.id}
-          className="flex justify-items-start w-full max-w-5xl border-b-2 mb-4 pb-1 border-gray-300 ">
+          className="flex justify-items-start w-full max-w-5xl border-b-2 mb-5 pb-1 border-gray-300 ">
 
           <div className='flex  justify-between gap-4 w-full '>
             <Link to={`/product/${item.id}`}>
@@ -80,16 +80,14 @@ export function Cart() {
                 </button>
               </div>
             </div>
-
-
-          </div>
+          </div>    
         </section>
       ))}
 
 
 
       {cart.length !== 0 && (
-        <div className='w-full max-w-5xl mt-4 flex flex-col justify-between items-center'>
+        <div className='w-full h-full max-w-5xl mt-2 flex flex-col justify-between items-center'>
           <div className='w-full flex items-center justify-between mb-6'>
             <p>Total a pagar :</p>
             <p className="font-bold text-right text-2xl text-verde">{total}</p>
