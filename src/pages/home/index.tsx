@@ -83,7 +83,7 @@ export function Home() {
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
                 <img
-                  className='w-full rounded-lg max-h-70 mb-4'
+                  className='w-full rounded-lg max-h-70 mb-4 border-solid border-border'
                   src={product.cover}
                   alt={product.title} />
                 <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
