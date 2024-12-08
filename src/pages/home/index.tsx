@@ -66,8 +66,8 @@ export function Home() {
     toast.success("Adicionado ao carrinho", {
       style: {
         backgroundColor: "#000",
-        color: "#FFF",
-        borderRadius: 17
+        color: "#28c76f",
+        borderRadius: 10
       }
     })
     addItemCart(product)
@@ -75,10 +75,10 @@ export function Home() {
 
   return (
     <div className='bg-slate-200 pb-6'>
-      <main className="w-full max-w-7xl px-2 mx-auto">
+      <main className="w-full max-w-7xl px-3 mx-auto">
         <h1 className="font-bold text-2xl mb-2 py-6 text-center text-colorTotal">Destaques</h1>
 
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-4 rounded-md'>
+        <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-2 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
@@ -98,7 +98,7 @@ export function Home() {
                 </strong>
 
                 <button
-                  className='bg-green-500 rounded-md flex gap-2 py-2 px-7 text-white font-bold text-sm hover:bg-green-600'
+                  className='bg-verde rounded-md flex gap-2 py-2 px-5 text-white font-bold text-sm hover:bg-green-600'
                   onClick={() => handleAddCartItem(product)}>
                   <BsCart size={20} color='#ffffff' /> Adicionar
                 </button>

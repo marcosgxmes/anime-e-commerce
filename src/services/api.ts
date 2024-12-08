@@ -1,12 +1,5 @@
-// AXIOS BASEADO NO FETCH API POR-EM COM RECURSOS A MAIS
-import axios from "axios";
 
-// json-server --watch db.json
-export const api = axios.create({
-  baseURL: "http://localhost:3000",
-});
-
-// Import the functions you need from the SDKs you need
+// FIREBASE CONFIG
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -23,10 +16,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
-
 const auth = getAuth(app);
 const storage = getStorage(app);
-
-
 
 export { db, auth, storage };
