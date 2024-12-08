@@ -89,7 +89,7 @@ export function Home() {
                 <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
               </Link>
 
-              <div className='flex gap-3 items-center'>
+              <div className='flex  gap-3 items-left justify-center sm:flex-col'>
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
@@ -98,7 +98,7 @@ export function Home() {
                 </strong>
 
                 <button
-                  className='bg-verde rounded-md flex gap-2 py-2 px-5 text-white font-bold text-sm hover:bg-green-600'
+                  className='bg-verde rounded-md flex gap-2 py-2 px-5 sm:px-2 text-white font-bold text-sm hover:bg-green-600'
                   onClick={() => handleAddCartItem(product)}>
                   <BsCart size={20} color='#ffffff' /> Adicionar
                 </button>
