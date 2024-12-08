@@ -63,11 +63,11 @@ export function Home() {
 
   // MENSAGEM DE ADICIONADO COM SUCESSO
   function handleAddCartItem(product: ProductsProps) {
-    toast.success("Adicionado ao carrinho", {
+    toast.success("Adicionado com sucesso", {
       style: {
         backgroundColor: "#000",
-        color: "#28c76f",
-        borderRadius: 10
+        color: "#FFF",
+        borderRadius: 10,
       }
     })
     addItemCart(product)
@@ -76,20 +76,20 @@ export function Home() {
   return (
     <div className='bg-slate-200 pb-6'>
       <main className="w-full max-w-7xl px-3 mx-auto">
-        <h1 className="font-bold text-2xl mb-2 py-6 text-center text-colorTotal">Destaques</h1>
+        <h1 className="font-bold text-2xl mb-2 py-6 text-center text-colorTotal">Mangás Populares</h1>
 
         <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white p-2 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
                 <img
-                  className='w-full rounded-lg max-h-70 mb-4'
+                  className='w-full rounded-lg max-h-70 mb-4 shadow-lg shadow-border-500/40'
                   src={product.cover}
                   alt={product.title} />
                 <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
               </Link>
 
-              <div className='w-full flex flex-col gap-3 md:flex items-left justify-center'>
+              <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
