@@ -1,6 +1,6 @@
 // LINK PARA NAVEGAÇÃO
 import { Link } from 'react-router-dom'
-import img from '../../../public/dc_logo_white.png'
+import img from '../../../public/dc_logo_big.png'
 // ICONES DO REACT
 import { FiShoppingCart } from 'react-icons/fi'
 import { FiSearch } from 'react-icons/fi'
