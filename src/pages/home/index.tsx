@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable prefer-const */
 import { useEffect, useState, useContext } from 'react'
 import { BsCart } from 'react-icons/bs'
