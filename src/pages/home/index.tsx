@@ -89,7 +89,7 @@ export function Home() {
                 <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
               </Link>
 
-              <div className='w-full flex sm:flex-col gap-2 items-left justify-center'>
+              <div className='w-full flex flex-col gap-3 md:flex items-left justify-center'>
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
