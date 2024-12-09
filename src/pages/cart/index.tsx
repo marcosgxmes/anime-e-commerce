@@ -97,12 +97,12 @@ export function Cart() {
             <p className="font-bold text-right text-2xl text-verde">{total}</p>
           </div>
 
-          <div className='flex gap-4  items-center justify-center'>
-            <button className='flex w-32 bg-colorTotal text-white rounded-xl items-center justify-center gap-2 p-4'>
+          <div className='flex gap-4 w-full items-center justify-center'>
+            <button className='flex w-full bg-colorTotal text-white rounded-xl items-center justify-center gap-2 p-4'>
               Continuar
             </button>
 
-            <button className='bg-black w-32 text-white rounded-xl flex items-center justify-center gap-2 p-4'>
+            <button className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 p-4'>
               Pix
               <FaPix size={20} color="#00bdae" />
             </button>
