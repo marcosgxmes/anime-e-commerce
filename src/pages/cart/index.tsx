@@ -10,7 +10,7 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-5 py-6 items-center bg-white">
+    <div className="w-full h-svh flex flex-col max-w-7xl mx-auto px-5 py-6 items-center bg-white">
       <h1 className="w-full font-medium text-xl text-start mb-10 text-colorTotal border-b-2 border-gray-200">Seu carrinho</h1>
 
       {cart.length === 0 && (
@@ -26,7 +26,7 @@ export function Cart() {
 
       {cart.map((item) => (
         <section key={item.id}
-          className="flex flex-col justify-items-start w-full max-w-5xl border mb-5 pb-1 border-gray-200 rounded-3xl bg-gray-50">
+          className="flex flex-col h-full justify-items-start w-full max-w-5xl border mb-5 pb-1 border-gray-200 rounded-3xl bg-gray-50">
 
           <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
             <div className='flex itens-center justify-center w-4/6'>
@@ -43,14 +43,14 @@ export function Cart() {
             <div className='w-full  flex flex-col items-start justify-between gap-3'>
               <div className='flex flex-col justify-between gap-5 h-full'>
                 <p className='font-bold text-lg'>{item.title}</p>
-                <div className='text-sm font-medium'>
-                  <p>Criador: {item.creator}</p>
+                <div className='text-sm font-medium'>                  
                   <p>Quantidade: {item.amount}</p>
+                  <p>Criador: {item.creator}</p>
                 </div>               
               </div>
 
               <div className='w-full flex items-center justify-between border-t border-border pt-2'>
-                <strong className="float-right text-colorTotal text-lg font-roboto">
+                <strong className="float-right text-black text-lg font-roboto">
                   {item.total.toLocaleString("pt-BR", {
                     style: 'currency',
                     currency: "BRL"
@@ -79,10 +79,10 @@ export function Cart() {
             </div>
 
             <button
-              className='p-1 flex items-center gap-1 text-colorTotal font-bold text-sm'
+              className='p-1 flex items-center gap-1 text-footer font-bold text-sm'
               onClick={() => deleteItemCart(item)}>
               Remover
-              <BsTrash size={24} color='#004280' />
+              <BsTrash size={24} color='#3259eb' />
             </button>
           </div>
         </section>
@@ -98,7 +98,7 @@ export function Cart() {
           </div>
 
           <div className='flex gap-4 w-full items-center justify-center'>
-            <button className='flex w-full bg-colorTotal text-white rounded-xl items-center justify-center gap-2 p-4'>
+            <button className='flex w-full bg-white text-footer border border-footer hover:bg-footer hover:text-white rounded-xl items-center justify-center gap-2 p-4'>
               Continuar
             </button>
 
