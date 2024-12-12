@@ -10,14 +10,14 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-svh flex flex-col max-w-7xl mx-auto px-5 py-6 items-center bg-white">
+    <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-5 py-10 items-center bg-white">
       <h1 className="w-full font-medium text-xl text-start mb-10 text-colorTotal border-b-2 border-gray-200">Seu carrinho</h1>
 
       {cart.length === 0 && (
-        <div className='h-full flex flex-col gap-2 items-center'>
-          <p className='font-medium mt-20'>Seu carrinho está vazio!</p>
+        <div className='h-screen flex flex-col gap-2 items-center justify-center'>
+          <p className='font-medium mt-20'>Ops... seu carrinho está vazio!</p>
           <Link
-            className='bg-blue-600 my-3 py-2 px-8 text-white font-medium rounded-lg hover:bg-colorTotal'
+            className='bg-footer my-3 py-2 px-8 text-white font-medium rounded-xl hover:bg-colorTotal'
             to="/">
             Ver Produtos
           </Link>
@@ -26,7 +26,7 @@ export function Cart() {
 
       {cart.map((item) => (
         <section key={item.id}
-          className="flex flex-col h-full justify-items-start w-full max-w-5xl border mb-5 pb-1 border-gray-200 rounded-3xl bg-gray-50">
+          className="flex flex-col justify-items-start w-full md:w-4/6 border mb-5 pb-1 border-gray-200 rounded-3xl bg-gray-50">
 
           <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
             <div className='flex itens-center justify-center w-4/6'>
@@ -50,7 +50,7 @@ export function Cart() {
               </div>
 
               <div className='w-full flex items-center justify-between border-t border-border pt-2'>
-                <strong className="float-right text-black text-lg font-roboto">
+                <strong className="float-right text-colorTotal text-lg font-roboto">
                   {item.total.toLocaleString("pt-BR", {
                     style: 'currency',
                     currency: "BRL"
@@ -81,7 +81,7 @@ export function Cart() {
             <button
               className='p-1 flex items-center gap-1 text-footer font-bold text-sm'
               onClick={() => deleteItemCart(item)}>
-              Remover
+              
               <BsTrash size={24} color='#3259eb' />
             </button>
           </div>
