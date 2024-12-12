@@ -11,11 +11,11 @@ export default {
         color: "#333",
         border: "#cdcdcd",
         background: "#f2f2f2;",
-        footer: "#3259eb",
+        footer: "#41337A",
         header: "#333",
-        verde: "#28c76f",
+        verde: "#32DE8A",
         backgroundButton: "#f2f2f2",
-        text: "#343d55",
+        text: "#353531",
         red: "#DA291C",
         fontFamily: { Rototo: ["Roboto"]}
         
