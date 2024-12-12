@@ -12,7 +12,7 @@ export function Cart() {
   return (
     <div className="w-full flex flex-col max-w-7xl mx-auto px-5 mb-10 items-center bg-white">
       
-        <h1 className="w-full font-medium text-xl text-start m-10 text-footer border-b-2 border-gray-200">Seu carrinho</h1>
+        <h1 className="w-full font-medium text-xl text-start m-6 text-footer border-b-2 border-gray-200">Seu carrinho</h1>
         {cart.length === 0 && (
           <div className='h-screen flex flex-col gap-2 items-center justify-center'>
             <p className='font-medium mt-20'>Ops... seu carrinho está vazio!</p>
@@ -25,7 +25,7 @@ export function Cart() {
         )}
         {cart.map((item) => (
           <section key={item.id}
-            className="flex flex-col h-full justify-items-start w-full md:w-4/6 border mb-8 border-gray-200 rounded-3xl bg-gray-50">
+            className="flex flex-col h-full justify-items-start w-full md:w-4/6 border m-4 border-gray-200 rounded-3xl bg-gray-50">
             <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
               <div className='flex itens-center justify-center w-4/6'>
                 <Link to={`/product/${item.id}`}>
@@ -69,9 +69,9 @@ export function Cart() {
                 </button>
               </div>
               <button
-                className='p-1 flex items-center gap-1 text-footer font-bold text-sm'
+                className='p-1 flex items-center gap-1 text-blue-600 font-bold text-sm'
                 onClick={() => deleteItemCart(item)}>
-
+                  Remover
                 <BsTrash size={24} color='#3259eb' />
               </button>
             </div>
@@ -80,10 +80,11 @@ export function Cart() {
 
         {cart.length !== 0 && (
           <div className='w-full max-w-5xl mt-5 flex flex-col justify-between items-center'>
-            <div className='w-full flex items-center justify-between mb-6 border-t pt-1 border-border'>
+            <div className='w-full flex items-center justify-between mb-6 border-t pt-2 border-border'>
               <p>Total a pagar :</p>
               <p className="font-bold text-right text-2xl text-verde">{total}</p>
             </div>
+
             <div className='flex gap-4 w-full items-center justify-center'>
               <button className='flex w-full bg-white text-footer border border-footer hover:bg-footer hover:text-white rounded-xl items-center justify-center gap-2 p-4'>
                 Continuar
