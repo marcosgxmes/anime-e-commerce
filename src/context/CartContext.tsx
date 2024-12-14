@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable prefer-const */
 
-//CONTEXT PARA ESPALHAR AS INFORMAÇÕES PELO SITE, DA HOME PRO CARRINHO
+// USECONTEXT PARA ESPALHAR AS INFORMAÇÕES PELO SITE, DA HOME PRO CARRINHO
 
 import { createContext, ReactNode, useState } from "react";
 import { ProductsProps } from "../pages/home";

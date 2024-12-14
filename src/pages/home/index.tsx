@@ -35,9 +35,6 @@ export function Home() {
   // CHAMANDO ARRAY DE PRODUTOS E SETANDO NO USESTATE
   useEffect(() => {
     async function getProducts() {
-      //const response = await api.get("/products")
-      //setProducts(response.data)
-
       const mangasRef = collection(db, "mangas")
 
       getDocs(mangasRef)
@@ -68,8 +65,9 @@ export function Home() {
     toast.success("Adicionado com sucesso", {
       style: {
         backgroundColor: "#000",
-        color: "#FFF",
+        color: "#32DE8A",
         borderRadius: 10,
+        marginTop: 50,
       }
     })
     addItemCart(product)
@@ -78,7 +76,7 @@ export function Home() {
   return (
     <div className='bg-slate-200 pb-10'>
       <main className="w-full max-w-7xl px-5 mx-auto">
-        <h1 className="font-medium text-2xl mb-2 py-6 text-center text-footer">Populares</h1>
+        <h1 className="font-medium text-2xl mb-2 py-6 text-center text-header">Destaques para você</h1>
 
         <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white px-2 py-4 rounded-md'>
           {products.map((product) => (
