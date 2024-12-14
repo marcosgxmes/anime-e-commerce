@@ -67,7 +67,6 @@ export function Home() {
         backgroundColor: "#000",
         color: "#32DE8A",
         borderRadius: 10,
-        marginTop: 50,
       }
     })
     addItemCart(product)

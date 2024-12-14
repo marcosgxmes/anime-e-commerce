@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CartProvider>
       <Toaster
-        position="top-left"
+        position="botton-left"
         reverseOrder={false}
       />
       <RouterProvider router={router} />
