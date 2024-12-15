@@ -11,13 +11,14 @@ export default {
         color: "#333",
         border: "#cdcdcd",
         background: "#f2f2f2;",
-        footer: "#000",
+        footer: "#3943B7",
         header: "#333",
         verde: "#32DE8A",
         backgroundButton: "#f2f2f2",
         text: "#353531",
         red: "#DA291C",
-        fontFamily: { Rototo: ["Roboto"]}
+        fontFamily: { Rototo: ["Roboto"]},
+        trezentos: 300,
         
       }
     },

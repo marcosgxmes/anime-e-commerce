@@ -38,23 +38,23 @@ export function Home() {
       const mangasRef = collection(db, "mangas")
 
       getDocs(mangasRef)
-      .then((snapshot) => {
-        let listMangas = [] as ProductsProps[]
+        .then((snapshot) => {
+          let listMangas = [] as ProductsProps[]
 
-        snapshot.forEach( doc => [
-          listMangas.push({
-            id: doc.id,
-            title: doc.data().title,
-            description: doc.data().description,
-            price: doc.data().price,
-            cover: doc.data().cover,
-            creator: doc.data().creator
+          snapshot.forEach(doc => [
+            listMangas.push({
+              id: doc.id,
+              title: doc.data().title,
+              description: doc.data().description,
+              price: doc.data().price,
+              cover: doc.data().cover,
+              creator: doc.data().creator
 
-          })
-        ])
+            })
+          ])
 
-        setProducts(listMangas)
-      })
+          setProducts(listMangas)
+        })
     }
 
     getProducts()
@@ -74,17 +74,20 @@ export function Home() {
 
   return (
     <div className='bg-slate-200 pb-10'>
-      <main className="w-full max-w-7xl px-5 mx-auto">
-        <h1 className="font-medium text-2xl mb-2 py-6 text-center text-header">Destaques para você</h1>
+      <main className="w-full max-w-7xl px-2 mx-auto">
+        <h1 className="font-medium text-2xl mb-2 py-6 text-center text-header">Destaques</h1>
 
-        <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly bg-white px-2 py-4 rounded-md'>
+        <div className='grid grid-cols-2 gap-5 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
-                <img
-                  className='w-full rounded-lg max-h-70 mb-4 shadow-lg shadow-border-500/40'
-                  src={product.cover}
-                  alt={product.title} />
+                <div className='flex items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-5 shadow-lg shadow-border-500/40'>
+                  <img
+                    className='h-48 sm:h-80 object-contain'
+                    src={product.cover}
+                    alt={product.title}
+                  />
+                </div>
                 <p className='font-medium text-md mb-3 text-color'>{product.title}</p>
               </Link>
 

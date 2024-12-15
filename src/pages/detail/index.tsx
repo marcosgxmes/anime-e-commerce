@@ -26,24 +26,24 @@ export function ProductDetail() {
   useEffect(() => {
     async function getProduct() {
 
-      if(!id){return}
-      
+      if (!id) { return }
+
       // PEGAR REFERENCIA DO DB PELO ID
       const mangaRef = doc(db, "mangas", id)
 
       // SETAR DADOS NA VARIAVEL DE ARMZENAMENTO
       getDoc(mangaRef)
-      .then((snapshot) => {
-        setProduct({
+        .then((snapshot) => {
+          setProduct({
             id: snapshot.id,
-            title: snapshot.data()?.title,            
+            title: snapshot.data()?.title,
             description: snapshot.data()?.description,
             price: snapshot.data()?.price,
             cover: snapshot.data()?.cover,
             creator: snapshot.data()?.creator,
+          })
         })
-      })
-    
+
     }
 
     getProduct()
@@ -66,11 +66,11 @@ export function ProductDetail() {
 
 
   return (
-    <div>
-      <main className='w-full max-w-7xl px-5 mx-auto my-6'>
+    <div className='bg-slate-200'>
+      <main className='w-full max-w-7xl px-5 mx-auto py-6'>
         {product && (
           <section className='w-full'>
-            <div className='w-full mb-5 flex gap-2'>
+            <div className='w-full mb-5 flex gap-2 text-sm'>
               <Link className='flex items-center' to="/">
                 <p>Home </p>
                 <span className='ml-1'>|</span>
@@ -78,12 +78,14 @@ export function ProductDetail() {
               <strong className='text-footer'>{product?.title}</strong>
             </div>
 
-            <div className='flex flex-col lg:flex-row'>
-              <img
-                className='flex-1 w-full h-80 object-contain'
-                src={product?.cover}
-                alt={product?.title}
-              />
+            <div className='flex flex-col lg:flex-row gap-6'>
+              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-5 shadow-lg shadow-border-500/40'>
+                <img
+                  className='h-72 sm:h-80 object-contain'
+                  src={product.cover}
+                  alt={product.title}
+                />
+              </div>
 
               <div className='flex-1'>
                 <p className='font-bold text-xl mt-4 mb-2'>{product?.title}</p>
