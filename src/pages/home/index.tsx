@@ -147,7 +147,7 @@ export function Home() {
               <Link to={`/product/${product.id}`}>
                 <div className='flex items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-5 shadow-lg shadow-border-500/40'>
                   <img
-                    className='h-36 sm:h-60 object-contain'
+                    className='h-40 sm:h-60 object-contain'
                     src={product.cover}
                     alt={product.title}
                   />
