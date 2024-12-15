@@ -43,8 +43,8 @@ export function Cart() {
               <div className='flex flex-col justify-between gap-5 h-full'>
                 <p className='font-bold text-lg'>{item.title}</p>
                 <div className='text-sm font-medium'>
-                  <p>Quantidade: {item.amount}</p>
-                  <p>Criador: {item.creator}</p>
+                  <p>Quantidade: {item.amount}</p>                  
+                  <p>Categoria: Quadrinho</p>                  
                 </div>
               </div>
               <div className='w-full flex items-center justify-between border-t border-border pt-2'>

@@ -90,6 +90,7 @@ export function ProductDetail() {
               <div className='flex-1'>
                 <p className='font-bold text-xl mt-4 mb-2'>{product?.title}</p>
                 <p className='my-4 border-b-2 pb-3 border-gray-200'>{product?.description}</p>
+                <p className='my-4 border-b-2 pb-3 border-gray-200'><span className='font-bold'>Autores:</span> {product?.creator}</p>
                 <strong className='text-color text-xl'>
                   {product?.price.toLocaleString("pt-BR", {
                     style: "currency",
