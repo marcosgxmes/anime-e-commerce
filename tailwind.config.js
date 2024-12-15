@@ -18,7 +18,7 @@ export default {
         text: "#353531",
         red: "#DA291C",
         fontFamily: { Rototo: ["Roboto"]},
-        trezentos: 300,
+        trezentos: 280,
         
       }
     },
