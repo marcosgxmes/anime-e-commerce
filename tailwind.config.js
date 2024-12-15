@@ -13,7 +13,7 @@ export default {
         background: "#f2f2f2;",
         footer: "#3943B7",
         header: "#333",
-        verde: "#32DE8A",
+        verde: "#28c76f",
         backgroundButton: "#f2f2f2",
         text: "#353531",
         red: "#DA291C",

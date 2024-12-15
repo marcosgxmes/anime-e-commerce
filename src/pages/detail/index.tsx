@@ -27,12 +27,12 @@ export function ProductDetail() {
     async function getProduct() {
 
       if (!id) { return }
-
       // PEGAR REFERENCIA DO DB PELO ID
-      const mangaRef = doc(db, "mangas", id)
+      const mangaRef = doc(db, "mangas", id)      
 
       // SETAR DADOS NA VARIAVEL DE ARMZENAMENTO
-      getDoc(mangaRef)
+      
+        getDoc(mangaRef)
         .then((snapshot) => {
           setProduct({
             id: snapshot.id,
@@ -42,12 +42,15 @@ export function ProductDetail() {
             cover: snapshot.data()?.cover,
             creator: snapshot.data()?.creator,
           })
-        })
-
+        })      
+            
     }
-
     getProduct()
   }, [id])
+
+  
+
+
 
 
   //ADD ITEM NO CARRINHO
@@ -68,7 +71,7 @@ export function ProductDetail() {
   return (
     <div className='bg-slate-200'>
       <main className='w-full max-w-7xl px-5 mx-auto py-6'>
-        {product && (
+        {product  && (
           <section className='w-full'>
             <div className='w-full mb-5 flex gap-2 text-sm'>
               <Link className='flex items-center' to="/">
@@ -109,7 +112,7 @@ export function ProductDetail() {
               </div>
             </div>
           </section>
-        )}
+        )}        
       </main>
     </div>
   )
