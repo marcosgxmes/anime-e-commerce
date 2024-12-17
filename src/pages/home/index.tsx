@@ -104,9 +104,9 @@ export function Home() {
   return (
     <div className='bg-slate-200 pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
-        <h1 className="font-medium text-2xl mb-2 py-6 text-center text-header">Mais Vendidos</h1>
+        <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mais Vendidos</h1>
 
-        <div className='grid grid-cols-2 gap-7 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
+        <div className='grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
@@ -117,7 +117,7 @@ export function Home() {
                     alt={product.title}
                   />
                 </div>
-                <p className='font-medium text-md mb-3 text-color'>{product.title}</p>
+                <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
               </Link>
 
               <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
@@ -139,7 +139,7 @@ export function Home() {
 
         </div>
 
-        <h1 className="font-medium text-2xl mb-2 mt-6 py-6 text-center text-header">Mangás</h1>
+        <h1 className="font-medium text-xl mb-2 mt-6 py-6 text-center text-header">Mangás</h1>
 
         <div className='grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
           {quadrinhos.map((product) => (
@@ -152,7 +152,7 @@ export function Home() {
                     alt={product.title}
                   />
                 </div>
-                <p className='font-medium text-md mb-3 text-color'>{product.title}</p>
+                <p className='font-medium text-sm mb-3 text-color'>{product.title}</p>
               </Link>
 
               <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>

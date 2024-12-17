@@ -21,7 +21,7 @@ export function Header() {
   }
 
   return (
-    <header className='w-full pr-3 sticky top-0 bg-footer shadow-lg shadow-border-500/40'>
+    <header className='w-full pr-3 sticky top-0 bg-footer shadow-md'>
       <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-2 mx-auto'>
         <Link to='/'>
           <img src={img} className='h-12 object-contain' alt="DC logo" />
