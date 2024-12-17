@@ -92,10 +92,11 @@ export function Cart() {
 
 
           <div className='flex gap-4 w-full items-center justify-center'>
-            <button
-              className='flex w-full bg-white text-footer border border-footer hover:bg-footer hover:text-white rounded-xl items-center justify-center gap-2 p-4'>
-              Continuar
-            </button>
+            <Link className='flex w-full bg-white text-footer border border-footer hover:bg-footer hover:text-white rounded-xl items-center justify-center gap-2 p-4' to="/">
+              <button>
+                Continuar
+              </button>
+            </Link>
 
             <button
               className='bg-black w-full text-white rounded-xl flex items-center justify-center gap-2 p-4'>

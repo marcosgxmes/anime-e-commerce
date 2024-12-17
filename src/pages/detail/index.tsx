@@ -82,7 +82,7 @@ export function ProductDetail() {
             </div>
 
             <div className='flex flex-col lg:flex-row gap-6'>
-              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-5 shadow-lg shadow-border-500/40'>
+              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-10 px-5 shadow-md shadow-border-500/40'>
                 <img
                   className='h-72 sm:h-80 object-contain'
                   src={product.cover}
@@ -92,8 +92,9 @@ export function ProductDetail() {
 
               <div className='flex-1'>
                 <p className='font-bold text-xl mt-4 mb-2'>{product?.title}</p>
-                <p className='my-4 border-b-2 pb-3 border-gray-200'>{product?.description}</p>
-                <p className='my-4 border-b-2 pb-3 border-gray-200'><span className='font-bold'>Autores:</span> {product?.creator}</p>
+                <p className='my-4 pb-3'>{product?.description}</p>
+                <p className='my-4 pb-3 '><span className='font-bold'>Autores:</span> {product?.creator}</p>
+
                 <strong className='text-color text-xl'>
                   {product?.price.toLocaleString("pt-BR", {
                     style: "currency",
@@ -104,7 +105,8 @@ export function ProductDetail() {
 
                 <button
                   onClick={() => handleAddItem(product)}
-                  className='bg-green-500 p-1 rounded-lg flex gap-2 py-2 px-4 mt-3 text-white font-bold hover:bg-green-600' >
+                  className='bg-green-500 p-1 rounded-lg flex gap-2 py-2 px-4 mt-3 text-white font-bold hover:bg-green-600'
+                >
                   <BsCart size={20} color='#FFF' />
                   Adicionar ao carrinho
                 </button>
