@@ -12,7 +12,7 @@ export function Cart() {
   return (
     <div className="w-full h-full flex flex-col max-w-7xl mx-auto px-5 mb-10 items-center justify-between bg-white">
 
-      <h1 className="w-full font-medium text-xl text-start m-6 text-footer border-b-2 border-gray-200">Seu carrinho</h1>
+      <h1 className="w-full font-medium text-xl text-start m-6 text-footer border-b-2 border-gray-200">Carrinho de compras</h1>
 
       {cart.length === 0 && (
         <div className='h-full flex flex-col gap-2 items-center justify-center'>
@@ -41,7 +41,7 @@ export function Cart() {
             </div>
             <div className='w-full  flex flex-col items-start justify-between gap-3'>
               <div className='flex flex-col justify-between gap-5 h-full'>
-                <p className='font-bold text-lg'>{item.title}</p>
+                <p className='font-bold text-md'>{item.title}</p>
                 <div className='text-sm font-medium'>
                   <p>Quantidade: {item.amount}</p>                  
                   <p>Categoria: Quadrinho</p>                  
