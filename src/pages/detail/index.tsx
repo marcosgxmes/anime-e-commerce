@@ -69,8 +69,8 @@ export function ProductDetail() {
 
 
   return (
-    <div className='bg-slate-200'>
-      <main className='w-full max-w-7xl px-5 mx-auto py-6'>
+    <div className='bg-slate-200 flex items-center py-72'>
+      <main className='w-full max-w-7xl px-5 mx-auto'>
         {product  && (
           <section className='w-full'>
             <div className='w-full mb-5 flex gap-2 text-sm'>
