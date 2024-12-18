@@ -106,11 +106,11 @@ export function Home() {
       <main className="w-full max-w-7xl px-3 mx-auto">
         <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mais Vendidos</h1>
 
-        <div className='grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
+        <div className='grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
-                <div className='flex items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-3 shadow-md'>
+                <div className='flex items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-6 px-3 shadow-sm'>
                   <img
                     className='h-48 sm:h-60 object-contain'
                     src={product.cover}
@@ -129,7 +129,7 @@ export function Home() {
                 </strong>
 
                 <button
-                  className='w-full bg-verde rounded-md flex justify-center items-center gap-2 py-2 px-4 text-white font-bold text-sm hover:bg-green-600'
+                  className='w-full bg-verde rounded-md flex justify-center items-center gap-2 py-2 px-4 text-white font-bold text-sm hover:bg-green-700'
                   onClick={() => handleAddCartItem(product)}>
                   <BsCart size={20} color='#ffffff' /> Adicionar
                 </button>
@@ -141,13 +141,13 @@ export function Home() {
 
         <h1 className="font-medium text-xl mb-2 mt-6 py-6 text-center text-header">Mangás</h1>
 
-        <div className='grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
+        <div className='grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
           {quadrinhos.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
-                <div className='flex items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-3 shadow-md'>
+                <div className='flex items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-6 px-3 shadow-sm'>
                   <img
-                    className='h-44 sm:h-60 object-contain'
+                    className='h-48 sm:h-60 object-contain'
                     src={product.cover}
                     alt={product.title}
                   />
