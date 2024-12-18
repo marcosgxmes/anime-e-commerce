@@ -21,7 +21,7 @@ export function Header() {
   }
 
   return (
-    <header className='w-full pr-3 sticky top-0 bg-footer shadow-md'>
+    <header className='w-full pr-3 sticky top-0 bg-footer shadow-md py-1'>
       <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-2 mx-auto'>
         <Link to='/'>
           <img src={img} className='h-12 object-contain' alt="DC logo" />
@@ -31,7 +31,7 @@ export function Header() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className='w-full border-2 rounded-full h-8 px-3 outline-none border-none'
+            className='w-full border-2 rounded-full h-9 px-3 outline-none border-none'
             placeholder='Pesquisar'
           />
 
@@ -40,7 +40,7 @@ export function Header() {
             onClick={handleSearchItem}
             >
             
-            <FiSearch size={22} color='#000' />
+            <FiSearch size={22} color='#333' />
           </button>
         </section>
 

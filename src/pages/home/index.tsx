@@ -106,13 +106,13 @@ export function Home() {
       <main className="w-full max-w-7xl px-3 mx-auto">
         <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mais Vendidos</h1>
 
-        <div className='grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
+        <div className='grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2 rounded-md'>
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
                 <div className='flex items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-6 px-3 shadow-md'>
                   <img
-                    className='h-44 sm:h-60 object-contain'
+                    className='h-48 sm:h-60 object-contain'
                     src={product.cover}
                     alt={product.title}
                   />
