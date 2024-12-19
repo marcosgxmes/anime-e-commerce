@@ -67,11 +67,11 @@ export function ProductDetail() {
 
   return (
     <div className='bg-slate-200 flex items-center py-5'>
-      <main className='w-full max-w-7xl px-5 mx-auto'>
+      <main className='w-full max-w-7xl px-5 pb-7 mx-auto'>
         {product  && (
           <section className='w-full'>
             <div className='w-full mb-5 flex gap-2 text-sm'>
-              <Link className='flex items-center' to="/">
+              <Link className='flex flex-wrap items-center justify-center' to="/">
                 <p>Home </p>
                 <span className='ml-1'>|</span>
               </Link>
@@ -79,17 +79,17 @@ export function ProductDetail() {
             </div>
 
             <div className='flex flex-col lg:flex-row gap-x-6 mt-7'>
-              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-10 px-5 shadow-sm shadow-border-500/40'>
+              <div className='flex flex-1 items-center h-80 justify-center bg-white  rounded-md mb-4 py-10 px-5 shadow-sm shadow-border-500/40'>
                 <img
-                  className='h-80 sm:h-80 object-contain'
+                  className='h-72 sm:h-80 object-contain'
                   src={product.cover}
                   alt={product.title}
                 />
               </div>
 
               <div className='flex-1'>
-                <p className='font-bold text-xl mt-4 mb-2'>{product?.title}</p>
-                <p className='my-4 pb-3'>{product?.description}</p>
+                <p className='font-bold text-xl mt-2 mb-2'>{product?.title}</p>
+                <p className='my-4 pb-3 text-justify'>{product?.description}</p>
                 <p className='my-4 pb-3 text-sm'>Autores: <span className='font-bold'>{product?.creator}</span></p>
 
                 <strong className='text-color text-xl'>

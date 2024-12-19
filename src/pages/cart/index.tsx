@@ -29,6 +29,7 @@ export function Cart() {
         {cart.map((item) => (
           <section key={item.id}
             className="flex flex-col h-full justify-items-start w-full md:w-4/6 border m-4 border-gray-200 rounded-3xl bg-gray-50">
+
             <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
               <div className='flex itens-center justify-center w-4/6'>
                 <Link to={`/product/${item.id}`}>
@@ -39,12 +40,12 @@ export function Cart() {
                   />
                 </Link>
               </div>
-              <div className='w-full  flex flex-col items-start justify-between gap-3'>
+
+              <div className='w-full  flex flex-col items-start justify-between pt-1 gap-3'>
                 <div className='flex flex-col justify-between gap-5 h-full'>
-                  <p className='font-bold text-md'>{item.title}</p>
+                  <p className='font-bold text-sm'>{item.title}</p>
                   <div className='text-sm font-medium'>
                     <p>Quantidade: {item.amount}</p>
-                    <p>Categoria: Quadrinho</p>
                   </div>
                 </div>
                 <div className='w-full flex items-center justify-between border-t border-border pt-2'>
@@ -57,7 +58,8 @@ export function Cart() {
                 </div>
               </div>
             </div>
-            <div className='flex items-center justify-between p-2 px-4 text-sm '>
+
+            <div className='flex items-center justify-between p-2 px-2 text-sm '>
               <div className="flex items-center justify-center gap-2 px-2 rounded-md font-robot">
                 <button
                   onClick={() => removeItemCart(item)}
