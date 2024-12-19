@@ -28,7 +28,8 @@ export function ProductDetail() {
 
       if (!id) { return }
       // PEGAR REFERENCIA DO DB PELO ID
-      const mangaRef = doc(db, "mangas", id)      
+      const mangaRef = doc(db, "mangas", id)   
+         
 
       // SETAR DADOS NA VARIAVEL DE ARMZENAMENTO
       
@@ -48,10 +49,6 @@ export function ProductDetail() {
     getProduct()
   }, [id])
 
-  
-
-
-
 
   //ADD ITEM NO CARRINHO
   function handleAddItem(product: ProductsProps) {
@@ -69,7 +66,7 @@ export function ProductDetail() {
 
 
   return (
-    <div className='bg-slate-200 flex items-center py-72'>
+    <div className='bg-slate-200 flex items-center py-5'>
       <main className='w-full max-w-7xl px-5 mx-auto'>
         {product  && (
           <section className='w-full'>
@@ -78,13 +75,13 @@ export function ProductDetail() {
                 <p>Home </p>
                 <span className='ml-1'>|</span>
               </Link>
-              <strong className='text-footer'>{product?.title}</strong>
+              <strong className='text-red'>{product?.title}</strong>
             </div>
 
-            <div className='flex flex-col lg:flex-row gap-6'>
-              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-lg mb-4 py-10 px-5 shadow-md shadow-border-500/40'>
+            <div className='flex flex-col lg:flex-row gap-x-6 mt-7'>
+              <div className='flex flex-1 items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-10 px-5 shadow-sm shadow-border-500/40'>
                 <img
-                  className='h-72 sm:h-80 object-contain'
+                  className='h-80 sm:h-80 object-contain'
                   src={product.cover}
                   alt={product.title}
                 />

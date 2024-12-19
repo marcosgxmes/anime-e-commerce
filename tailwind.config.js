@@ -11,7 +11,7 @@ export default {
         color: "#333",
         border: "#cdcdcd",
         background: "#f2f2f2;",
-        footer: "#000",
+        footer: "#333",
         header: "#333",
         verde: "#28c76f",
         backgroundButton: "#f2f2f2",

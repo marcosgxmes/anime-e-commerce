@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom'
 
 import {
   collection,
-  //query,
+  query,
+  orderBy,
   getDocs,
 } from 'firebase/firestore'
 
@@ -38,8 +39,9 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const mangasRef = collection(db, "mangas")
+      const queryRef = query(mangasRef, orderBy("title", "asc"))
 
-      getDocs(mangasRef)
+      getDocs(queryRef)
         .then((snapshot) => {
           let listMangas = [] as ProductsProps[]
 
@@ -65,8 +67,9 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
+      const queryRef = query(comicRef, orderBy("title", "desc"))
 
-      getDocs(comicRef)
+      getDocs(queryRef)
         .then((snapshot) => {
           let listComic = [] as ProductsProps[]
 
@@ -110,7 +113,7 @@ export function Home() {
           {products.map((product) => (
             <section key={product.id} className="w-full flex flex-col justify-between">
               <Link to={`/product/${product.id}`}>
-                <div className='flex items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-6 px-4 shadow-sm'>
+                <div className='flex items-center h-trezentos justify-center bg-white  rounded-md mb-4 py-6 px-4'>
                   <img
                     className='h-48 sm:h-60 object-contain'
                     src={product.cover}
