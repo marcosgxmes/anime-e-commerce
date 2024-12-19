@@ -10,7 +10,7 @@ export function Cart() {
   const { cart, total, addItemCart, removeItemCart, deleteItemCart } = useContext(CartContext);
 
   return (
-    <div className="w-full h-full flex mx-auto items-center justify-end bg-transparent pb-7">
+    <div className="w-full h-full flex mx-auto items-center justify-end bg-transparent pb-6">
       <div className="w-full flex flex-col max-w-xl px-5 items-center justify-between bg-white z-10">
         <h1 className="w-full font-medium text-xl text-start m-6 text-footer border-b-2 border-gray-200">Carrinho de compras</h1>
 
