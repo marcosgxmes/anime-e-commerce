@@ -109,7 +109,7 @@ export function Home() {
       }
     })
     addItemCart(product)
-  }  
+  }
 
 
   return (
@@ -118,7 +118,7 @@ export function Home() {
 
         <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mangás</h1>
 
-        <div className='grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
+        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
 
           {quadrinhos.map(product => (
             <div
@@ -169,7 +169,7 @@ export function Home() {
         <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Marvel & DC</h1>
 
 
-        <div className='grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
+        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
 
           {products.map(product => (
             <div
@@ -181,10 +181,10 @@ export function Home() {
 
           {products.map(product => (
 
-            <section key={product.id} className="w-full flex flex-col justify-between">
+            <section key={product.id} className="w-full flex flex-col justify-between gap-4">
 
-              <Link className=' flex flex-col gap-5 mb-3' to={`/product/${product.id}`}>
-                <div className='flex items-center h-72 justify-center bg-white  rounded-md  py-6 px-3'>
+              <Link className=' flex flex-col gap-3' to={`/product/${product.id}`}>
+                <div className='flex items-center h-60 md:h-72 justify-center bg-white  rounded-md  py-6 px-3'>
                   <img
                     className='h-full object-contain'
                     src={product.cover}
@@ -197,7 +197,7 @@ export function Home() {
                 <p className='font-medium text-sm  text-color'>{product.title}</p>
               </Link>
 
-              <div className='w-full flex flex-col gap-3 md:flex items-left justify-center'>
+              <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",

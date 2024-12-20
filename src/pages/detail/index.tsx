@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-
 import { ProductsProps } from '../home';
 import { BsCart } from 'react-icons/bs';
 import { CartContext } from '../../context/CartContext'
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-
 import { getDoc, doc } from "firebase/firestore";
 import { db } from '../../services/api'
 
@@ -68,14 +66,17 @@ export function ProductDetail() {
   return (
     <div className='bg-slate-200 flex items-center py-5'>
       <main className='w-full max-w-7xl px-5 pb-7 mx-auto'>
+
         {product  && (
           <section className='w-full'>
+
             <div className='w-full mb-5 flex gap-2 text-sm'>
-              <Link className='flex flex-wrap items-center justify-center' to="/">
+              <Link className='flex items-center justify-center' to="/">
                 <p>Home </p>
                 <span className='ml-1'>|</span>
               </Link>
-              <strong className='text-red'>{product?.title}</strong>
+
+              <strong className='text-red flex flex-wrap'>{product?.title}</strong>
             </div>
 
             <div className='flex flex-col lg:flex-row gap-x-6 mt-7'>
