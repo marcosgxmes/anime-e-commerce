@@ -119,8 +119,7 @@ export function Home() {
 
         <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mangás</h1>
 
-
-        <div className='grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
+        <div className='grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
 
           {quadrinhos.map(product => (
             <div
@@ -134,8 +133,8 @@ export function Home() {
 
             <section key={product.id} className="w-full flex flex-col justify-between">
 
-              <Link className=' flex flex-col gap-5 mb-3' to={`/product/${product.id}`}>
-                <div className='flex items-center h-72 justify-center bg-white  rounded-md  py-6 px-3'>
+              <Link className=' flex flex-col gap-3 mb-3' to={`/product/${product.id}`}>
+                <div className='flex items-center h-60 md:h-72 justify-center bg-white  rounded-md  py-6 px-3'>
                   <img
                     className='h-full object-contain'
                     src={product.cover}
