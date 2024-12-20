@@ -17,6 +17,7 @@ export default {
         backgroundButton: "#f2f2f2",
         text: "#353531",
         red: "#DA291C",
+        background: "#f1f5f9",
         fontFamily: { Rototo: ["Roboto"]},
         trezentos: 280,
         
