@@ -16,10 +16,10 @@ import {
 
 export interface ProductsProps {
   id: string;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   price: number;
-  cover?: string;
+  cover: string;
   creator?: string;
 }
 
@@ -92,7 +92,7 @@ export function Home() {
     getProducts()
   }, [])
 
-  
+
   // MENSAGEM DE ADICIONADO COM SUCESSO
   function handleAddCartItem(product: ProductsProps) {
     toast.success("Adicionado com sucesso", {
