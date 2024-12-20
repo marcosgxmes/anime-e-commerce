@@ -93,24 +93,23 @@ export function Home() {
   }, [])
 
 
-  // MENSAGEM DE ADICIONADO COM SUCESSO
-  function handleAddCartItem(product: ProductsProps) {
-    toast.success("Adicionado com sucesso", {
-      style: {
-        backgroundColor: "#0e9c58",
-        color: "#000",
-        borderRadius: 10,
-        marginRight: 35
-      }
-    })
-    addItemCart(product)
-  }
-
-
   // EVITAR LAYOUT SHIFT
   function handleImageLoad(id: string) {
     setLoadImages((prevImagesLoaded) => [...prevImagesLoaded, id])
   }
+
+
+  // MENSAGEM DE ADICIONADO COM SUCESSO
+  function handleAddCartItem(product: ProductsProps) {
+    toast.success("Adicionado com sucesso", {
+      style: {
+        backgroundColor: "#FFF",
+        color: "#28c76f",
+        borderRadius: 10,
+      }
+    })
+    addItemCart(product)
+  }  
 
 
   return (
@@ -131,9 +130,9 @@ export function Home() {
 
           {quadrinhos.map(product => (
 
-            <section key={product.id} className="w-full flex flex-col justify-between">
+            <section key={product.id} className="w-full flex flex-col justify-between gap-4">
 
-              <Link className=' flex flex-col gap-3 mb-3' to={`/product/${product.id}`}>
+              <Link className=' flex flex-col gap-3' to={`/product/${product.id}`}>
                 <div className='flex items-center h-60 md:h-72 justify-center bg-white  rounded-md  py-6 px-3'>
                   <img
                     className='h-full object-contain'
@@ -147,7 +146,7 @@ export function Home() {
                 <p className='font-medium text-sm  text-color'>{product.title}</p>
               </Link>
 
-              <div className='w-full flex flex-col gap-3 md:flex items-left justify-center'>
+              <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
