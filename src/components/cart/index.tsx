@@ -36,7 +36,7 @@ export function Cart() {
               >
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl sm:rounded-l-3xl">
                   <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                    <div className="flex items-start justify-between border-b-2 pb-1">
+                    <div className="flex w-full items-start justify-between border-b-2 pb-1 ">
                       <p className="text-lg font-medium text-gray-900">Carrinho de compras</p>
                       <div className="ml-3 flex h-7 items-center">
                         <button
@@ -46,7 +46,7 @@ export function Cart() {
                         >
                           <span className="absolute -inset-0.5" />
                           <span className="sr-only">Close panel</span>
-                          <IoClose aria-hidden="true" size={24} color='#3259eb' />
+                          <IoClose aria-hidden="true" size={27} color='#3259eb' />
                         </button>
                       </div>
                     </div>
@@ -58,15 +58,16 @@ export function Cart() {
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
 
                           {cart.length === 0 && (
-                            <div className='h-full flex flex-col gap-2 mt-20 items-center justify-center'>
-                              <img src={dc_circle_logo} className='w-52 object-contain' alt="DC Logo" />
-                              <p className='font-medium mt-5'>O seu carrinho de compras
+                            <div className='h-full flex flex-col gap-2 mt-10 items-center justify-center'>
+                              <img src={dc_circle_logo} className='w-44 object-contain' alt="DC Logo" />
+
+                              <p className='font-medium mt-10'>O seu carrinho de compras
                               está vazio</p>
                               <Link
-                                className='bg-blue-500 my-3 py-2 px-8 text-white font-medium hover:bg-blue-700'
+                                className='bg-blue-500 my-3 py-2 px-8 text-white font-medium hover:bg-blue-700 rounded'
                                 to="/"
                                 onClick={() => setOpen(false)}>
-                                Ver Produtos
+                                Continuar comprando
                               </Link>
                             </div>
                           )}
@@ -91,11 +92,12 @@ export function Cart() {
                                   <div className='flex flex-col justify-between gap-5 h-full'>
                                     <p className='font-bold text-sm'>{item.title}</p>
                                     <div className='text-sm font-medium'>
-                                      <p>Quantidade: {item.amount}</p>
+                                      <p>Autor: {item.creator}</p>
+                                      <p>Qtd: {item.amount}</p>
                                     </div>
                                   </div>
                                   <div className='w-full flex items-center justify-between border-t border-border pt-2'>
-                                    <strong className="float-right text-colorTotal text-lg font-roboto">
+                                    <strong className="float-right text-footer text-lg font-roboto">
                                       {item.total.toLocaleString("pt-BR", {
                                         style: 'currency',
                                         currency: "BRL"
@@ -122,7 +124,7 @@ export function Cart() {
                                 <button
                                   className='p-1 flex items-center gap-1 text-blue-600 font-bold text-sm'
                                   onClick={() => deleteItemCart(item)}>
-                                  Remover
+                                  Excluir
                                   <BsTrash size={24} color='#3259eb' />
                                 </button>
                               </div>
@@ -136,8 +138,8 @@ export function Cart() {
                   {cartAmount !== 0 && (
                     <div className=" px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Total</p>
-                        <p>{total}</p>
+                        <p className='text-md'>Subtotal</p>
+                        <p className='text-verde text-lg'>{total}</p>
                       </div>
 
                       <div className="mt-6">

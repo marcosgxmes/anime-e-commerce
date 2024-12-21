@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ProductsProps } from '../home';
 import { BsCart } from 'react-icons/bs';
 import { CartContext } from '../../context/CartContext'
@@ -16,7 +16,6 @@ export function ProductDetail() {
 
   const [product, setProduct] = useState<ProductsProps>();
   const { addItemCart } = useContext(CartContext);
-  const navigate = useNavigate();
 
 
   // CHAMANDO PRODUTO NO DATABASE PELO ID
@@ -54,7 +53,7 @@ export function ProductDetail() {
     })
 
     addItemCart(product)
-    navigate("/cart")
+    //setOpen(true)
   }
 
 
@@ -91,7 +90,7 @@ export function ProductDetail() {
                 <div className='flex items-center justify-between w-full border-t-2 pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-4 text-white font-bold hover:bg-green-600'
+                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-7 text-white font-bold hover:bg-green-600'
                   >
                     <BsCart size={20} color='#FFF' />
                     Adicionar

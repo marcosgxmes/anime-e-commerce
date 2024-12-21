@@ -9,12 +9,11 @@ import { RouterProvider } from 'react-router-dom'
 
 import CartProvider from './context/CartContext.tsx'
 
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CartProvider>
       <Toaster
-        position="top-center"
+        position="bottom-center"
         reverseOrder={false}
       />
       <RouterProvider router={router} />

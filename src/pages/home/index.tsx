@@ -1,5 +1,5 @@
-//import { api } from '../../services/api'
 /* eslint-disable prefer-const */
+
 import { useEffect, useState, useContext } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { CartContext } from '../../context/CartContext'
@@ -84,7 +84,7 @@ export function Home() {
     <div className='bg-slate-200 pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
 
-        <h1 className="font-medium text-lg py-6 text-center text-header">Destaques</h1>
+        <h1 className="font-medium text-xl py-6 text-center text-header">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-3 lg:grid-cols-5 justify-evenly px-2'>
 
