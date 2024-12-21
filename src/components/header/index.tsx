@@ -10,14 +10,13 @@ import { CartContext } from '../../context/CartContext'
 import { useContext, useState } from 'react'
 
 
-
 export function Header() {
   const { cartAmount } = useContext(CartContext)
   const [input, setInput] = useState("")
 
 
   function handleSearchItem() {
-    
+    // buscar produtos no database e filtrar
   }
 
   return (
@@ -38,13 +37,12 @@ export function Header() {
           <button 
             className='absolute h-8 right-0 px-6'
             onClick={handleSearchItem}
-            >
-            
+          >            
             <FiSearch size={22} color='#333' />
           </button>
         </section>
 
-        <Link className='relative' to='/cart'>
+        <div className='relative'>
           <FiShoppingCart size={24} color="#fff" />
           
           {cartAmount > 0 && (
@@ -52,7 +50,7 @@ export function Header() {
               {cartAmount}
             </span>
           )}
-        </Link>
+        </div>
       </nav>
     </header>
   )

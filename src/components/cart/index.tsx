@@ -6,6 +6,7 @@ import { CiCircleMinus } from 'react-icons/ci'
 import { FaPix } from 'react-icons/fa6'
 import { BsTrash } from 'react-icons/bs'
 import { IoClose } from "react-icons/io5";
+import dc_circle_logo from '../../../public/dc_circle.png'
 
 export function Cart() {
   const {
@@ -14,7 +15,7 @@ export function Cart() {
     cartAmount,
     addItemCart,
     removeItemCart,
-    deleteItemCart
+    deleteItemCart,
   } = useContext(CartContext);
 
   const [open, setOpen] = useState(true)
@@ -22,18 +23,18 @@ export function Cart() {
 
   return (
     <div
-    style={{ display: open == true ? "relative" : "none"}}
-    className="relative z-10">
+      style={{ display: open === true ? "relative" : "none" }}
+      className="relative z-10">
 
       <div className='fixed inset-0 bg-gray-800/75 backdrop-blur-sm transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"'>
 
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div className="fixed inset-0 overflow-hidden ">
+          <div className="absolute inset-0 overflow-hidden ">
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full sm:pl-10">
               <div
                 className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
               >
-                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl sm:rounded-l-3xl">
                   <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                     <div className="flex items-start justify-between border-b-2 pb-1">
                       <p className="text-lg font-medium text-gray-900">Carrinho de compras</p>
@@ -50,9 +51,25 @@ export function Cart() {
                       </div>
                     </div>
 
+
+
                     <div className="mt-8">
                       <div className="flow-root">
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
+
+                          {cart.length === 0 && (
+                            <div className='h-full flex flex-col gap-2 mt-20 items-center justify-center'>
+                              <img src={dc_circle_logo} className='w-52 object-contain' alt="DC Logo" />
+                              <p className='font-medium mt-5'>O seu carrinho de compras
+                              está vazio</p>
+                              <Link
+                                className='bg-blue-500 my-3 py-2 px-8 text-white font-medium hover:bg-blue-700'
+                                to="/"
+                                onClick={() => setOpen(false)}>
+                                Ver Produtos
+                              </Link>
+                            </div>
+                          )}
 
                           {cart.map((item) => (
                             <section
@@ -117,34 +134,36 @@ export function Cart() {
                   </div>
 
                   {cartAmount !== 0 && (
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                    <div className="flex justify-between text-base font-medium text-gray-900">
-                      <p>Subtotal :</p>
-                      <p>{total}</p>
-                    </div>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 gap-2"
-                      >
-                        Pagar com Pix
-                        <FaPix size={20} color="#00bdae" />
-                      </a>
-                    </div>
-                    <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                      <p>
-                        ou{' '}
-                        <button
-                          type="button"
-                          onClick={() => setOpen(false)}
-                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                    <div className=" px-4 py-6 sm:px-6">
+                      <div className="flex justify-between text-base font-medium text-gray-900">
+                        <p>Total</p>
+                        <p>{total}</p>
+                      </div>
+
+                      <div className="mt-6">
+                        <a
+                          href="#"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 gap-2"
                         >
-                          Continue Comprando
-                          <span aria-hidden="true"> &rarr;</span>
-                        </button>
-                      </p>
+                          Pagar com Pix
+                          <FaPix size={20} color="#00bdae" />
+                        </a>
+                      </div>
+
+                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                        <p>
+                          ou{' '}
+                          <button
+                            type="button"
+                            onClick={() => setOpen(false)}
+                            className="font-medium text-blue-600 hover:text-blue-500"
+                          >
+                            Continue Comprando
+                            <span aria-hidden="true"> &rarr;</span>
+                          </button>
+                        </p>
+                      </div>
                     </div>
-                  </div>
                   )}
                 </div>
               </div>

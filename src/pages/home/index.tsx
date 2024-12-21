@@ -35,7 +35,7 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("id", "desc"))
+      const queryRef = query(comicRef, orderBy("description", "desc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -71,9 +71,9 @@ export function Home() {
   function handleAddCartItem(product: ProductsProps) {
     toast.success("Adicionado com sucesso", {
       style: {
-        backgroundColor: "#FFF",
-        color: "#28c76f",
-        borderRadius: 10,
+        backgroundColor: "#000",
+        color: "#FFF",
+        borderRadius: 15,
       }
     })
     addItemCart(product)
@@ -84,11 +84,9 @@ export function Home() {
     <div className='bg-slate-200 pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
 
-        <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Destaques</h1>
+        <h1 className="font-medium text-lg py-6 text-center text-header">Destaques</h1>
 
-
-        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
-
+        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-3 lg:grid-cols-5 justify-evenly px-2'>
 
           {quadrinhos.map(product => (
             <div
@@ -102,8 +100,8 @@ export function Home() {
           {quadrinhos.map(product => (
             <section key={product.id} className="w-full flex flex-col justify-between gap-4">
 
-              <Link className=' flex flex-col gap-3' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center bg-white  rounded-md  py-6 px-3'>
+              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
+                <div className='flex items-center h-60 md:h-72 justify-center rounded-md p-2'>
                   <img
                     className='h-full object-contain'
                     src={product.cover}

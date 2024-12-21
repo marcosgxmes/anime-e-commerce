@@ -11,7 +11,7 @@ export default {
         color: "#333",
         border: "#cdcdcd",
         background: "#f2f2f2;",
-        footer: "#000",
+        footer: "#23252b",
         header: "#333",
         verde: "#28c76f",
         backgroundButton: "#f2f2f2",
@@ -19,13 +19,9 @@ export default {
         red: "#DA291C",
         background: "#f1f5f9",
         fontFamily: { Rototo: ["Roboto"]},
-        trezentos: 280,
-        
+        trezentos: 280,        
       }
     },
-    screens: {
-      cart: "500px",
-    }
   },
   plugins: [],
 }

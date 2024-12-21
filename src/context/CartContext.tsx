@@ -37,11 +37,14 @@ function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartProps[]>([])
   const [total, setTotal] = useState("");
 
+  
+
+
   // ADICIONAR PRODUTOS NO CARRINHO
-  function addItemCart(newItem: ProductsProps){
+  function addItemCart(newItem: ProductsProps) {
     const indexItem = cart.findIndex(item => item.id === newItem.id)
 
-    if(indexItem !== -1){
+    if (indexItem !== -1) {
       let cartList = cart;
 
       cartList[indexItem].amount = cartList[indexItem].amount + 1;
@@ -62,10 +65,12 @@ function CartProvider({ children }: CartProviderProps) {
     totalResultCart([...cart, data])
   }
 
-  function removeItemCart(product: CartProps){
+
+  // REMOVER QUANTIDADE DE PRODUTOS
+  function removeItemCart(product: CartProps) {
     const indexItem = cart.findIndex(item => item.id === product.id)
 
-    if(cart[indexItem]?.amount > 1){
+    if (cart[indexItem]?.amount > 1) {
       let cartList = cart;
 
       cartList[indexItem].amount = cartList[indexItem].amount - 1;
@@ -83,21 +88,24 @@ function CartProvider({ children }: CartProviderProps) {
   }
 
 
-  function deleteItemCart(product: CartProps){
+  // EXCLUIR PRODUTO DO CARRINHO
+  function deleteItemCart(product: CartProps) {
     const removeItem = cart.filter(item => item.id !== product.id)
 
     setCart(removeItem);
     totalResultCart(removeItem)
   }
 
+
   // CALCULAR TOTAL
-  function totalResultCart(items: CartProps[]){
+  function totalResultCart(items: CartProps[]) {
     let myCart = items;
-    let result = myCart.reduce((acc, obj) => { return acc + obj.total}, 0)
-    const resultFomated = result.toLocaleString("pt-BR", {style: 'currency', currency: "BRL"})
+    let result = myCart.reduce((acc, obj) => { return acc + obj.total }, 0)
+    const resultFomated = result.toLocaleString("pt-BR", { style: 'currency', currency: "BRL" })
 
     setTotal(resultFomated);
   }
+
 
   return (
     <CartContext.Provider
