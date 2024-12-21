@@ -23,6 +23,9 @@ export default {
         
       }
     },
+    screens: {
+      cart: "500px",
+    }
   },
   plugins: [],
 }

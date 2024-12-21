@@ -84,9 +84,11 @@ export function Home() {
     <div className='bg-slate-200 pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
 
-        <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Mangás</h1>
+        <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Destaques</h1>
+
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
+
 
           {quadrinhos.map(product => (
             <div
@@ -95,6 +97,7 @@ export function Home() {
             >
             </div>
           ))}
+
 
           {quadrinhos.map(product => (
             <section key={product.id} className="w-full flex flex-col justify-between gap-4">
