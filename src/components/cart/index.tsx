@@ -21,7 +21,9 @@ export function Cart() {
 
 
   return (
-    <div className="relative z-10">
+    <div
+    style={{ display: open == true ? "relative" : "none"}}
+    className="relative z-10">
 
       <div className='fixed inset-0 bg-gray-800/75 backdrop-blur-sm transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"'>
 
@@ -114,7 +116,8 @@ export function Cart() {
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                  {cartAmount !== 0 && (
+                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal :</p>
                       <p>{total}</p>
@@ -142,6 +145,7 @@ export function Cart() {
                       </p>
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
             </div>
