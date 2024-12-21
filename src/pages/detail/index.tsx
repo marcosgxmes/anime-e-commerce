@@ -11,25 +11,21 @@ import { db } from '../../services/api'
 
 export function ProductDetail() {
 
-  // PEGAR ID DA ULR
+  // PEGAR ID DO PRODUTO PELA URL
   const { id } = useParams();
-
-  // ARMAZENAR DADOS QUE VEM DO BANCO DE DADOS
+  
   const [product, setProduct] = useState<ProductsProps>();
-
   const { addItemCart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  // CHAMAR DADOS NO BANCO DE DADOS
+
+  // CHAMANDO PRODUTO NO DATABASE PELO ID
   useEffect(() => {
-    async function getProduct() {
+    async function getProduct() {      
 
       if (!id) { return }
-      // PEGAR REFERENCIA DO DB PELO ID
-      const mangaRef = doc(db, "mangas", id)   
-         
 
-      // SETAR DADOS NA VARIAVEL DE ARMZENAMENTO
+      const mangaRef = doc(db, "quadrinhos", id)         
       
         getDoc(mangaRef)
         .then((snapshot) => {
@@ -41,14 +37,13 @@ export function ProductDetail() {
             cover: snapshot.data()?.cover,
             creator: snapshot.data()?.creator,
           })
-        })      
-            
+        })                  
     }
     getProduct()
-  }, [id])
+  }, [id])  
 
 
-  //ADD ITEM NO CARRINHO
+  // ADD ITEM NO CARRINHO
   function handleAddItem(product: ProductsProps) {
     toast.success("Adicionado ao carrinho", {
       style: {
@@ -70,7 +65,7 @@ export function ProductDetail() {
         {product  && (
           <section className='w-full'>
 
-            <div className='w-full mb-5 flex gap-2 text-sm'>
+            <div className='w-full mb-5 flex items-center justify-start gap-2 text-sm'>
               <Link className='flex items-center justify-center' to="/">
                 <p>Home </p>
                 <span className='ml-1'>|</span>

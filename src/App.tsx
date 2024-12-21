@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 //PAGINAS
 import { Home } from './pages/home'
-import { Cart } from './pages/cart'
+// import { Cart } from './pages/cart'
 import { ProductDetail } from './pages/detail'
 
 //COMPONENTES
@@ -18,10 +18,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />
       },
-      {
-        path: "/cart",
-        element: <Cart />
-      },
+      // {
+      //   path: "/cart",
+      //   element: <Cart />
+      // },
       {
         path: "/product/:id",
         element: <ProductDetail />

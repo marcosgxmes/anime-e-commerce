@@ -26,48 +26,16 @@ export interface ProductsProps {
 
 export function Home() {
 
-  const [products, setProducts] = useState<ProductsProps[]>([])
   const [quadrinhos, setQuadrinhos] = useState<ProductsProps[]>([])
   const [loadImages, setLoadImages] = useState<string[]>([])
-
   const { addItemCart } = useContext(CartContext)
 
-
-  // CHAMANDO HQs DO DATABASE
-  useEffect(() => {
-    async function getProducts() {
-      const mangasRef = collection(db, "mangas")
-      const queryRef = query(mangasRef, orderBy("title", "asc"))
-
-      getDocs(queryRef)
-        .then((snapshot) => {
-          let listMangas = [] as ProductsProps[]
-
-          snapshot.forEach(doc => [
-            listMangas.push({
-              id: doc.id,
-              title: doc.data().title,
-              description: doc.data().description,
-              price: doc.data().price,
-              cover: doc.data().cover,
-              creator: doc.data().creator
-
-            })
-          ])
-
-          setProducts(listMangas)
-        })
-    }
-
-    getProducts()
-  }, [])
-
-
-  // CHAMANDO MANGÁS DO DATABASE
+  
+  // CHAMANDO PRODUTOS DO DATABASE
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("title", "desc"))
+      const queryRef = query(comicRef, orderBy("id", "desc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -129,7 +97,6 @@ export function Home() {
           ))}
 
           {quadrinhos.map(product => (
-
             <section key={product.id} className="w-full flex flex-col justify-between gap-4">
 
               <Link className=' flex flex-col gap-3' to={`/product/${product.id}`}>
@@ -146,7 +113,9 @@ export function Home() {
                 <p className='font-medium text-sm  text-color'>{product.title}</p>
               </Link>
 
+
               <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
+
                 <strong className='text-color font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
@@ -165,59 +134,7 @@ export function Home() {
           ))}
 
         </div>
-
-        <h1 className="font-medium text-xl mb-2 py-6 text-center text-header">Marvel & DC</h1>
-
-
-        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-5 justify-evenly px-2'>
-
-          {products.map(product => (
-            <div
-              className='w-full h-72 rounded-md bg-white'
-              style={{ display: loadImages.includes(product.id) ? "none" : "block" }}
-            >
-            </div>
-          ))}
-
-          {products.map(product => (
-
-            <section key={product.id} className="w-full flex flex-col justify-between gap-4">
-
-              <Link className=' flex flex-col gap-3' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center bg-white  rounded-md  py-6 px-3'>
-                  <img
-                    className='h-full object-contain'
-                    src={product.cover}
-                    alt={product.title}
-                    onLoad={() => handleImageLoad(product.id)}
-                    style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
-                  />
-                </div>
-
-                <p className='font-medium text-sm  text-color'>{product.title}</p>
-              </Link>
-
-              <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
-                <strong className='text-color font-roboto'>
-                  {product.price.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                  })}
-                </strong>
-
-                <button
-                  className=' bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-bold text-sm hover:bg-green-700'
-                  onClick={() => handleAddCartItem(product)}>
-                  <BsCart size={20} color='#ffffff' /> Adicionar
-                </button>
-              </div>
-
-            </section>
-          ))}
-
-        </div>
-
-      </main>
+      </main>      
     </div>
   )
 }
