@@ -15,7 +15,7 @@ const CarrinhoContext = createContext({} as CarrinhoContextData);
 
 export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
 
-  const [carrinhoAberto, setCarrinhoAberto] = useState(true);
+  const [carrinhoAberto, setCarrinhoAberto] = useState(false);
 
   const abrirCarrinho = () => setCarrinhoAberto(true);
   const fecharCarrinho = () => setCarrinhoAberto(false);

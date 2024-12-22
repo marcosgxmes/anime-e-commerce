@@ -62,7 +62,7 @@ export function ProductDetail() {
 
 
   return (
-    <div className='bg-slate-200 flex items-center py-5'>
+    <div className='bg-background flex items-center py-5'>
       <main className='w-full max-w-7xl px-5 pb-7 mx-auto'>
 
         {product && (

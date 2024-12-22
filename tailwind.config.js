@@ -10,7 +10,6 @@ export default {
         colorTotal: "#004280",
         color: "#333",
         border: "#cdcdcd",
-        background: "#f2f2f2;",
         footer: "#23252b",
         header: "#333",
         verde: "#28c76f",

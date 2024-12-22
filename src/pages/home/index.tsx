@@ -35,7 +35,7 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("id", "asc"))
+      const queryRef = query(comicRef, orderBy("title", "desc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -81,7 +81,7 @@ export function Home() {
 
 
   return (
-    <div className='bg-slate-200 pb-10'>
+    <div className='bg-background pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
 
         <h1 className="font-medium text-xl py-6 text-center text-header">Destaques</h1>
