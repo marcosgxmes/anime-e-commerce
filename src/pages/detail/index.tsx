@@ -11,6 +11,8 @@ import { db } from '../../services/api'
 import { useCarrinho } from '../../context/CarrinhoContext';
 
 
+
+
 export function ProductDetail() {
 
   // PEGAR ID DO PRODUTO PELA URL
@@ -74,7 +76,7 @@ export function ProductDetail() {
                 <span className='ml-1'>|</span>
               </Link>
 
-              <strong className='text-red flex flex-wrap'>{product?.title}</strong>
+              <strong className='text-colorTotal flex flex-wrap'>{product?.title}</strong>
             </div>
 
             <div className='flex flex-col lg:flex-row mt-7'>
@@ -94,9 +96,9 @@ export function ProductDetail() {
                 <div className='flex items-center justify-between w-full border-t-2 pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-8 text-white font-bold hover:bg-green-600'
+                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-8 text-white font-bold hover:bg-white border-2 border-verde hover:text-verde'
                   >
-                    <BsCart size={20} color='#FFF' />
+                    <BsCart size={20} />
                     Adicionar
                   </button>
 

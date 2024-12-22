@@ -13,6 +13,7 @@ interface CarrinhoProviderProps {
 
 const CarrinhoContext = createContext({} as CarrinhoContextData);
 
+
 export const CarrinhoProvider = ({ children }: CarrinhoProviderProps) => {
 
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);

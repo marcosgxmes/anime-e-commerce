@@ -1,5 +1,4 @@
-/* eslint-disable prefer-const */
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useContext } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { CartContext } from '../../context/CartContext'
@@ -12,6 +11,9 @@ import {
   orderBy,
   getDocs,
 } from 'firebase/firestore'
+
+import { useSearch } from '../../context/SeachContext'
+
 
 
 export interface ProductsProps {
@@ -26,39 +28,42 @@ export interface ProductsProps {
 
 export function Home() {
 
-  const [quadrinhos, setQuadrinhos] = useState<ProductsProps[]>([])
+  const { quadrinhos, setQuadrinhos} = useSearch();
+  
+ 
   const [loadImages, setLoadImages] = useState<string[]>([])
   const { addItemCart } = useContext(CartContext)
 
   
   // CHAMANDO PRODUTOS DO DATABASE
   useEffect(() => {
-    async function getProducts() {
-      const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("title", "desc"))
-
-      getDocs(queryRef)
-        .then((snapshot) => {
-          let listComic = [] as ProductsProps[]
-
-          snapshot.forEach(doc => [
-            listComic.push({
-              id: doc.id,
-              title: doc.data().title,
-              description: doc.data().description,
-              price: doc.data().price,
-              cover: doc.data().cover,
-              creator: doc.data().creator
-
-            })
-          ])
-
-          setQuadrinhos(listComic)
-        })
-    }
-
     getProducts()
-  }, [])
+  }, [])  
+
+  async function getProducts() {
+    const comicRef = collection(db, "quadrinhos")
+    const queryRef = query(comicRef, orderBy("id", "asc"))
+
+    getDocs(queryRef)
+      .then((snapshot) => {
+        // eslint-disable-next-line prefer-const
+        let listComic = [] as ProductsProps[]
+
+        snapshot.forEach(doc => [
+          listComic.push({
+            id: doc.id,
+            title: doc.data().title,
+            description: doc.data().description,
+            price: doc.data().price,
+            cover: doc.data().cover,
+            creator: doc.data().creator
+
+          })
+        ])
+
+        setQuadrinhos(listComic)
+      })
+  }
 
 
   // EVITAR LAYOUT SHIFT
@@ -103,7 +108,7 @@ export function Home() {
               <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
                 <div className='flex items-center h-60 md:h-72 justify-center rounded-md p-2'>
                   <img
-                    className='h-full object-contain'
+                    className='h-full object-contain hover:scale-105 transition-all'
                     src={product.cover}
                     alt={product.title}
                     onLoad={() => handleImageLoad(product.id)}
@@ -111,7 +116,7 @@ export function Home() {
                   />
                 </div>
 
-                <p className='font-medium text-sm  text-color'>{product.title}</p>
+                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
               </Link>
 
 
@@ -124,10 +129,12 @@ export function Home() {
                   })}
                 </strong>
 
-                <button
-                  className=' bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-bold text-sm hover:bg-green-700'
-                  onClick={() => handleAddCartItem(product)}>
-                  <BsCart size={20} color='#ffffff' /> Adicionar
+                <button  onClick={() => handleAddCartItem(product)}
+                  className=' bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm hover:bg-white border-2 border-verde hover:text-verde'
+                >
+
+                  <BsCart size={20} />
+                  Adicionar
                 </button>
               </div>
 
@@ -139,4 +146,5 @@ export function Home() {
     </div>
   )
 }
+
 

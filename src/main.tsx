@@ -10,15 +10,19 @@ import { RouterProvider } from 'react-router-dom'
 import CartProvider from './context/CartContext.tsx'
 import { CarrinhoProvider } from './context/CarrinhoContext.tsx'
 
+import {SearchProvider} from './context/SeachContext.tsx'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <CartProvider>
       <CarrinhoProvider>
-        <Toaster
-          position="bottom-center"
-          reverseOrder={false}
-        />
-        <RouterProvider router={router} />
+        <SearchProvider>
+          <Toaster
+            position="bottom-center"
+            reverseOrder={false}
+          />
+          <RouterProvider router={router} />
+        </SearchProvider>
       </CarrinhoProvider>
     </CartProvider>
   </StrictMode>,
