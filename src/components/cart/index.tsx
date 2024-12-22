@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 import { Link } from 'react-router-dom';
 import { BsPlusCircle } from 'react-icons/bs'
@@ -7,6 +7,10 @@ import { FaPix } from 'react-icons/fa6'
 import { BsTrash } from 'react-icons/bs'
 import { IoClose } from "react-icons/io5";
 import dc_circle_logo from '../../../public/dc_circle.png'
+
+import { useCarrinho } from '../../context/CarrinhoContext';
+
+
 
 export function Cart() {
   const {
@@ -18,14 +22,15 @@ export function Cart() {
     deleteItemCart,
   } = useContext(CartContext);
 
-  const [open, setOpen] = useState(true)
+  const { carrinhoAberto, fecharCarrinho } = useCarrinho();
 
+
+  
 
   return (
     <div
-      style={{ display: open === true ? "relative" : "none" }}
+      style={{ display: carrinhoAberto == true ? "block" : "none"}}
       className="relative z-10">
-
       <div className='fixed inset-0 bg-gray-800/75 backdrop-blur-sm transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"'>
 
         <div className="fixed inset-0 overflow-hidden ">
@@ -41,7 +46,7 @@ export function Cart() {
                       <div className="ml-3 flex h-7 items-center">
                         <button
                           type="button"
-                          onClick={() => setOpen(false)}
+                          onClick={() => fecharCarrinho()}
                           className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
                         >
                           <span className="absolute -inset-0.5" />
@@ -66,7 +71,7 @@ export function Cart() {
                               <Link
                                 className='bg-blue-500 my-3 py-2 px-8 text-white font-medium hover:bg-blue-700 rounded'
                                 to="/"
-                                onClick={() => setOpen(false)}>
+                                onClick={() => fecharCarrinho()}>
                                 Continuar comprando
                               </Link>
                             </div>
@@ -157,7 +162,7 @@ export function Cart() {
                           ou{' '}
                           <button
                             type="button"
-                            onClick={() => setOpen(false)}
+                            onClick={() => fecharCarrinho()}
                             className="font-medium text-blue-600 hover:text-blue-500"
                           >
                             Continue Comprando
@@ -172,7 +177,7 @@ export function Cart() {
             </div>
           </div>
         </div>
-
+        
       </div>
 
     </div>

@@ -9,10 +9,14 @@ import { FiSearch } from 'react-icons/fi'
 import { CartContext } from '../../context/CartContext'
 import { useContext, useState } from 'react'
 
+import { useCarrinho } from '../../context/CarrinhoContext';
+
 
 export function Header() {
   const { cartAmount } = useContext(CartContext)
   const [input, setInput] = useState("")
+
+  const { abrirCarrinho } = useCarrinho();
 
 
   function handleSearchItem() {
@@ -42,7 +46,8 @@ export function Header() {
           </button>
         </section>
 
-        <div className='relative'>
+        <div className='relative'
+        onClick={ () => abrirCarrinho() }>
           <FiShoppingCart size={24} color="#fff" />
           
           {cartAmount > 0 && (

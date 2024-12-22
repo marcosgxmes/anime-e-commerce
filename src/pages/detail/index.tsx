@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import { ProductsProps } from '../home';
 import { BsCart } from 'react-icons/bs';
 import { CartContext } from '../../context/CartContext'
-import toast from 'react-hot-toast';
+//import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { getDoc, doc } from "firebase/firestore";
 import { db } from '../../services/api'
+
+import { useCarrinho } from '../../context/CarrinhoContext';
 
 
 export function ProductDetail() {
@@ -16,6 +18,8 @@ export function ProductDetail() {
 
   const [product, setProduct] = useState<ProductsProps>();
   const { addItemCart } = useContext(CartContext);
+
+  const { abrirCarrinho } = useCarrinho();
 
 
   // CHAMANDO PRODUTO NO DATABASE PELO ID
@@ -44,16 +48,16 @@ export function ProductDetail() {
 
   // ADD ITEM NO CARRINHO
   function handleAddItem(product: ProductsProps) {
-    toast.success("Adicionado ao carrinho", {
-      style: {
-        backgroundColor: "#000",
-        color: "#FFF",
-        borderRadius: 17
-      }
-    })
+    // toast.success("Adicionado ao carrinho", {
+    //   style: {
+    //     backgroundColor: "#000",
+    //     color: "#FFF",
+    //     borderRadius: 17
+    //   }
+    // })    
 
     addItemCart(product)
-    //setOpen(true)
+    abrirCarrinho()
   }
 
 
@@ -90,7 +94,7 @@ export function ProductDetail() {
                 <div className='flex items-center justify-between w-full border-t-2 pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-7 text-white font-bold hover:bg-green-600'
+                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-8 text-white font-bold hover:bg-green-600'
                   >
                     <BsCart size={20} color='#FFF' />
                     Adicionar

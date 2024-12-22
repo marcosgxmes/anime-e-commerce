@@ -35,7 +35,7 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("description", "desc"))
+      const queryRef = query(comicRef, orderBy("id", "asc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -77,7 +77,7 @@ export function Home() {
       }
     })
     addItemCart(product)
-  }
+  }  
 
 
   return (
