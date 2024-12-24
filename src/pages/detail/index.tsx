@@ -131,27 +131,27 @@ export function ProductDetail() {
               <strong className='text-colorTotal flex flex-wrap'>{product?.title}</strong>
             </div>
 
-            <div className='flex flex-col items-center lg:flex-row mt-7'>
+            <div className='flex max-w-5xl mx-auto flex-col items-center lg:flex-row my-8'>
               <div className='flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
                 <img
-                  className='h-64 sm:h-96 object-contain shadow-md rounded-lg'
+                  className='h-64 sm:h-80 object-contain shadow-md rounded-lg'
                   src={product.cover}
                   alt={product.title}
                 />
               </div>
 
-              <div className='flex-1 bg-white rounded-md py-5 px-3 sm:px-7'>
-                <p className='font-bold text-lg mb-2'>{product?.title}</p>
-                <p className='my-4 pb-3 italic text-justify'>{product?.description}</p>
+              <div className='flex-1  bg-white rounded-md py-5 px-3 sm:px-7'>
+                <p className='font-bold text-lg sm:text-2xl mb-8'>{product?.title}</p>
+                <p className='my-4 text-sm pb-3 text-justify'>{product?.description}</p>
                 <p className='my-4 pb-3 text-sm '>Autores: <span className='font-medium'>{product?.creator}</span></p>
 
-                <div className='flex items-center justify-between w-full border-t-2 pt-4'>
+                <div className='flex flex-col-reverse gap-4 justify-start w-full border-t-2 pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-green-500 rounded-lg flex gap-2 py-2 px-8 text-white font-bold hover:bg-white border-2 border-verde hover:text-verde'
+                    className='bg-green-500 rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold hover:bg-white border-2 border-verde hover:text-verde'
                   >
                     <BsCart size={20} />
-                    Adicionar
+                    Adicionar ao carrinho
                   </button>
 
                   <strong className='text-color text-xl'>
@@ -171,8 +171,8 @@ export function ProductDetail() {
 
 
 
-      <section className='w-full flex px-5  flex-col items-center justify-center max-w-7xl mx-auto gap-y-8 my-5 sm:mt-10'>
-        <h1 className='text-colorTotal font-medium text-xl text-left'>Sugestões para você</h1>
+      <section className='w-full flex px-5  flex-col items-center justify-center max-w-7xl mx-auto gap-y-8 my-5 sm:my-10'>
+      <h1 className="font-medium text-xl py-6 text-center text-header">Sugestões para você</h1>
 
         <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly w-full '>
 

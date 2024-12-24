@@ -132,7 +132,7 @@ export function Cart() {
                                 <button
                                   className='p-1 flex items-center gap-1 text-azul font-bold text-sm'
                                   onClick={() => deleteItemCart(item)}>
-                                  Excluir
+                                  Remover
                                   <BsTrash size={24} color='#3259eb' />
                                 </button>
                               </div>
