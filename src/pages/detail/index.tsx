@@ -5,7 +5,7 @@ import { BsCart } from 'react-icons/bs';
 import { CartContext } from '../../context/CartContext'
 //import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { db } from '../../services/api'
 
 import { useCarrinho } from '../../context/CarrinhoContext';
@@ -13,12 +13,11 @@ import { useCarrinho } from '../../context/CarrinhoContext';
 
 export function ProductDetail() {
 
-  // PEGAR ID DO PRODUTO PELA URL
   const { id } = useParams();
-
   const [product, setProduct] = useState<ProductsProps>();
-  const { addItemCart } = useContext(CartContext);
+  const [produtos, setProdutos] = useState<ProductsProps[]>([])
 
+  const { addItemCart } = useContext(CartContext);
   const { abrirCarrinho } = useCarrinho();
 
 
@@ -43,6 +42,7 @@ export function ProductDetail() {
         })
     }
     getProduct()
+    sugerirProdutosAleatorios();
   }, [id])
 
 
@@ -60,20 +60,59 @@ export function ProductDetail() {
     abrirCarrinho()
   }
 
-  // function sortNumber(){
-  //   let min = 1;
-  //   let max = 20;
-  //   let ramdomNumbers = [];
 
-  //   for (let i = 0; i < 4; i++) {
-  //     let ramdomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-  //     ramdomNumbers.push(ramdomNumber)
-  //   }
+  // SUGESTÕES DE PRODUTOS
+  async function sugerirProdutosAleatorios() {
+    try {
+      // Referência à coleção de produtos
+      const produtosRef = collection(db, "quadrinhos")
 
-  //   console.log(ramdomNumbers)
-  // }
+      // Pega todos os produtos da coleção
+      getDocs(produtosRef)
+        .then((snapshot) => {
+          // eslint-disable-next-line prefer-const
+          let listComic = [] as ProductsProps[]
 
-  // sortNumber()
+          snapshot.forEach(doc => [
+            listComic.push({
+              id: doc.id,
+              title: doc.data().title,
+              description: doc.data().description,
+              price: doc.data().price,
+              cover: doc.data().cover,
+              creator: doc.data().creator
+
+            })
+          ])
+
+          setProdutos(listComic.slice(0, 4))
+        })
+
+
+
+      // Embaralha o array de produtos aleatoriamente
+      const produtosAleatorios = shuffleArray(produtos);
+
+      // Seleciona os 4 primeiros produtos após embaralhar
+      setProdutos(produtosAleatorios.slice(0, 4))
+      console.log(produtosAleatorios.slice(0, 4))
+      
+      return produtosAleatorios.slice(0, 4);
+      
+
+    } catch (error) {
+      console.error("Erro ao sugerir produtos aleatórios:", error);
+    }    
+  }
+
+  // Função de embaralhamento (algoritmo de Fisher-Yates)
+  function shuffleArray<T>(array: T[]): T[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+    }
+    return array;
+  }
 
 
   return (
@@ -127,7 +166,7 @@ export function ProductDetail() {
             </div>
           </section>
         )}
-        
+
       </main>
 
 
@@ -137,131 +176,38 @@ export function ProductDetail() {
 
         <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly w-full '>
 
-        {product && (
-            <section key={product.id} className="w-full flex flex-col justify-between gap-2">
+          {produtos.map((snap => (
+            <section key={snap.id} className="w-full flex flex-col justify-between gap-2">
 
-              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
+              <Link className=' flex flex-col gap-1' to={`/product/${snap.id}`}>
                 <div className='flex items-center h-60 md:h-72 justify-center rounded-md '>
                   <img
                     className='h-full object-contain hover:scale-105 transition-all'
-                    src={product.cover}
-                    alt={product.title}
-                    // onLoad={() => handleImageLoad(product.id)}
-                    // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
+                    src={snap.cover}
+                    alt={snap.title}
+                  // onLoad={() => handleImageLoad(product.id)}
+                  // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
                   />
                 </div>
 
-                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
+                <p className='font-medium text-center text-sm text-black'>{snap.title}</p>
               </Link>
 
               <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
 
                 <strong className='text-color font-roboto'>
-                  {product.price.toLocaleString("pt-BR", {
+                  {snap.price.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL"
                   })}
                 </strong>
 
-                
+
               </div>
 
             </section>
-          )}
-        {product && (
-            <section key={product.id} className="w-full flex flex-col justify-between gap-2">
+          )))}
 
-              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center rounded-md '>
-                  <img
-                    className='h-full object-contain hover:scale-105 transition-all'
-                    src={product.cover}
-                    alt={product.title}
-                    // onLoad={() => handleImageLoad(product.id)}
-                    // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
-                  />
-                </div>
-
-                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
-              </Link>
-
-              <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
-
-                <strong className='text-color font-roboto'>
-                  {product.price.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                  })}
-                </strong>
-
-                
-              </div>
-
-            </section>
-          )}
-        {product && (
-            <section key={product.id} className="w-full flex flex-col justify-between gap-2">
-
-              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center rounded-md '>
-                  <img
-                    className='h-full object-contain hover:scale-105 transition-all'
-                    src={product.cover}
-                    alt={product.title}
-                    // onLoad={() => handleImageLoad(product.id)}
-                    // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
-                  />
-                </div>
-
-                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
-              </Link>
-
-              <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
-
-                <strong className='text-color font-roboto'>
-                  {product.price.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                  })}
-                </strong>
-
-                
-              </div>
-
-            </section>
-          )}
-
-        {product && (
-            <section key={product.id} className="w-full flex flex-col justify-between gap-2">
-
-              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center rounded-md '>
-                  <img
-                    className='h-full object-contain hover:scale-105 transition-all'
-                    src={product.cover}
-                    alt={product.title}
-                    // onLoad={() => handleImageLoad(product.id)}
-                    // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
-                  />
-                </div>
-
-                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
-              </Link>
-
-              <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
-
-                <strong className='text-color font-roboto'>
-                  {product.price.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                  })}
-                </strong>
-
-                
-              </div>
-
-            </section>
-          )}      
 
         </div>
       </section>
