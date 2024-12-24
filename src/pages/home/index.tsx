@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from 'react'
 import { BsCart } from 'react-icons/bs'
 import { CartContext } from '../../context/CartContext'
+import { useSearch } from '../../context/SeachContext'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { db } from '../../services/api'
@@ -11,9 +12,6 @@ import {
   orderBy,
   getDocs,
 } from 'firebase/firestore'
-
-import { useSearch } from '../../context/SeachContext'
-
 
 
 export interface ProductsProps {
@@ -28,42 +26,39 @@ export interface ProductsProps {
 
 export function Home() {
 
-  const { quadrinhos, setQuadrinhos} = useSearch();  
- 
+  const { quadrinhos, setQuadrinhos} = useSearch();   
   const [loadImages, setLoadImages] = useState<string[]>([])
   const { addItemCart } = useContext(CartContext)
 
   
   // CHAMANDO PRODUTOS DO DATABASE
   useEffect(() => {
+    async function getProducts() {
+      const comicRef = collection(db, "quadrinhos")
+      const queryRef = query(comicRef, orderBy("creator", "asc"))
+  
+      getDocs(queryRef)
+        .then((snapshot) => {
+          // eslint-disable-next-line prefer-const
+          let listComic = [] as ProductsProps[]
+  
+          snapshot.forEach(doc => [
+            listComic.push({
+              id: doc.id,
+              title: doc.data().title,
+              description: doc.data().description,
+              price: doc.data().price,
+              cover: doc.data().cover,
+              creator: doc.data().creator
+  
+            })
+          ])
+  
+          setQuadrinhos(listComic)
+        })
+    }
     getProducts()
-  }, [])  
-
-
-  async function getProducts() {
-    const comicRef = collection(db, "quadrinhos")
-    const queryRef = query(comicRef, orderBy("id", "asc"))
-
-    getDocs(queryRef)
-      .then((snapshot) => {
-        // eslint-disable-next-line prefer-const
-        let listComic = [] as ProductsProps[]
-
-        snapshot.forEach(doc => [
-          listComic.push({
-            id: doc.id,
-            title: doc.data().title,
-            description: doc.data().description,
-            price: doc.data().price,
-            cover: doc.data().cover,
-            creator: doc.data().creator
-
-          })
-        ])
-
-        setQuadrinhos(listComic)
-      })
-  }
+  }, [])   
 
 
   // EVITAR LAYOUT SHIFT
@@ -105,7 +100,7 @@ export function Home() {
           {quadrinhos.map(product => (
             <section key={product.id} className="w-full flex flex-col justify-between gap-4">
 
-              <Link className=' flex flex-col gap-1' to={`/product/${product.id}`}>
+              <Link className=' flex flex-col gap-1 z-1' to={`/product/${product.id}`}>
                 <div className='flex items-center h-60 md:h-72 justify-center rounded-md p-2'>
                   <img
                     className='h-full object-contain hover:scale-105 transition-all'

@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { ProductsProps } from '../home';
 import { BsCart } from 'react-icons/bs';
 import { CartContext } from '../../context/CartContext'
-//import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { db } from '../../services/api'
@@ -44,6 +44,12 @@ export function ProductDetail() {
     getProduct()
     sugerirProdutosAleatorios();
   }, [id])
+
+
+  // VOLTAR AO TOPO DA PÁGINA
+  function reSize(){
+    window.scrollTo(0,0)
+  }
 
 
   // ADD ITEM NO CARRINHO
@@ -131,7 +137,7 @@ export function ProductDetail() {
               <strong className='text-colorTotal flex flex-wrap'>{product?.title}</strong>
             </div>
 
-            <div className='flex max-w-5xl mx-auto flex-col items-center lg:flex-row my-8'>
+            <div className='flex max-w-6xl mx-auto flex-col items-center lg:flex-row my-8 gap-y-8'>
               <div className='flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
                 <img
                   className='h-64 sm:h-80 object-contain shadow-md rounded-lg'
@@ -140,7 +146,7 @@ export function ProductDetail() {
                 />
               </div>
 
-              <div className='flex-1  bg-white rounded-md py-5 px-3 sm:px-7'>
+              <div className='flex-1  bg-white rounded-md py-5 px-3 sm:px-7 shadow-md'>
                 <p className='font-bold text-lg sm:text-2xl mb-8'>{product?.title}</p>
                 <p className='my-4 text-sm pb-3 text-justify'>{product?.description}</p>
                 <p className='my-4 pb-3 text-sm '>Autores: <span className='font-medium'>{product?.creator}</span></p>
@@ -170,19 +176,18 @@ export function ProductDetail() {
       </main>
 
 
-
-      <section className='w-full flex px-5  flex-col items-center justify-center max-w-7xl mx-auto gap-y-8 my-5 sm:my-10'>
-      <h1 className="font-medium text-xl py-6 text-center text-header">Sugestões para você</h1>
+      <section className='w-full flex-1 px-5  flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 my-3 sm:my-8'>
+      <h1 className="font-medium text-xl text-left mb-10 sm:text-center text-header">Talvez você goste</h1>
 
         <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly w-full '>
 
           {produtos.map((snap => (
             <section key={snap.id} className="w-full flex flex-col justify-between gap-2">
 
-              <Link className=' flex flex-col gap-1' to={`/product/${snap.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center rounded-md '>
+              <Link onClick={() => reSize()} className=' flex flex-col gap-1 scroll-smooth'  to={`/product/${snap.id}`}>
+                <div className='flex items-center h-60 md:h-64  justify-center rounded-md '>
                   <img
-                    className='h-full object-contain hover:scale-105 transition-all'
+                    className='h-full object-contain hover:scale-105 transition-all md:rounded-lg'
                     src={snap.cover}
                     alt={snap.title}
                   // onLoad={() => handleImageLoad(product.id)}

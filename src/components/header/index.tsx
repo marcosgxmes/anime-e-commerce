@@ -15,7 +15,7 @@ export function Header() {
 
 
   return (
-    <header className='w-full pr-2 sticky top-0 bg-footer shadow-md py-1'>
+    <header className='w-full pr-2 z-10 sticky top-0 bg-footer shadow-md py-1'>
       <nav className='w-full max-w-7xl h-16 flex items-center justify-between pr-2 pl-2 mx-auto'>
         <Link to='/'>
           <img src={img} className='h-12 object-contain' alt="DC logo" />

@@ -20,7 +20,7 @@ export default {
         red: "#DA291C",
         background: "#f1f5f9",
         fontFamily: { Rototo: ["Roboto"]},
-        trezentos: 280,        
+        trezentos: 280,                
       }
     },
   },
