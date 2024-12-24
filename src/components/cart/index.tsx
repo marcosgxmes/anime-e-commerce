@@ -29,13 +29,13 @@ export function Cart() {
       style={{ display: carrinhoAberto == true ? "block" : "none" }}
     >
 
-      <div className='fixed inset-0 bg-gray-800/75 backdrop-blur-sm transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"'>
+      <div className='fixed inset-0 bg-gray-800/75 backdrop-blur-sm transition-opacity duration-700 ease-in-out data-[closed]:opacity-0"'>
 
         <div className="fixed inset-0 overflow-hidden ">
           <div className="absolute inset-0 overflow-hidden ">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full sm:pl-10">
               <div
-                className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
+                className="pointer-events-auto w-screen max-w-md transform transition duration-700 ease-in-out data-[closed]:translate-x-full sm:duration-700"
               >
 
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl sm:rounded-l-3xl">
@@ -153,10 +153,10 @@ export function Cart() {
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-azul px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-black gap-2  hover:scale-105 transition-all"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-base font-medium text-white shadow-sm gap-3  hover:scale-105 transition-all"
                         >
                           Pagar com Pix
-                          <FaPix size={20} color="#00bdae" />
+                          <FaPix size={24} color="#00bdae" />
                         </a>
                       </div>
 
