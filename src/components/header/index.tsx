@@ -15,21 +15,21 @@ export function Header() {
 
 
   return (
-    <header className='w-full pr-3 sticky top-0 bg-footer shadow-md py-1'>
-      <nav className='w-full max-w-7xl h-16 flex items-center justify-between px-2 mx-auto'>
+    <header className='w-full pr-2 sticky top-0 bg-footer shadow-md py-1'>
+      <nav className='w-full max-w-7xl h-16 flex items-center justify-between pr-2 pl-1 mx-auto'>
         <Link to='/'>
           <img src={img} className='h-12 object-contain' alt="DC logo" />
         </Link>
 
-        <section className='p-3 rounded-full  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
+        <section className='rounded-xl pl-1.5 pr-3  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className='w-full border-2 rounded-full h-9 px-3 outline-none border-none'
-            placeholder='Pesquisar'
+            className='w-full border-2 rounded-xl h-9 px-4 outline-none border-none'
+            placeholder='Pesquisar'            
           />
 
-          <button className='absolute h-8 right-0 px-6' onClick={handleSearchItem}>
+          <button className='absolute h-8 right-0 pr-6' onClick={handleSearchItem}>
             <FiSearch size={22} color='#707070' />
           </button>
         </section>
@@ -40,7 +40,7 @@ export function Header() {
           <FiShoppingCart size={24} color="#fff" />
 
           {cartAmount > 0 && (
-            <span className='absolute -top-3 -right-3 px-2.5 bg-red rounded-full w-5 h-5 flex items-center justify-center text-white text-xs'>
+            <span className='absolute -top-3 -right-2 px-2.5 bg-red rounded-full w-5 h-5 flex items-center justify-center text-white text-xs'>
               {cartAmount}
             </span>
           )}

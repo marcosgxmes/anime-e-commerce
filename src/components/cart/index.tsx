@@ -66,15 +66,16 @@ export function Cart() {
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
 
                           {cart.length === 0 && (
-                            <div className='h-full flex flex-col gap-2 mt-10 items-center justify-center'>
-                              <img src={dc_logo} className='h-44 object-contain mt-16' alt="DC Logo" />
-
-                              <p className='font-medium mt-5'>O seu carrinho está vazio!</p>
+                            <div className='h-full flex flex-col gap-2 mt-28 items-center justify-between '>
+                              <p className='font-medium mt-5'>Ops... o seu carrinho está vazio!</p>
+                              <img src={dc_logo} className='h-44 object-contain my-5' alt="DC Logo" />
+                              
+                              
                               <Link
-                                className='bg-azul my-3 py-2 px-8 text-white font-medium hover:scale-105 transition-all rounded'
+                                className='flex items-center justify-center h-12 bg-gradient-to-t from-blue-800 to-blue-600 my-3 px-10 text-white font-medium hover:scale-105 transition-all rounded-2xl'
                                 to="/"
                                 onClick={() => fecharCarrinho()}>
-                                Ver produtos
+                                Continuar Comprando
                               </Link>
                             </div>
                           )}
