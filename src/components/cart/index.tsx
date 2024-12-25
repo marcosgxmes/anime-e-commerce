@@ -6,7 +6,7 @@ import { CiCircleMinus } from 'react-icons/ci'
 import { FaPix } from 'react-icons/fa6'
 import { BsTrash } from 'react-icons/bs'
 import { IoClose } from "react-icons/io5";
-import dc_logo from '../../../public/dc_logo.png'
+import dc_logo from '../../../public/dc_logo_white.png'
 
 import { useCarrinho } from '../../context/CarrinhoContext';
 
@@ -203,27 +203,25 @@ export function Cart() {
                 className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
               >
 
-                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl sm:rounded-l-3xl">
+                <div className="flex h-full flex-col overflow-y-scroll bg-background shadow-xl sm:rounded-l-3xl">
                   <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-6">
 
-                    <div className="flex w-full items-start justify-between border-b-2 pb-1 ">
+                    <div className="flex w-full items-start justify-between border-b-2 pb-1 border-border">
 
-                      <p className="text-lg font-medium text-gray-900">Carrinho de compras</p>
+                      <p className="text-lg font-medium text-white">Carrinho de compras</p>
 
                       <div className="ml-3 flex h-7 items-center">
                         <button
                           type="button"
                           onClick={() => fecharCarrinho()}
-                          className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+                          className="relative -m-2 p-2 text-white"
                         >
                           <span className="absolute -inset-0.5" />
                           <span className="sr-only">Close panel</span>
-                          <IoClose aria-hidden="true" size={27} color='#3259eb' />
+                          <IoClose aria-hidden="true" size={27} />
                         </button>
                       </div>
-
                     </div>
-
 
 
                     <div className="mt-8">
@@ -232,25 +230,28 @@ export function Cart() {
 
                           {cart.length === 0 && (
                             <div className='h-full flex flex-col gap-2 mt-28 items-center justify-between '>
-                              <p className='font-medium mt-5'>Ops... o seu carrinho está vazio!</p>
+                              
                               <img src={dc_logo} className='h-44 object-contain my-5' alt="DC Logo" />
+
+                              <p className='font-medium mt-5 text-white'>Ops... o seu carrinho está vazio!</p>
 
 
                               <Link
-                                className='flex items-center justify-center h-12 bg-gradient-to-t from-blue-800 to-blue-600 my-3 px-10 text-white font-medium hover:scale-105 transition-all rounded-2xl'
+                                className='flex items-center justify-center h-12 bg-gradient-to-t from-verde to-verdeLima my-3 px-10 text-black font-medium hover:scale-105 transition-all rounded-2xl'
                                 to="/"
                                 onClick={() => fecharCarrinho()}>
                                 Continuar Comprando
                               </Link>
                             </div>
                           )}
+                          
 
                           {cart.map((item) => (
                             <section
                               key={item.id}
-                              className="flex flex-col justify-items-start w-full border my-5 border-gray-200 rounded-3xl bg-gray-50">
+                              className="flex flex-col justify-items-start w-full border my-5 border-border rounded-3xl bg-footer">
 
-                              <div className='flex justify-between py-2 w-full border-2 px-4 gap-2 bg-white border-gray-200 rounded-3xl'>
+                              <div className='flex justify-between py-2 w-full border-b-2 px-4 gap-2 bg-background border-border rounded-3xl'>
                                 <div className='flex itens-center justify-center w-4/6'>
                                   <Link to={`/product/${item.id}`}>
                                     <img
@@ -263,14 +264,14 @@ export function Cart() {
 
                                 <div className='w-full  flex flex-col items-start justify-between pt-1 gap-3'>
                                   <div className='flex flex-col justify-between gap-5 h-full'>
-                                    <p className='font-medium text-sm'>{item.title}</p>
-                                    <div className='text-sm text-color font-medium'>
+                                    <p className='font-medium text-sm text-white'>{item.title}</p>
+                                    <div className='text-sm text-texts font-medium'>
                                       <p>Quantidade: {item.amount}</p>
                                       <p>Autor: {item.creator}</p>
                                     </div>
                                   </div>
                                   <div className='w-full flex items-center justify-between border-t border-border pt-2'>
-                                    <strong className="float-right text-black text-lg font-roboto">
+                                    <strong className="float-right text-white text-lg font-roboto">
                                       {item.total.toLocaleString("pt-BR", {
                                         style: 'currency',
                                         currency: "BRL"
@@ -281,24 +282,24 @@ export function Cart() {
                               </div>
 
                               <div className='flex items-center justify-between p-2 px-2 text-sm '>
-                                <div className="flex items-center justify-center gap-2 px-2 rounded-md font-robot">
+                                <div className="flex items-center justify-center gap-2 px-2 rounded-md font-robot text-texts">
                                   <button
                                     onClick={() => removeItemCart(item)}
                                     className="p-1 rounded-md  flex item-center justify-center">
-                                    <CiCircleMinus size={30} color='#333' />
+                                    <CiCircleMinus size={30} color='#fff' />
                                   </button>
                                   {item.amount}
                                   <button
                                     onClick={() => addItemCart(item)}
                                     className="p-1 rounded-md flex item-center justify-center">
-                                    <BsPlusCircle size={25} color="#333" />
+                                    <BsPlusCircle size={25} color="#fff" />
                                   </button>
                                 </div>
                                 <button
-                                  className='p-1 flex items-center gap-1 text-azul font-bold text-sm'
+                                  className='p-1 flex items-center gap-1 text-red font-bold text-sm'
                                   onClick={() => deleteItemCart(item)}>
-                                  Remover
-                                  <BsTrash size={24} color='#3259eb' />
+                                  Excluir
+                                  <BsTrash size={24} color='#DA291C' />
                                 </button>
                               </div>
                             </section>
@@ -312,8 +313,8 @@ export function Cart() {
                   {cartAmount !== 0 && (
                     <div className=" px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p className='text-md'>Subtotal</p>
-                        <p className='text-verde text-lg'>{total}</p>
+                        <p className='text-md text-texts'>Subtotal</p>
+                        <p className='text-verdeLima text-lg'>{total}</p>
                       </div>
 
                       <div className="mt-6">
@@ -327,12 +328,12 @@ export function Cart() {
                       </div>
 
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                        <p>
+                        <p className='text-texts'>
                           ou{' '}
                           <button
                             type="button"
                             onClick={() => fecharCarrinho()}
-                            className="font-medium text-azul hover:text-black"
+                            className="font-medium text-verde hover:text-verdeLima"
                           >
                             Continue Comprando
                             <span aria-hidden="true"> &rarr;</span>

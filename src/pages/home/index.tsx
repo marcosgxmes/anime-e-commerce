@@ -71,8 +71,8 @@ export function Home() {
   function handleAddCartItem(product: ProductsProps) {
     toast.success("Adicionado com sucesso", {
       style: {
-        backgroundColor: "#000",
-        color: "#FFF",
+        backgroundColor: "#3259eb",
+        color: "#fff",
         borderRadius: 15,
       }
     })
