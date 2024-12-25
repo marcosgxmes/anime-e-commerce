@@ -271,7 +271,7 @@ export function Cart() {
                                     </div>
                                   </div>
                                   <div className='w-full flex items-center justify-between border-t border-border pt-2'>
-                                    <strong className="float-right text-white text-lg font-roboto">
+                                    <strong className="float-right text-verde text-lg font-roboto">
                                       {item.total.toLocaleString("pt-BR", {
                                         style: 'currency',
                                         currency: "BRL"
@@ -298,8 +298,8 @@ export function Cart() {
                                 <button
                                   className='p-1 flex items-center gap-1 text-red font-bold text-sm'
                                   onClick={() => deleteItemCart(item)}>
-                                  Excluir
-                                  <BsTrash size={24} color='#DA291C' />
+                                  Remover
+                                  <BsTrash size={24}  />
                                 </button>
                               </div>
                             </section>
@@ -311,10 +311,10 @@ export function Cart() {
                   </div>
 
                   {cartAmount !== 0 && (
-                    <div className=" px-4 py-6 sm:px-6">
+                    <div className=" px-4 py-6 sm:px-6 border-t-2 border-border">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p className='text-md text-texts'>Subtotal</p>
-                        <p className='text-verdeLima text-lg'>{total}</p>
+                        <p className='text-verde text-lg'>{total}</p>
                       </div>
 
                       <div className="mt-6">
