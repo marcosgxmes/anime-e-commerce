@@ -84,13 +84,13 @@ export function Home() {
     <div className='bg-background pb-10'>
       <main className="w-full max-w-7xl px-3 mx-auto">
 
-        <h1 className="font-medium text-xl py-6 text-center text-header">Destaques</h1>
+        <h1 className="font-medium text-xl py-6 text-center text-white">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
 
           {quadrinhos.map(product => (
             <div
-              className='w-full h-72 rounded-md bg-white'
+              className='w-full h-64 sm:h-72 rounded-md bg-texts'
               style={{ display: loadImages.includes(product.id) ? "none" : "block" }}
             >
             </div>
@@ -111,13 +111,13 @@ export function Home() {
                   />
                 </div>
 
-                <p className='font-medium text-center text-sm text-black'>{product.title}</p>
+                <p className='font-medium text-center text-sm text-texts'>{product.title}</p>
               </Link>
 
 
               <div className='w-full flex flex-col gap-2 md:flex items-left justify-center'>
 
-                <strong className='text-color font-roboto'>
+                <strong className='text-white font-roboto'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL"
@@ -125,7 +125,7 @@ export function Home() {
                 </strong>
 
                 <button  onClick={() => handleAddCartItem(product)}
-                  className=' bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm hover:bg-white border-2 border-verde hover:text-verde'
+                  className=' bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black'
                 >
 
                   <BsCart size={20} />
