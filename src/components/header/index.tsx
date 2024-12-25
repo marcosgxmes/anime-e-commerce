@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import img from '../../../public/dc_logo_white.png'
+import img from '../../../public/dc_logo_white1.png'
 import { FiShoppingCart } from 'react-icons/fi'
 import { FiSearch } from 'react-icons/fi'
 import { CartContext } from '../../context/CartContext'
@@ -15,7 +15,7 @@ export function Header() {
 
 
   return (
-    <header className='w-full pr-2 z-10 sticky top-0 bg-footer shadow-md py-1'>
+    <header className='w-full pr-2 z-10 sticky top-0 bg-footer shadow-xl py-1'>
       <nav className='w-full max-w-7xl h-16 flex items-center justify-between pr-2 pl-2 mx-auto'>
         <Link to='/'>
           <img src={img} className='h-12 object-contain' alt="DC logo" />
