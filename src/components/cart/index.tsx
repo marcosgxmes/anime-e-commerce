@@ -206,7 +206,7 @@ export function Cart() {
                 <div className="flex h-full flex-col overflow-y-scroll bg-background shadow-xl sm:rounded-l-3xl">
                   <div className="flex-1 overflow-y-auto px-5 py-6 sm:px-6">
 
-                    <div className="flex w-full items-start justify-between border-b-2 pb-1 border-border">
+                    <div className="flex w-full items-start justify-between border-b-2 pb-1.5 border-border">
 
                       <p className="text-lg font-medium text-white">Carrinho de compras</p>
 
@@ -249,8 +249,9 @@ export function Cart() {
                           {cart.map((item) => (
                             <section
                               key={item.id}
-                              className="flex flex-col justify-items-start w-full border my-5 border-border rounded-3xl bg-footer">
+                              className="flex flex-col justify-items-start w-full border my-5 border-border rounded-3xl bg-footer box-border">
 
+                              {/* COMENTÁRIO JSX */}
                               <div className='flex justify-between py-2 w-full border-b-2 px-4 gap-2 bg-background border-border rounded-3xl'>
                                 <div className='flex itens-center justify-center w-4/6'>
                                   <Link to={`/product/${item.id}`}>
@@ -270,7 +271,7 @@ export function Cart() {
                                       <p>Autor: {item.creator}</p>
                                     </div>
                                   </div>
-                                  <div className='w-full flex items-center justify-between border-t border-border pt-2'>
+                                  <div className='w-full flex items-center justify-between border-t-2 border-border pt-2'>
                                     <strong className="float-right text-verde text-lg font-roboto">
                                       {item.total.toLocaleString("pt-BR", {
                                         style: 'currency',
@@ -298,7 +299,7 @@ export function Cart() {
                                 <button
                                   className='p-1 flex items-center gap-1 text-red font-bold text-sm'
                                   onClick={() => deleteItemCart(item)}>
-                                  Remover
+                                  Excluir
                                   <BsTrash size={24}  />
                                 </button>
                               </div>
@@ -314,7 +315,7 @@ export function Cart() {
                     <div className=" px-4 py-6 sm:px-6 border-t-2 border-border">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p className='text-md text-texts'>Subtotal</p>
-                        <p className='text-verde text-lg'>{total}</p>
+                        <p className='text-verdeLima text-lg'>{total}</p>
                       </div>
 
                       <div className="mt-6">
