@@ -16,12 +16,13 @@ export function Header() {
 
   return (
     <header className='w-full pr-2 z-10 sticky top-0 bg-footer shadow-xl py-1'>
-      <nav className='w-full max-w-7xl md:max-w-6xl h-16 flex items-center justify-between pr-2 pl-2 mx-auto'>
+      <nav className='w-full max-w-7xl md:max-w-6xl min-h-16 flex items-center justify-between pr-2 pl-2 mx-auto'>
         <Link to='/'>
-          <img src={img} className='h-14 object-contain' alt="DC logo" />
+          <img src={img} className='h-14 w-16 object-contain' alt="DC logo" />
         </Link>
 
-        <section className='rounded-xl pl-2.5 pr-3  w-full max-w-3xl mx-auto flex justify-center items-center gap-2 relative border-none'>
+        <section className='relative rounded-xl pl-2.5 pr-3  w-full max-w-3xl mx-auto flex justify-center items-center gap-2  border-none'>
+
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -34,7 +35,7 @@ export function Header() {
           </button>
         </section>
 
-
+        
         <div className='relative' onClick={() => abrirCarrinho()}>
 
           <FiShoppingCart size={24} color="#fff" />

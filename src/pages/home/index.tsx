@@ -36,12 +36,12 @@ export function Home() {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
       const queryRef = query(comicRef, orderBy("id", "asc"))
-
+  
       getDocs(queryRef)
         .then((snapshot) => {
           // eslint-disable-next-line prefer-const
           let listComic = [] as ProductsProps[]
-
+  
           snapshot.forEach(doc => [
             listComic.push({
               id: doc.id,
@@ -50,10 +50,10 @@ export function Home() {
               price: doc.data().price,
               cover: doc.data().cover,
               creator: doc.data().creator
-
+  
             })
           ])
-
+  
           setQuadrinhos(listComic)
         })
     }
@@ -87,7 +87,6 @@ export function Home() {
         <h1 className="font-medium text-xl mb-6 mt-3 text-center text-white">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
-
 
           {/* LAYOUT SHIFT */}
           {quadrinhos.map(product => (
@@ -154,5 +153,3 @@ export function Home() {
     </div>
   )
 }
-
-

@@ -141,8 +141,10 @@ export function Cart() {
                                 </div>
 
                                 <button
-                                  className='p-1 flex items-center gap-1 text-texts font-bold text-sm hover:text-red'
-                                  onClick={() => deleteItemCart(item)}>                                  
+                                  className='p-1 flex items-center gap-1 text-blue-500 font-bold text-sm hover:text-red'
+                                  onClick={() => deleteItemCart(item)}
+                                >
+                                                                    
                                   <BsTrash size={24}  />
                                 </button>
 
@@ -159,7 +161,7 @@ export function Cart() {
                     <div className=" px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p className='text-md text-texts'>Subtotal</p>
-                        <p className='text-verde text-lg'>{total}</p>
+                        <p className='text-verde text-lg font-Roboto'>{total}</p>
                       </div>
 
                       <div className="mt-6">

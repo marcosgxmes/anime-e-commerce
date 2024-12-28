@@ -5,7 +5,6 @@ import { collection, getDocs,  query, where } from 'firebase/firestore';
 import { db } from '../services/api';
 
 
-
 interface SearchContextData {
   handleSearchItem: () => void;  
   setInput: (e: string) => void;
@@ -35,7 +34,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 // BUSCAR ITEM PELA BARRA DE PESQUISA
   async function handleSearchItem() {
     if (input === "") {
-     
+      
       return;
     }
 
