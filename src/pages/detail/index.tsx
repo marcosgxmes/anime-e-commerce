@@ -111,6 +111,7 @@ export function ProductDetail() {
     }    
   }
 
+  
   // Função de embaralhamento (algoritmo de Fisher-Yates)
   function shuffleArray<T>(array: T[]): T[] {
     for (let i = array.length - 1; i > 0; i--) {
@@ -122,11 +123,12 @@ export function ProductDetail() {
 
 
   return (
-    <div className='flex flex-col bg-background py-5'>
-      <main className=' w-full flex-1 h-full max-w-7xl px-5  mx-auto '>
+    <div className='flex-col bg-background py-5'>
+      <main className='w-full h-full max-w-7xl px-5  mx-auto '>
+
 
         {product && (
-          <section className='w-full h-full'>
+          <section className='w-full min-h-full'>
 
             <div className='w-full mb-5 flex items-start justify-start gap-2 text-sm'>
               <Link className='flex items-center justify-center text-texts' to="/">
@@ -137,10 +139,11 @@ export function ProductDetail() {
               <strong className='text-red flex flex-wrap'>{product?.title}</strong>
             </div>
 
-            <div className='flex max-w-6xl mx-auto flex-col items-center lg:flex-row my-8 gap-y-8'>
-              <div className='flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
+            <div className='flex max-w-6xl mx-auto flex-col items-center lg:flex-row my-8 gap-8'>
+
+              <div className='w-full min-h-72 h-full py-5 md:bg-footer flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
                 <img
-                  className='h-64 sm:h-80 object-contain shadow-md rounded-lg'
+                  className='h-full object-contain shadow-md rounded-lg'
                   src={product.cover}
                   alt={product.title}
                 />
@@ -169,6 +172,7 @@ export function ProductDetail() {
                 </div>
 
               </div>
+
             </div>
           </section>
         )}
@@ -216,6 +220,7 @@ export function ProductDetail() {
 
         </div>
       </section>
+
     </div>
   )
 }
