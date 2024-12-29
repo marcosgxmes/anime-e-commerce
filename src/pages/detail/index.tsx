@@ -21,7 +21,7 @@ export function ProductDetail() {
   const { addItemCart } = useContext(CartContext);
   const { abrirCarrinho } = useCarrinho();
 
-  let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos
+  
 
 
   // CHAMANDO PRODUTO NO DATABASE PELO ID
@@ -45,12 +45,15 @@ export function ProductDetail() {
         })
     }
     getProduct()
-   
 
     sugerirProdutosAleatorios(produtosExibidos).then((produtos) => {
       console.log("Produtos aleatórios:", produtos);
     });
+
+   
   }, [id])
+
+  let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos    
 
 
   // VOLTAR AO TOPO DA PÁGINA

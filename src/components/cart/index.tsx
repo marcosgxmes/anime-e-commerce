@@ -25,16 +25,16 @@ export function Cart() {
 
   return (
 
-    <div className='fixed top-0 left-0 right-0 z-20'>
+    <div className='fixed top-0 left-0 right-0 z-20' >
 
       <div
         onClick={() => fecharCarrinho()}
-        className={`${!carrinhoAberto && "hidden"} bg-gray-700/80 min-h-screen w-full fixed top-0 left-0 right-0 backdrop-blur-sm`}>
+        className={`${!carrinhoAberto && "hidden"} bg-gray-700/80 min-h-screen w-full fixed top-0 left-0  backdrop-blur-sm`}>
       </div>
 
-      <div className={`${carrinhoAberto ? "-translate-x-0" : "translate-x-full"} min-h-screen fixed w-full top-0 right-0 transform  transition-all duration-300 ease-in-out `}>
+      <div className={`${carrinhoAberto ? "-translate-x-0" : "translate-x-full"} min-h-screen fixed w-full md:w-3/6 top-0 right-0 transform  transition-all duration-500 ease-in-out`}>
 
-        <div className={`${!carrinhoAberto && "hidden"} transition-all duration-300 w-full `}>
+        <div className={`transition-all duration-500 w-full`}>
         <div className="fixed inset-0 overflow-hidden ">
           <div className="absolute inset-0 overflow-hidden ">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full sm:pl-10">
@@ -72,11 +72,11 @@ export function Cart() {
                               
                               <img src={dc_logo} className='h-44 object-contain my-5' alt="DC Logo" />
 
-                              <p className='font-medium mt-5 text-white'>Ops... o seu carrinho está vazio!</p>
+                              <p className='font-medium mt-4 mb-2 text-white'>Ops... o seu carrinho está vazio!</p>
 
 
                               <Link
-                                className='flex items-center justify-center h-12 bg-gradient-to-t from-verde to-verdeLima my-3 px-10 text-black font-medium hover:scale-105 transition-all rounded-2xl'
+                                className='flex items-center justify-center h-12 bg-verde hover:bg-verdeLima my-3 px-10 text-black font-medium hover:scale-105 transition-all rounded-2xl'
                                 to="/"
                                 onClick={() => fecharCarrinho()}>
                                 Continuar Comprando
@@ -197,6 +197,7 @@ export function Cart() {
         </div>
 
       </div>
+
     </div>
 
   )
