@@ -18,7 +18,7 @@ export function ProductDetail() {
   const [product, setProduct] = useState<ProductsProps>();
   const [produtos, setProdutos] = useState<ProductsProps[]>([])
 
-  const { addItemCart } = useContext(CartContext);
+  const { addItemCart, scrollToTop } = useContext(CartContext);
   const { abrirCarrinho } = useCarrinho();
 
   
@@ -56,10 +56,7 @@ export function ProductDetail() {
   let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos    
 
 
-  // VOLTAR AO TOPO DA PÁGINA
-  function reSize() {
-    window.scrollTo(0, 0)
-  }
+  
 
 
   // ADD ITEM NO CARRINHO
@@ -261,7 +258,7 @@ async function sugerirProdutosAleatorios(produtosExibidos: Set<string>) {
           {produtos.map((snap => (
             <section key={snap.id} className="w-full flex flex-col justify-between gap-2">
 
-              <Link onClick={() => reSize()} className=' flex flex-col gap-4 scroll-smooth' to={`/product/${snap.id}`}>
+              <Link onClick={() => scrollToTop()} className=' flex flex-col gap-4 scroll-smooth' to={`/product/${snap.id}`}>
                 <div className='flex items-center h-60 md:h-64  justify-center rounded-md '>
                   <img
                     className='h-full object-contain hover:scale-105 transition-all md:rounded-lg'

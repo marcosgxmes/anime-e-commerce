@@ -12,9 +12,9 @@ interface CartContextData {
   addItemCart: (newItem: ProductsProps) => void;
   removeItemCart: (product: CartProps) => void;
   deleteItemCart: (product: CartProps) => void;
+  scrollToTop: () => void;
   total: string;
 }
-
 
 
 interface CartProps {
@@ -109,6 +109,11 @@ function CartProvider({ children }: CartProviderProps) {
     setTotal(resultFomated);
   }
 
+  // VOLTAR AO TOPO DA PÁGINA
+  function scrollToTop() {
+    window.scrollTo(0, 0)
+  }
+
 
   return (
     <CartContext.Provider
@@ -118,6 +123,7 @@ function CartProvider({ children }: CartProviderProps) {
         addItemCart,
         removeItemCart,
         deleteItemCart,
+        scrollToTop,
         total
       }}>
       {children}

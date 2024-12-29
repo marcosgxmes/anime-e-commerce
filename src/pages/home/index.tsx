@@ -28,7 +28,7 @@ export function Home() {
 
   const { quadrinhos, setQuadrinhos } = useSearch();
   const [loadImages, setLoadImages] = useState<string[]>([])
-  const { addItemCart } = useContext(CartContext)
+  const { addItemCart, scrollToTop } = useContext(CartContext)
 
 
   // CHAMANDO PRODUTOS DO DATABASE
@@ -36,12 +36,12 @@ export function Home() {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
       const queryRef = query(comicRef, orderBy("id", "asc"))
-  
+
       getDocs(queryRef)
         .then((snapshot) => {
           // eslint-disable-next-line prefer-const
           let listComic = [] as ProductsProps[]
-  
+
           snapshot.forEach(doc => [
             listComic.push({
               id: doc.id,
@@ -50,10 +50,10 @@ export function Home() {
               price: doc.data().price,
               cover: doc.data().cover,
               creator: doc.data().creator
-  
+
             })
           ])
-  
+
           setQuadrinhos(listComic)
         })
     }
@@ -90,10 +90,10 @@ export function Home() {
 
           {/* LAYOUT SHIFT */}
           {quadrinhos.map(product => (
-            <section  
+            <section
               key={product.id} className="w-full flex flex-col justify-between gap-4"
               style={{ display: loadImages.includes(product.id) ? "none" : "block" }}
-              >
+            >
 
               <div className=' flex flex-col gap-2 animate-pulse'>
 
@@ -101,7 +101,7 @@ export function Home() {
                 <div className='bg-slate-500 w-full h-4 rounded-full'></div>
                 <div className='bg-slate-500 w-full h-4 rounded-full'></div>
 
-              </div>             
+              </div>
 
             </section>
           ))}
@@ -110,9 +110,11 @@ export function Home() {
           {/* PRODUTOS */}
           {quadrinhos.map(product => (
             <section key={product.id} className="w-full flex flex-col justify-between gap-5">
-              
 
-              <Link className='flex flex-col z-1 gap-y-2' to={`/product/${product.id}`}>
+
+              <Link
+                onClick={() => scrollToTop()}
+                className='flex flex-col z-1 gap-y-2' to={`/product/${product.id}`}>
                 <div className='flex items-center h-60 md:h-72 justify-center p-3'>
                   <img
                     className='h-full object-contain hover:scale-105 transition-all'
@@ -137,8 +139,8 @@ export function Home() {
                 </strong>
 
                 <button
-                   onClick={() => handleAddCartItem(product)}
-                   className='w-full bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black hover:bg-gradient-to-t from-verde to-verdeLima'
+                  onClick={() => handleAddCartItem(product)}
+                  className='w-full bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black hover:bg-gradient-to-t from-verde to-verdeLima'
                 >
                   <BsCart size={20} />
                   Adicionar
