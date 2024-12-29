@@ -35,7 +35,7 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("id", "asc"))
+      const queryRef = query(comicRef, orderBy("creator", "desc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -86,7 +86,7 @@ export function Home() {
 
         <h1 className="font-medium text-xl mb-6 mt-3 text-center text-white">Destaques</h1>
 
-        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
+        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
 
           {/* LAYOUT SHIFT */}
           {quadrinhos.map(product => (
@@ -114,10 +114,10 @@ export function Home() {
 
               <Link
                 onClick={() => scrollToTop()}
-                className='flex flex-col z-1 gap-y-2' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center p-3'>
+                className='flex flex-col z-1 sm:gap-y-3 ' to={`/product/${product.id}`}>
+                <div className='flex items-center h-60 md:h-72 justify-center p-2'>
                   <img
-                    className='h-full object-contain hover:scale-105 transition-all'
+                    className='rounded-md w-full sm:h-full object-contain hover:scale-105 transition-all '
                     src={product.cover}
                     alt={product.title}
                     onLoad={() => handleImageLoad(product.id)}
@@ -129,7 +129,7 @@ export function Home() {
               </Link>
 
 
-              <div className='w-full flex gap-5 items-center justify-center flex-wrap'>
+              <div className='w-full flex gap-y-3 gap-x-4 items-center justify-center flex-wrap lg:flex-row-reverse lg:flex-nowrap'>
 
                 <strong className='text-white font-roboto w-full'>
                   {product.price.toLocaleString("pt-BR", {
@@ -140,7 +140,7 @@ export function Home() {
 
                 <button
                   onClick={() => handleAddCartItem(product)}
-                  className='w-full bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black hover:bg-gradient-to-t from-verde to-verdeLima'
+                  className='w-full  bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black hover:bg-gradient-to-t from-verde to-verdeLima'
                 >
                   <BsCart size={20} />
                   Adicionar

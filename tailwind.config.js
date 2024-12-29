@@ -19,6 +19,7 @@ export default {
         azul: "#3259eb",
         text: "#353531",
         red: "#DA291C",
+        yellow: "#fff200",
         //background: "#f1f5f9",
         background: "#2d3137",
         fontFamily: { Rototo: ["Roboto"]},   

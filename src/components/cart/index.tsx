@@ -53,7 +53,7 @@ export function Cart() {
                         <button
                           type="button"
                           onClick={() => fecharCarrinho()}
-                          className="relative -m-2 p-2 text-red"
+                          className="relative -m-2 p-2 text-white"
                         >
                           <span className="absolute -inset-0.5" />
                           <span className="sr-only">Close panel</span>
@@ -98,7 +98,7 @@ export function Cart() {
                                     <img
                                       src={item.cover}
                                       alt={item.title}
-                                      className="object-contain h-full rounded-md"
+                                      className="object-contain w-full rounded-sm"
                                     />
                                   </Link>
                                 </div>
@@ -106,7 +106,7 @@ export function Cart() {
 
                                 <div className='w-full flex flex-col items-start justify-between pr-2'>
                                   <div className='flex flex-col justify-between gap-4 h-full pt-2'>
-                                    <p className='font-medium text-sm text-texts'>{item.title}</p>
+                                    <p className='font-medium text-md text-white'>{item.title}</p>
                                     <div className='text-sm text-texts font-medium'>
                                       <p>Quantidade: {item.amount}</p>
                                       <p>Autor: {item.creator}</p>
@@ -141,10 +141,10 @@ export function Cart() {
                                 </div>
 
                                 <button
-                                  className='p-1 flex items-center gap-1 text-blue-500 font-bold text-sm hover:text-red'
+                                  className='p-1 flex items-center gap-1 text-purple-500 font-bold text-sm hover:text-red'
                                   onClick={() => deleteItemCart(item)}
                                 >
-                                                                    
+                                  Excluir                             
                                   <BsTrash size={24}  />
                                 </button>
 
