@@ -69,7 +69,7 @@ export function Home() {
 
   // MENSAGEM DE ADICIONADO COM SUCESSO
   function handleAddCartItem(product: ProductsProps) {
-    toast.success("Adicionado com sucesso", {
+    toast.success("Adicionado ao carrinho!", {
       style: {
         backgroundColor: "#fff",
         color: "#000",
