@@ -243,9 +243,9 @@ export function ProductDetail() {
               <strong className='text-red flex flex-wrap'>{product?.title}</strong>
             </div>
 
-            <div className='flex max-w-6xl mx-auto flex-col items-center lg:flex-row my-8 gap-8'>
+            <div className='flex max-w-6xl mx-auto flex-col items-center md:flex-row my-8 gap-8'>
 
-              <div className='w-full min-h-80 h-full  py-5 md:bg-footer flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
+              <div className='w-full max-w-lg min-h-80 h-full  py-5 md:bg-footer flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
                 <img
                   className='h-80  object-contain shadow-md rounded-lg'
                   src={product.cover}
@@ -253,7 +253,7 @@ export function ProductDetail() {
                 />
               </div>
 
-              <div className='flex-1 border border-border rounded-md py-5 px-3 sm:px-7 shadow-md'>
+              <div className='flex-1 border border-border rounded-md py-5 px-3 sm:px-7 shadow-md max-w-2xl'>
                 <p className='font-bold text-lg text-white sm:text-2xl mb-8'>{product?.title}</p>
                 <p className='my-4 text-sm text-texts pb-3 text-justify'>{product?.description}</p>
                 <p className='my-4 pb-3 text-sm text-white'>Autores: <span className='font-medium'>{product?.creator}</span></p>
