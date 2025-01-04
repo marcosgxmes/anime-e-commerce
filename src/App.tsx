@@ -7,6 +7,8 @@ import { ProductDetail } from './pages/detail'
 
 //COMPONENTES
 import { Layout } from './components/layout'
+import { Login } from './pages/login'
+import { Register } from './pages/register'
 
 // ROTAS (REACT ROUTER DOM)
 const router = createBrowserRouter([
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductDetail />
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/register",
+        element: <Register />
       }
     ]
   }

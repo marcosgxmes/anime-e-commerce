@@ -6,7 +6,7 @@ import { Cart } from '../cart'
 export function Layout(){
   return(
     <>
-      <Header />
+      {/* <Header /> */}
       <Cart />
       <Outlet /> 
       <Footer />

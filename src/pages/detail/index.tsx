@@ -10,6 +10,7 @@ import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { db } from '../../services/api'
 
 import { useCarrinho } from '../../context/CarrinhoContext';
+import { Header } from '../../components/header';
 
 
 export function ProductDetail() {
@@ -20,8 +21,6 @@ export function ProductDetail() {
 
   const { addItemCart, scrollToTop } = useContext(CartContext);
   const { abrirCarrinho } = useCarrinho();
-
-
 
 
   // CHAMANDO PRODUTO NO DATABASE PELO ID
@@ -53,10 +52,8 @@ export function ProductDetail() {
 
   }, [id])
 
+
   let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos    
-
-
-
 
 
   // ADD ITEM NO CARRINHO
@@ -142,8 +139,9 @@ export function ProductDetail() {
 
 
   return (
-    <div className='flex-col bg-background py-5 min-h-screen'>
-      <main className='w-full h-full max-w-7xl px-5  mx-auto '>
+    <div className='flex-col bg-background pb-5 min-h-screen'>
+      <Header />
+      <main className='w-full h-full max-w-7xl p-5  mx-auto '>
 
         {/* LAYOUT SHIFT */}
         {!product && (
@@ -151,9 +149,9 @@ export function ProductDetail() {
 
             <div className='w-80 bg-slate-500 h-4 rounded-md animate-pulse'></div>
 
-            <div className='flex max-w-6xl mx-auto flex-col items-center lg:flex-row my-8 gap-8 animate-pulse'>
+            <div className='flex w-full max-w-6xl min-h-80 h-full mx-auto flex-col items-center md:flex-row my-8 gap-8 animate-pulse'>
 
-              <div className='w-full min-h-80 h-full  flex-1  rounded-md mb-8 sm:mb-0'>
+              <div className='w-full max-x-lg min-h-80 h-full flex-1  rounded-md mb-8 sm:mb-0'>
                 <div className='bg-slate-500 w-full h-80 rounded-xl mb-4'></div>
               </div>
 

@@ -12,6 +12,7 @@ import {
   orderBy,
   getDocs,
 } from 'firebase/firestore'
+import { Header } from '../../components/header'
 
 
 export interface ProductsProps {
@@ -81,7 +82,9 @@ export function Home() {
 
 
   return (
-    <div className='bg-background pb-20'>
+    
+    <div className='bg-background pb-10'>
+      <Header />
       <main className="w-full min-h-screen max-w-7xl p-3 mx-auto">
 
         <h1 className="font-medium text-xl mb-6 mt-3 text-center text-white">Destaques</h1>
