@@ -11,7 +11,6 @@ export default {
         color: "#333",
         border: "#4e4e4e",
         footer: "#212429",
-        //footer: "#3259eb",
         header: "#333",
         verde: "#28c76f",
         verdeLima: "#90ff00",
@@ -21,12 +20,13 @@ export default {
         red: "#DA291C",
         yellow: "#fff200",
         //background: "#f1f5f9",
-        background: "#2d3137",
-        fontFamily: { Rototo: ["Roboto"]},   
-        
-        
+        background: "#2d3137",        
         texts: "#e2e2e2"
-      }
+      },
+      fontFamily: {
+        Rototo: ["Roboto"]         
+            
+       }, 
     },
   },
   plugins: [],

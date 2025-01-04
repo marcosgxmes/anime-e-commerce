@@ -16,14 +16,14 @@ export function Header() {
 
   return (
     <header className='w-full z-10 sticky top-0 bg-footer shadow-black shadow-md'>
-      <nav className='w-full max-w-7xl min-h-16 flex items-center justify-between mx-auto'>
-
+      <nav className='w-full max-w-7xl min-h-16 flex flex-col items-center justify-between mx-auto'>
         
-        <div className='w-full flex items-center justify-between px-3'>
+        <div className='w-full flex items-center justify-between py-1.5 px-3 pr-5'>
 
           {/* LOGO */}
           <Link to='/' className='flex gap-x-2'>
             <img src={img} className='max-w-12 w-full object-contain' alt="DC logo" />
+            <span className='text-white font-gow'>DC <br />STORE</span>
           </Link>
 
           {/* INPUT */}
@@ -62,6 +62,23 @@ export function Header() {
             </div>
           </div>
 
+        </div>
+
+        <div className='w-full border-t border-black'>
+          {/* INPUT */}
+          <section className='relative px-4 py-2 w-full max-w-3xl mx-auto flex justify-center items-center'>
+
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className='w-full rounded-md h-9 px-3 outline-none border-none'
+              placeholder='Pesquisar'
+            />
+
+            <button className='absolute h-8 right-0 pr-6' onClick={handleSearchItem}>
+              <FiSearch size={22} color='#707070' />
+            </button>
+          </section>
         </div>
 
       </nav>
