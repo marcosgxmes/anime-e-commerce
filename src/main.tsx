@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
       <CarrinhoProvider>
         <SearchProvider>
           <Toaster
-            position="top-left"
+            position="top-center"
             reverseOrder={false}
           />
           <RouterProvider router={router} />
