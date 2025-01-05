@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import img from '../../../public/dc_circle_black.png'
+import img from '../../../public/dc_logo.png'
 import { FiShoppingCart } from 'react-icons/fi'
 import { FiSearch, FiUser } from 'react-icons/fi'
 import { CartContext } from '../../context/CartContext'
@@ -22,8 +22,8 @@ export function Header() {
 
           {/* LOGO */}
           <Link to='/' className='flex gap-x-2'>
-            <img src={img} className='max-w-10 w-full object-contain py-1.5' alt="DC logo" />
-            <span className='text-iconColor flex items-center justify-center pl-2  font-gow border-l border-grayText min-h-full'>DC <br />STORE</span>
+            <img src={img} className='max-w-6 w-full object-contain py-1.5' alt="DC logo" />
+            <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full'><span>DC</span> <span>STORE</span></div>
           </Link>
 
           {/* INPUT */}
@@ -68,7 +68,7 @@ export function Header() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className='w-full rounded-md h-8 px-3 outline-none border-none bg-bgInput'
+              className='w-full rounded-md h-9 px-3 outline-none border-none bg-bgInput'
               placeholder='Pesquisar'
             />
 

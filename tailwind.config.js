@@ -29,7 +29,8 @@ export default {
         iconColor: "#607D8B"
       },
       fontFamily: {
-        Rototo: ["Roboto"]         
+        Roboto: "Roboto",
+        Gow: "gow"    
             
        }, 
     },
