@@ -85,9 +85,10 @@ export function Home() {
     
     <div className='bg-background pb-10'>
       <Header />
+
       <main className="w-full min-h-screen max-w-7xl p-3 mx-auto">
 
-        <h1 className="font-medium text-xl mb-6 mt-3 text-center text-white">Destaques</h1>
+        <h1 className="font-medium text-xl mb-6 mt-3 text-center text-color">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
 
@@ -134,7 +135,7 @@ export function Home() {
 
               <div className='w-full flex gap-y-3 gap-x-4 items-center justify-center flex-wrap lg:flex-row-reverse lg:flex-nowrap'>
 
-                <strong className='text-white font-roboto w-full'>
+                <strong className='font-Roboto w-full'>
                   {product.price.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL"
@@ -143,8 +144,7 @@ export function Home() {
 
                 <button
                   onClick={() => handleAddCartItem(product)}
-                  className='w-full  bg-verde rounded-lg flex justify-center items-center gap-2 py-2 px-4 text-white font-medium text-sm  hover:bg-verdeLima hover:text-black hover:bg-gradient-to-t from-verde to-verdeLima'
-                >
+                  className='w-full bg-purple rounded-lg flex justify-center items-center gap-2 py-2  text-white font-medium text-sm'>
                   <BsCart size={20} />
                   Adicionar
                 </button>

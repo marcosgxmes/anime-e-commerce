@@ -139,7 +139,7 @@ export function ProductDetail() {
 
 
   return (
-    <div className='flex-col bg-background pb-5 min-h-screen'>
+    <div className='flex-col bg-white pb-5 min-h-screen'>
       <Header />
       <main className='w-full h-full max-w-7xl p-5  mx-auto '>
 
@@ -238,12 +238,12 @@ export function ProductDetail() {
                 <span className='ml-1'>|</span>
               </Link>
 
-              <strong className='text-red flex flex-wrap'>{product?.title}</strong>
+              <strong className='text-purple flex flex-wrap'>{product?.title}</strong>
             </div>
 
             <div className='flex max-w-6xl mx-auto flex-col items-center md:flex-row my-8 gap-8'>
 
-              <div className='w-full max-w-lg min-h-80 h-full  py-5 md:bg-footer flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
+              <div className='w-full max-w-lg min-h-80 h-full  py-5 flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0'>
                 <img
                   className='h-80  object-contain shadow-md rounded-lg'
                   src={product.cover}
@@ -251,21 +251,21 @@ export function ProductDetail() {
                 />
               </div>
 
-              <div className='flex-1 border border-border rounded-md py-5 px-3 sm:px-7 shadow-md max-w-2xl'>
-                <p className='font-bold text-lg text-white sm:text-2xl mb-8'>{product?.title}</p>
-                <p className='my-4 text-sm text-texts pb-3 text-justify'>{product?.description}</p>
-                <p className='my-4 pb-3 text-sm text-white'>Autores: <span className='font-medium'>{product?.creator}</span></p>
+              <div className='flex-1 border bg-gray-50 border-grayText rounded-md py-5 px-3 sm:px-7 shadow-md max-w-2xl'>
+                <p className='font-bold text-lg  sm:text-2xl mb-8'>{product?.title}</p>
+                <p className='my-4 text-sm pb-3 text-justify'>{product?.description}</p>
+                <p className='my-4 pb-3 text-sm '>Autores: <span className='font-medium'>{product?.creator}</span></p>
 
-                <div className='flex flex-col-reverse gap-4 justify-start w-full border-t-2 border-border pt-4'>
+                <div className='flex flex-col-reverse gap-4 justify-start w-full border-t border-grayText pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-green-500 rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold hover:bg-verdeLima hover:text-black'
+                    className='bg-purple rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold'
                   >
                     <BsCart size={20} />
                     Adicionar ao carrinho
                   </button>
 
-                  <strong className='text-white text-xl'>
+                  <strong className='text-xl'>
                     {product?.price.toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL"
@@ -282,7 +282,7 @@ export function ProductDetail() {
 
         {product && (
           <section className='w-full flex-1 px-5  flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 mb-10'>
-            <h1 className="font-medium text-xl text-center mb-7 text-white">Sugestões para você</h1>
+            <h1 className="font-medium text-xl text-center mb-7">Sugestões para você</h1>
 
             <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly w-full '>
 
@@ -305,7 +305,7 @@ export function ProductDetail() {
 
                   <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
 
-                    <strong className='text-white font-roboto'>
+                    <strong className='font-roboto'>
                       {snap.price.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL"

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logoImg from '../../../public/dc_circle.png'
+import logoImg from '../../../public/dc_circle_black.png'
 
 import { Input } from "../../components/input"
 import { useForm } from 'react-hook-form'
@@ -30,14 +30,14 @@ export function Register() {
 
   return (
     <Container>
-      <div className='w-full min-h-screen flex justify-center items-center flex-col gap-4'>
+      <div className='bg-white w-full min-h-screen flex justify-center items-center flex-col gap-4'>
        
 
-        <Link to="/" className='mb-6 max-w-sm w-full h-28 flex items-center justify-center'>
+        <Link to="/" className='mb-6 max-w-36 w-full h-28 flex items-center justify-center'>
         <img
           src={logoImg}
           alt="Logo do site"
-          className='object-contain h-full'
+          className='object-contain w-full'
         />
       </Link>
 
@@ -46,13 +46,13 @@ export function Register() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='bg-footer max-w-xl w-full rounded-lg px-4 py-8'
+          className='max-w-xl w-full rounded-lg px-4 py-8'
         >
 
           <div className='mb-3.5'>
             <Input
               type="text"
-              placeholder="Digite seu nome"
+              placeholder="Nome"
               name="name"
               error={errors.name?.message}
               register={register}
@@ -62,7 +62,7 @@ export function Register() {
           <div className='mb-3.5'>
             <Input
               type="text"
-              placeholder="Digite seu sobrenome"
+              placeholder="Sobrenome"
               name="name"
               error={errors.lastname?.message}
               register={register}
@@ -72,7 +72,7 @@ export function Register() {
           <div className='mb-3.5'>
             <Input
               type="email"
-              placeholder="Digite seu email"
+              placeholder="Email"
               name="email"
               error={errors.email?.message}
               register={register}
@@ -82,21 +82,21 @@ export function Register() {
           <div className='mb-3.5'>
             <Input
               type="password"
-              placeholder="Digite sua senha"
+              placeholder="Senha"
               name="password"
               error={errors.password?.message}
               register={register}
             />
           </div>
 
-          <button className='bg-verde rounded-md w-full text-white h-10 font-medium' type='submit'>
+          <button className='bg-purple rounded-2xl w-full text-white h-10 font-medium' type='submit'>
             Cadastrar
           </button>
 
         </form>
 
         <Link to="/login" className='text-texts text-sm'>
-          Já possui uma conta? <span className='text-verde hover:text-verdeLima'>Faça Login aqui!</span>
+          Já possui uma conta? <span className='text-purple'>Faça Login aqui!</span>
         </Link>
       </div>
     </Container>
