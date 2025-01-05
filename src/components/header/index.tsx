@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import img from '../../../public/dc_logo.png'
+import img from '../../../public/dc_logo_gray.png'
 import { FiShoppingCart } from 'react-icons/fi'
 import { FiSearch, FiUser } from 'react-icons/fi'
 import { CartContext } from '../../context/CartContext'
@@ -15,7 +15,7 @@ export function Header() {
 
 
   return (
-    <header className='w-full z-10 md:sticky top-0 bg-white  md:shadow-md'>
+    <header className='w-full z-10 md:sticky top-0 bg-white shadow-md'>
       <nav className='w-full max-w-7xl min-h-16 flex flex-col items-center justify-between mx-auto md:py-2'>
 
         <div className='w-full flex items-center justify-between px-3 pr-5'>
@@ -23,7 +23,7 @@ export function Header() {
           {/* LOGO */}
           <Link to='/' className='flex gap-x-2'>
             <img src={img} className='max-w-6 w-full object-contain py-1.5' alt="DC logo" />
-            <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full'><span>DC</span> <span>STORE</span></div>
+            <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full'><span className='leading-none'>DC<br /> STORE</span></div>
           </Link>
 
           {/* INPUT */}

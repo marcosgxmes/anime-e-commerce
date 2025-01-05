@@ -89,7 +89,7 @@ export function Register() {
             />
           </div>
 
-          <button className='bg-purple rounded-2xl w-full text-white h-10 font-medium' type='submit'>
+          <button className='bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 font-medium' type='submit'>
             Cadastrar
           </button>
 

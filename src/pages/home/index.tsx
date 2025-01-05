@@ -144,7 +144,7 @@ export function Home() {
 
                 <button
                   onClick={() => handleAddCartItem(product)}
-                  className='w-full bg-purple rounded-lg flex justify-center items-center gap-2 py-2  text-white font-medium text-sm'>
+                  className='w-full bg-gradient-to-t from-purple to-cleanPurple rounded-lg flex justify-center items-center gap-2 py-2  text-white font-medium text-sm hover:bg-none hover:bg-purple'>
                   <BsCart size={20} />
                   Adicionar
                 </button>

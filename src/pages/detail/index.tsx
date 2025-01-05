@@ -259,13 +259,13 @@ export function ProductDetail() {
                 <div className='flex flex-col-reverse gap-4 justify-start w-full border-t border-grayText pt-4'>
                   <button
                     onClick={() => handleAddItem(product)}
-                    className='bg-purple rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold'
+                    className='bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold'
                   >
                     <BsCart size={20} />
                     Adicionar ao carrinho
                   </button>
 
-                  <strong className='text-xl'>
+                  <strong className='text-xl font-Roboto'>
                     {product?.price.toLocaleString("pt-BR", {
                       style: "currency",
                       currency: "BRL"
@@ -281,18 +281,18 @@ export function ProductDetail() {
 
 
         {product && (
-          <section className='w-full flex-1 px-5  flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 mb-10'>
+          <section className='w-full flex-1 px-1 pt-5 flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 my-10 '>
             <h1 className="font-medium text-xl text-center mb-7">Sugestões para você</h1>
 
-            <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly w-full '>
+            <div className='h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly min-w-full'>
 
               {produtos.map((snap => (
-                <section key={snap.id} className="w-full flex flex-col justify-between gap-2">
+                <section key={snap.id} className="w-full flex flex-col justify-evenly itens-center gap-2">
 
-                  <Link onClick={() => scrollToTop()} className=' flex flex-col gap-1.5 sm:gap-4 scroll-smooth' to={`/product/${snap.id}`}>
-                    <div className='flex items-center h-60 md:h-64  justify-center rounded-md '>
+                  <Link onClick={() => scrollToTop()} className=' flex flex-col gap-1 sm:gap-4 scroll-smooth' to={`/product/${snap.id}`}>
+                    <div className='flex items-center h-60 md:h-64  justify-center rounded-md'>
                       <img
-                        className='w-full sm:h-full object-contain hover:scale-105 transition-all rounded-md'
+                        className='sm:h-full object-contain hover:scale-105 transition-all rounded-md'
                         src={snap.cover}
                         alt={snap.title}
                       // onLoad={() => handleImageLoad(product.id)}
@@ -300,12 +300,12 @@ export function ProductDetail() {
                       />
                     </div>
 
-                    <p className='font-medium text-center text-texts text-sm'>{snap.title}</p>
+                    <p className='font-medium text-center text-sm'>{snap.title}</p>
                   </Link>
 
-                  <div className='w-full flex flex-col gap-2 md:flex items-center justify-center'>
+                  <div className='w-full flex flex-col md:flex items-center justify-center'>
 
-                    <strong className='font-roboto'>
+                    <strong className='font-Roboto'>
                       {snap.price.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL"

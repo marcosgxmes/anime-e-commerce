@@ -73,7 +73,7 @@ export function Cart() {
                               <p className='font-medium mt-4 mb-2'>Ops... seu carrinho está vazio!</p>
 
                               <Link
-                                className='flex items-center justify-center h-12 bg-purple  my-3 px-10 text-white font-medium hover:scale-105 transition-all rounded-2xl'
+                                className='flex items-center justify-center h-12 bg-gradient-to-t from-purple to-cleanPurple  my-3 px-10 text-white font-medium  rounded-2xl hover:bg-none hover:bg-purple'
                                 to="/"
                                 onClick={() => fecharCarrinho()}>
                                 Continuar Comprando
@@ -111,7 +111,7 @@ export function Cart() {
                                   </div>
                                   
                                   <div className='w-full flex border-t border-grayText pt-2 mt-1'>
-                                    <strong className="float-right text-lg font-roboto">
+                                    <strong className="float-right text-lg font-Roboto">
                                       {item.total.toLocaleString("pt-BR", {
                                         style: 'currency',
                                         currency: "BRL"
@@ -138,10 +138,10 @@ export function Cart() {
                                 </div>
 
                                 <button
-                                  className='p-1 flex items-center gap-1 text-purple font-base text-sm hover:text-red'
+                                  className='p-1 flex items-center gap-1 text-purple font-medium text-sm'
                                   onClick={() => deleteItemCart(item)}
                                 >
-                                   Remover                           
+                                   Excluir                           
                                   <BsTrash size={24}  />
                                 </button>
 
@@ -157,8 +157,8 @@ export function Cart() {
                   {cartAmount !== 0 && (
                     <div className=" px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p className='text-md text-texts'>Subtotal</p>
-                        <p className='text-price text-lg font-bold'>{total}</p>
+                        <p className='text-md font-bold'>Subtotal</p>
+                        <p className='text-price text-lg font-bold font-Roboto'>{total}</p>
                       </div>
 
                       <div className="mt-6">
