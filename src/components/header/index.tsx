@@ -22,7 +22,7 @@ export function Header() {
 
           {/* LOGO */}
           <Link to='/' className='flex gap-x-2'>
-            <img src={img} className='max-w-6 w-full object-contain py-1.5' alt="DC logo" />
+            <img src={img} className='max-w-6 w-full object-contain mx-1 py-1.5' alt="DC logo" />
             <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full'><span className='leading-none'>DC<br /> STORE</span></div>
           </Link>
 
