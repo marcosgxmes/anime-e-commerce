@@ -36,7 +36,7 @@ export function Home() {
   useEffect(() => {
     async function getProducts() {
       const comicRef = collection(db, "quadrinhos")
-      const queryRef = query(comicRef, orderBy("creator", "desc"))
+      const queryRef = query(comicRef, orderBy("id", "asc"))
 
       getDocs(queryRef)
         .then((snapshot) => {
@@ -90,7 +90,7 @@ export function Home() {
 
         <h1 className="font-medium text-xl mb-6 mt-3 text-center text-color">Destaques</h1>
 
-        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 justify-evenly px-2'>
+        <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2'>
 
           {/* LAYOUT SHIFT */}
           {quadrinhos.map(product => (
@@ -113,7 +113,7 @@ export function Home() {
 
           {/* PRODUTOS */}
           {quadrinhos.map(product => (
-            <section key={product.id} className="w-full flex flex-col justify-between gap-5">
+            <section key={product.id} className="w-full h-full flex flex-col justify-between gap-5">
 
 
               <Link
@@ -133,7 +133,7 @@ export function Home() {
               </Link>
 
 
-              <div className='w-full flex gap-y-3 gap-x-4 items-center justify-center flex-wrap lg:flex-row-reverse lg:flex-nowrap'>
+              <div className='w-full flex gap-y-2 gap-x-4 items-center justify-center flex-wrap lg:flex-row-reverse lg:flex-nowrap'>
 
                 <strong className='font-Roboto w-full'>
                   {product.price.toLocaleString("pt-BR", {

@@ -9,6 +9,7 @@ import { ProductDetail } from './pages/detail'
 import { Layout } from './components/layout'
 import { Login } from './pages/login'
 import { Register } from './pages/register'
+import { Cart } from './pages/cart'
 
 // ROTAS (REACT ROUTER DOM)
 const router = createBrowserRouter([
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />
+      },
+      {path: "/cart",
+        element: <Cart />
       }
+    
     ]
   }
 ])
