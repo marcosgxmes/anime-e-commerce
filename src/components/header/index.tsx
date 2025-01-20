@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import img from '../../../public/dc_logo_gray.png'
 import { FiShoppingCart } from 'react-icons/fi'
-import { FiSearch, FiUser } from 'react-icons/fi'
+import { FiSearch,  } from 'react-icons/fi'
 import { CartContext } from '../../context/CartContext'
 import { useContext } from 'react'
 import { useCarrinho } from '../../context/CarrinhoContext';
@@ -45,9 +45,9 @@ export function Header() {
           {/* ICONS */}
           <div className='flex items-center justify-between gap-3.5 pt-1.5'>        
 
-            <Link to="/login">
+            {/* <Link to="/login">
               <FiUser size={24} color="#607D8B" />
-            </Link>
+            </Link> */}
 
             <div className='relative' onClick={() => abrirCarrinho()}>
               <FiShoppingCart size={24} color={cartAmount != 0 ? "#3E31FA" : "#607D8B"} />
