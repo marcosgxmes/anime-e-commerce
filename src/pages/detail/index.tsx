@@ -71,71 +71,75 @@ export function ProductDetail() {
   }
 
 
-  // Função para embaralhar um array de produtos
-  function shuffleArray<T>(array: T[]): T[] {
-    return array.sort(() => Math.random() - 0.5);
-  }
+  // Função para sugerir 4 produtos aleatórios, excluindo o produto selecionado
+async function sugerirProdutosAleatorios(produtoSelecionadoId: string) {
+  try {
+    // Referência à coleção de quadrinhos
+    const produtosRef = collection(db, "quadrinhos");
 
+    // Pega todos os produtos da coleção
+    const snapshot = await getDocs(produtosRef);
 
-  // Função para sugerir 4 produtos aleatórios, sem repetir os já exibidos
-  async function sugerirProdutosAleatorios(produtosExibidos: Set<string>) {
-    try {
-      // Referência à coleção de quadrinhos
-      const produtosRef = collection(db, "quadrinhos");
-
-      // Pega todos os produtos da coleção
-      const snapshot = await getDocs(produtosRef);
-
-      if (snapshot.empty) {
-        console.log("Nenhum produto encontrado.");
-        return [];
-      }
-
-      // Lista para armazenar os produtos disponíveis (não exibidos ainda)
-      const listaDisponivel: ProductsProps[] = [];
-
-      // Itera sobre os documentos e adiciona os dados à lista de produtos disponíveis
-      snapshot.forEach((doc) => {
-        // Verifica se o produto já foi exibido (se o ID está em produtosExibidos)
-        if (!produtosExibidos.has(doc.id)) {
-          listaDisponivel.push({
-            id: doc.id,
-            title: doc.data().title,
-            description: doc.data().description,
-            price: doc.data().price,
-            cover: doc.data().cover,
-            creator: doc.data().creator,
-          });
-        }
-      });
-
-      if (listaDisponivel.length === 0) {
-        console.log("Não há produtos novos para sugerir.");
-        return [];
-      }
-
-      // Embaralha os produtos disponíveis
-      const produtosAleatorios = shuffleArray(listaDisponivel);
-
-      // Seleciona os 4 primeiros produtos aleatórios
-      const produtosSelecionados = produtosAleatorios.slice(0, 4);
-
-      // Adiciona os IDs dos produtos sugeridos ao conjunto de produtos exibidos
-      produtosSelecionados.forEach(produto => produtosExibidos.add(produto.id));
-
-      // Exibe ou retorna os produtos aleatórios
-      console.log("Produtos aleatórios:", produtosSelecionados);
-
-      // Supondo que você tenha uma função setProdutos para atualizar o estado (React)
-      setProdutos(produtosSelecionados);
-
-      return produtosSelecionados;
-
-    } catch (error) {
-      console.error("Erro ao sugerir produtos aleatórios:", error);
+    if (snapshot.empty) {
+      console.log("Nenhum produto encontrado.");
       return [];
     }
+
+    // Lista para armazenar os produtos disponíveis (excluindo o selecionado)
+    const listaDisponivel: ProductsProps[] = [];
+
+    // Itera sobre os documentos e adiciona os dados à lista de produtos disponíveis
+    snapshot.forEach((doc) => {
+      // Verifica se o produto NÃO é o selecionado
+      if (doc.id !== produtoSelecionadoId) {
+        listaDisponivel.push({
+          id: doc.id,
+          title: doc.data().title,
+          description: doc.data().description,
+          price: doc.data().price,
+          cover: doc.data().cover,
+          creator: doc.data().creator,
+        });
+      }
+    });
+
+    if (listaDisponivel.length === 0) {
+      console.log("Não há produtos disponíveis para sugerir.");
+      return [];
+    }
+
+    // Embaralha os produtos disponíveis
+    const produtosAleatorios = shuffleArray(listaDisponivel);
+
+    // Seleciona até 4 primeiros produtos aleatórios (ou menos se não houver 4)
+    const quantidadeMaxima = Math.min(4, produtosAleatorios.length);
+    const produtosSelecionados = produtosAleatorios.slice(0, quantidadeMaxima);
+
+    // Exibe ou retorna os produtos aleatórios
+    console.log("Produtos aleatórios sugeridos:", produtosSelecionados);
+
+    // Supondo que você tenha uma função setProdutos para atualizar o estado (React)
+    if (typeof setProdutos === 'function') {
+      setProdutos(produtosSelecionados);
+    }
+
+    return produtosSelecionados;
+
+  } catch (error) {
+    console.error("Erro ao sugerir produtos aleatórios:", error);
+    return [];
   }
+}
+
+// Função auxiliar para embaralhar array (mantenha esta função)
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 
   return (
@@ -279,7 +283,7 @@ export function ProductDetail() {
           </section>
         )}
 
-
+        {/* Sugestões */}
         {product && (
           <section className='w-full flex-1 px-1 pt-5 flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 my-10 '>
             <h1 className="font-medium text-xl text-center mb-7">Sugestões para você</h1>
