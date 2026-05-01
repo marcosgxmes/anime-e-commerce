@@ -88,7 +88,7 @@ export function Home() {
 
       <main className="w-full min-h-screen max-w-7xl p-3 mx-auto">
 
-        <h1 className="font-medium text-xl mb-6 mt-3 text-center text-color">Destaques</h1>
+        <h1 className="font-bold text-2xl md:text-3xl  mb-6 mt-3 text-center text-color">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2'>
 
@@ -113,13 +113,13 @@ export function Home() {
 
           {/* PRODUTOS */}
           {quadrinhos.map(product => (
-            <section key={product.id} className="w-full h-full flex flex-col justify-between gap-5">
+            <section key={product.id} className="w-full h-full flex flex-col justify-between gap-3 md:gap-5">
 
 
               <Link
                 onClick={() => scrollToTop()}
                 className='flex flex-col z-1 sm:gap-y-3 ' to={`/product/${product.id}`}>
-                <div className='flex items-center h-60 md:h-72 justify-center p-2'>
+                <div className='flex items-center h-60 md:h-72 justify-center py-8 bg-white md:px-6 px-4 rounded-md mb-2'>
                   <img
                     className='rounded-md w-full sm:h-full object-contain hover:scale-105 transition-all '
                     src={product.cover}
@@ -129,7 +129,7 @@ export function Home() {
                   />
                 </div>
 
-                <p className='font-medium text-center text-sm text-texts'>{product.title}</p>
+                <p className='font-bold text-center text-sm text-text'>{product.title}</p>
               </Link>
 
 

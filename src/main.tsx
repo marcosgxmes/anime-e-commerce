@@ -26,4 +26,7 @@ createRoot(document.getElementById('root')!).render(
       </CarrinhoProvider>
     </CartProvider>
   </StrictMode>,
+  
 )
+
+

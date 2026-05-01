@@ -15,15 +15,15 @@ export function Header() {
 
 
   return (
-    <header className='w-full z-10 md:sticky top-0 bg-white shadow-md'>
+    <header className='w-full  z-10 md:sticky top-0 bg-white shadow-md'>
       <nav className='w-full max-w-7xl min-h-16 flex flex-col items-center justify-between mx-auto md:py-2'>
 
         <div className='w-full flex items-center justify-between px-3 pr-5 gap-2'>
 
           {/* LOGO */}
           <Link to='/' className='flex gap-x-2 mr-4'>
-            <img src={img} className='max-w-6 w-full object-contain mx-1 py-1.5' alt="DC logo" />
-            <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full'><span className='leading-none'>DC<br /> STORE</span></div>
+            <img src={img} className='max-w-8 w-full object-contain mx-1 py-1.5' alt="DC logo" />
+            <div className='text-iconColor flex flex-col items-start justify-center pl-2 font-Gow border-l border-grayText min-h-full '><span className='leading-none text-xl'>DC<br /> STORE</span></div>
           </Link>
 
           {/* INPUT */}

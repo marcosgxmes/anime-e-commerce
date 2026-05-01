@@ -2,15 +2,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { ProductsProps } from "../home";
-import { BsCart } from "react-icons/bs";
-import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
+import { BsCart } from "react-icons/bs";
+
 import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/api";
 
+import { CartContext } from "../../context/CartContext";
 import { useCarrinho } from "../../context/CarrinhoContext";
 import { Header } from "../../components/header";
+import { ProductsProps } from "../home";
+
+
 
 export function ProductDetail() {
   const { id } = useParams();
@@ -42,7 +45,8 @@ export function ProductDetail() {
     }
     getProduct();
 
-    sugerirProdutosAleatorios(produtosExibidos).then((produtos) => {
+
+    sugerirProdutosAleatorios(produtosExibidos ).then((produtos) => {
       console.log("Produtos aleatórios:", produtos);
     });
   }, [id]);
@@ -113,7 +117,7 @@ export function ProductDetail() {
       // Exibe ou retorna os produtos aleatórios
       console.log("Produtos aleatórios sugeridos:", produtosSelecionados);
 
-      // Supondo que você tenha uma função setProdutos para atualizar o estado (React)
+      // Supondo que tenha uma função setProdutos para atualizar o estado (React)
       if (typeof setProdutos === "function") {
         setProdutos(produtosSelecionados);
       }
@@ -136,7 +140,7 @@ export function ProductDetail() {
   }
 
   return (
-    <div className="flex-col bg-white pb-5 min-h-screen">
+    <div className="flex-col bg-background pb-5 min-h-screen">
       <Header />
       <main className="w-full h-full max-w-7xl p-5  mx-auto ">
         {/* LAYOUT SHIFT */}
@@ -229,10 +233,10 @@ export function ProductDetail() {
               </strong>
             </div>
 
-            <div className="flex max-w-6xl mx-auto flex-col items-center md:flex-row my-8 gap-8">
-              <div className="w-full max-w-lg min-h-80 h-full  py-5 flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0">
+            <div className="flex max-w-6xl mx-auto flex-col items-center md:flex-row my-8 sm:gap-3 md:gap-8">
+              <div className="w-full max-w-lg h-full py-4 flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0 bg-white">
                 <img
-                  className="h-80  object-contain shadow-md rounded-lg"
+                  className="h-full max-h-[400px]  object-contain shadow-md"
                   src={product.cover}
                   alt={product.title}
                 />
@@ -274,7 +278,7 @@ export function ProductDetail() {
         {/* Sugestões */}
         {product && (
           <section className="w-full flex-1 px-1 pt-5 flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 my-10 ">
-            <h1 className="font-medium text-xl text-center mb-7">
+            <h1 className="font-bold text-xl text-center mb-7">
               Sugestões para você
             </h1>
 
@@ -289,9 +293,9 @@ export function ProductDetail() {
                     className=" flex flex-col gap-1 sm:gap-4 scroll-smooth"
                     to={`/product/${snap.id}`}
                   >
-                    <div className="flex items-center h-60 md:h-64  justify-center rounded-md">
+                    <div className="flex items-center h-60 md:w-60 md:h-64 justify-center rounded-md bg-white md:py-2">
                       <img
-                        className="sm:h-full object-contain hover:scale-105 transition-all rounded-md"
+                        className="h-full sm:max-h-[180px] md:max-h-[210px]  object-contain hover:scale-105 transition-all sm:rounded-sm lg:rounded-none"
                         src={snap.cover}
                         alt={snap.title}
                         // onLoad={() => handleImageLoad(product.id)}
