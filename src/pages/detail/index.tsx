@@ -46,9 +46,9 @@ export function ProductDetail() {
     getProduct();
 
 
-    sugerirProdutosAleatorios(produtosExibidos ).then((produtos) => {
-      console.log("Produtos aleatórios:", produtos);
-    });
+    sugerirProdutosAleatorios(Array.from(produtosExibidos).join(',')).then((produtos) => {
+  console.log("Produtos aleatórios:", produtos);
+});
   }, [id]);
 
   let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos
