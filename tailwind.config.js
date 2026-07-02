@@ -23,7 +23,7 @@ export default {
         yellow: "#fff200",
         purple: "#3E31FA",
         cleanPurple: "#8760f6",
-        background: "#f3f4f8",
+        background: "#f4f3f8",
         bgDark: "#2d3137",        
         grayText: "#e2e2e2",
         bgInput: "#EDEFF2",
