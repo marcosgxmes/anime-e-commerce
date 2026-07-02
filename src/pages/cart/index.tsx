@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
-import { BsPlusCircle } from "react-icons/bs";
+import { BsPlusCircle, BsArrowBarRight } from "react-icons/bs";
 import { CiCircleMinus } from "react-icons/ci";
 // import { FaPix } from 'react-icons/fa6'
 import { BsTrash } from "react-icons/bs";
@@ -86,7 +86,7 @@ export function Cart() {
                                   to="/"
                                   onClick={() => fecharCarrinho()}
                                 >
-                                  Continuar Comprando
+                                  Continue Comprando
                                 </Link>
                               </div>
                             )}
@@ -183,21 +183,21 @@ export function Cart() {
                             href="#"
                             className="flex items-center justify-center rounded-xl border border-transparent  bg-gradient-to-t from-purple to-cleanPurple px-6 py-3 text-base font-medium text-white shadow-sm gap-3  hover:bg-none hover:bg-purple"
                           >
-                            Finalizar Compra
+                            Finalizar Carrinho
                             {/* <FaPix size={24} color="#00bdae" /> */}
                           </a>
                         </div>
 
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                          <p className="text-texts">
+                          <p className="flex gap-2 text-texts">
                             ou{" "}
                             <button
                               type="button"
                               onClick={() => fecharCarrinho()}
-                              className="font-medium text-purple"
-                            >
-                              Continue Comprando
-                              <span aria-hidden="true"> &rarr;</span>
+                              className="flex items-center gap-1 font-medium text-purple"
+                            > Continue Comprando
+                              <BsArrowBarRight size={16} className="font-medium text-purple" />                             
+                              
                             </button>
                           </p>
                         </div>

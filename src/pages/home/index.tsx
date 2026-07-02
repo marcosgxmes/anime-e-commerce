@@ -70,7 +70,7 @@ export function Home() {
 
   // MENSAGEM DE ADICIONADO COM SUCESSO
   function handleAddCartItem(product: ProductsProps) {
-    toast.success("Adicionado ao carrinho!", {
+    toast.success("Adicionado com sucesso!", {
       style: {
         backgroundColor: "#fff",
         color: "#000",
@@ -88,7 +88,7 @@ export function Home() {
 
       <main className="w-full min-h-screen max-w-7xl p-3 mx-auto">
 
-        <h1 className="font-bold text-2xl md:text-3xl  my-8 text-center text-color">Destaques</h1>
+        <h1 className="font-bold text-2xl md:text-3xl  mt-4 mb-6 text-center text-color">Destaques</h1>
 
         <div className='grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2'>
 

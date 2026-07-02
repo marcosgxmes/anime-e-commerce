@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
 import logoImg from '../../../public/dc_circle_black.png'
+
+import { useEffect } from 'react'
 
 import { Input } from "../../components/input"
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Container } from '../../components/container'
+
+import { signInWithEmailAndPassword, signOut}  from "firebase/auth"
+import { auth } from "../../services/api"
 
 const schema = z.object({
   email: z.string().email("* Digite um email válido").nonempty("* O email é obrigatório"),
@@ -15,21 +20,41 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 export function Login() {
-
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: "onChange"
   })
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function handleLogout() {
+      await signOut(auth)
+    }
+
+    handleLogout()
+  }, [] )
+
   function onSubmit(data: FormData) {
     console.log(data)
+
+    signInWithEmailAndPassword(auth, data.email, data.password)
+    .then(() => {
+      console.log("LOGADO COM SUCESSO")
+      navigate("/", { replace: true})
+
+    })
+    .catch(err => {
+      console.log("ERRO AO LOGAR")
+      console.log(err)
+    })
   }
 
   return (
     <Container>
-      <div className='bg-white w-full min-h-screen flex justify-start items-center pt-40 flex-col gap-4'>
+      <div className='bg-white w-full min-h-screen flex justify-start items-center pt-36 flex-col gap-4'>
 
-        <Link to="/" className='mb-6 max-w-36 w-full h-28 flex items-center justify-center'>
+        <Link to="/" className='mb-6 max-w-40 w-full h-34 flex items-center justify-center'>
           <img
             src={logoImg}
             alt="Logo do site"
@@ -38,13 +63,12 @@ export function Login() {
         </Link>
 
         <h1 className='text-3xl font-medium text-texts'>Bem vindo!</h1>
-        <p className='text-texts text-sm'>Faça Login ou crie sua conta:</p>
+        <p className='text-texts text-sm'>Faça Login ou crie uma conta para continuar</p>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='max-w-xl w-full rounded-lg px-4 py-8'
+          className='max-w-xl w-full rounded-lg px-4 pt-4 pb-2'
         >
-
           <div className='mb-3'>
             <Input
               type="email"
@@ -55,7 +79,7 @@ export function Login() {
             />
           </div>
 
-          <div className='mb-3'>
+          <div className='mb-6'>
             <Input
               type="password"
               placeholder="Senha"
@@ -65,13 +89,17 @@ export function Login() {
             />
           </div>
 
-          <button className='bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 font-medium' type='submit'>
+          <button className='bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 mb-3 font-medium' type='submit'>
             Entrar
+          </button>
+
+          <button className='bg-purple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 font-medium'>
+            Esqueci minha senha
           </button>
 
         </form>
 
-        <Link to="/register" className='text-texts text-sm text-center'>
+        <Link to="/register" className='text-texts text-sm text-center mb-8'>
           Não possui uma conta? <span className='text-purple'>Cadastre-se aqui!</span>
         </Link>
         

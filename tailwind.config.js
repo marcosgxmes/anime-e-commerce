@@ -11,7 +11,7 @@ export default {
         color: "#333",
         border: "#4e4e4e",
         dark: "#212429",
-        footer: "#102341",
+        footer: "#0F2145",
         header: "#333",
         price: "#28C76F",
         verdeLima: "#90ff00",
