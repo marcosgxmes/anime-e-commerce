@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
-import { BsPlusCircle, BsArrowBarRight } from "react-icons/bs";
+import { BsPlusCircle, BsArrowBarLeft } from "react-icons/bs";
 import { CiCircleMinus } from "react-icons/ci";
 // import { FaPix } from 'react-icons/fa6'
 import { BsTrash } from "react-icons/bs";
@@ -68,16 +68,15 @@ export function Cart() {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y">
-
                             {/* Carrinho vazio */}
                             {cart.length === 0 && (
                               <div className="h-full flex flex-col mt-20 items-center justify-between ">
                                 <p className="font-medium mt-4 mb-2">
-                                  Ops... seu carrinho está vazio!
+                                  Seu carrinho está vazio!
                                 </p>
                                 <img
                                   src={sad_face}
-                                  className="h-44 object-contain my-5"
+                                  className="h-36 object-contain my-5"
                                   alt="DC Logo"
                                 />
 
@@ -86,7 +85,7 @@ export function Cart() {
                                   to="/"
                                   onClick={() => fecharCarrinho()}
                                 >
-                                  Continue Comprando
+                                  Continuar Comprando
                                 </Link>
                               </div>
                             )}
@@ -116,14 +115,14 @@ export function Cart() {
                                       <p className="font-semibold text-md">
                                         {item.title}
                                       </p>
-                                      <div className="text-sm text-texts font-medium">
+                                      <div className="flex flex-col items-start gap-1 justify-center text-sm text-texts font-medium">
                                         <p>Quantidade: {item.amount}</p>
                                         <p>Autor: {item.creator}</p>
                                       </div>
                                     </div>
 
                                     <div className="w-full flex border-t border-grayText py-4 mt-4">
-                                      <strong className="float-right text-lg font-Roboto">
+                                      <strong className="float-right text-lg font-Roboto text-[#CE135B]">
                                         {item.total.toLocaleString("pt-BR", {
                                           style: "currency",
                                           currency: "BRL",
@@ -171,35 +170,39 @@ export function Cart() {
                     {/* Subtotal e Finalzar compra */}
                     {cartAmount !== 0 && (
                       <div className=" px-4 py-6 sm:px-6 ">
+                        <p className="text-[#647088] mb-2">
+                          Taxas & frete calculados no checkout.
+                        </p>
                         <div className="flex justify-between text-base font-medium text-gray-900 border-t py-4">
                           <p className="text-lg font-bold">Subtotal</p>
-                          <p className="text-price text-lg font-bold font-Roboto">
+                          <p className="text-lg font-bold font-Roboto">
                             {total}
                           </p>
                         </div>
 
-                        <div className="mt-6">
-                          <a
-                            href="#"
-                            className="flex items-center justify-center rounded-xl border border-transparent  bg-gradient-to-t from-purple to-cleanPurple px-6 py-3 text-base font-medium text-white shadow-sm gap-3  hover:bg-none hover:bg-purple"
-                          >
-                            Finalizar Carrinho
-                            {/* <FaPix size={24} color="#00bdae" /> */}
-                          </a>
-                        </div>
-
-                        <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                          <p className="flex gap-2 text-texts">
-                            ou{" "}
+                        <div className="flex w-full items-center justify-center gap-3 mt-4 ">
+                          <div className="flex flex-1 items-center justify-center">
                             <button
                               type="button"
                               onClick={() => fecharCarrinho()}
-                              className="flex items-center gap-1 font-medium text-purple"
-                            > Continue Comprando
-                              <BsArrowBarRight size={16} className="font-medium text-purple" />                             
-                              
+                              className="flex px-3 gap-1 w-full items-center justify-center rounded-xl border border-transparent py-3 font-medium text-purple shadow-sm hover:bg-none hover:bg-[#DEE5FD]"
+                            >
+                              <BsArrowBarLeft />
+                              Continuar
                             </button>
-                          </p>
+                          </div>
+
+                          <div className="flex flex-1 items-center justify-center">
+                            <Link className="w-full" to="/payment">
+                              <button
+                                onClick={() => fecharCarrinho()}
+                                className="w-full px-3 items-center justify-center rounded-xl border border-transparent  py-3 bg-gradient-to-t from-purple to-cleanPurple  text-base font-medium text-white shadow-sm hover:bg-none hover:bg-purple"
+                              >
+                                Finalizar carrinho
+                                {/* <FaPix size={24} color="#00bdae" /> */}
+                              </button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     )}

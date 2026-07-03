@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../../public/dc_circle_black.png";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
 import { Input } from "../../components/input";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,8 @@ import { Container } from "../../components/container";
 import { auth } from "../../services/api";
 import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
 import toast from "react-hot-toast";
+
+import { AuthContext } from "../../context/AuthContext";
 
 const schema = z.object({
   name: z.string().nonempty("* O nome é obrigatório"),
@@ -30,6 +32,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function Register() {
+  const { handleInfoUser } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -49,6 +53,13 @@ export function Register() {
       .then(async (user) => {
         await updateProfile(user.user, {
           displayName: data.name,
+        });
+
+        // ATUALIAZA NO CONTEXTO OS DADOS DO USUARIO
+        handleInfoUser({
+          uid: user.user.uid,
+          name: data.name,
+          email: data.email,
         });
 
         console.log("Cadastrado com sucesso");
