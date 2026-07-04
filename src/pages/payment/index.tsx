@@ -14,7 +14,7 @@ function Payment() {
     <>
       <Header />
       {cart.length !==0 ? (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center md:p-4">
+        <div className="min-h-screen bg-background flex items-center justify-center md:p-4">
         <main className="max-w-4xl w-full bg-white md:rounded-2xl shadow-xl overflow-hidden">
           {/* Header */}
           <div className="bg-purple px-4 md:px-8 py-6">
@@ -86,7 +86,7 @@ function Payment() {
                   <section key={product.id}>
                     <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3 border border-gray-200 gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center">
+                        <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center py-2">
                           <img src={product.cover} alt={product.title} className="w-full sm:h-full h-16 object-contain" />
                         </div>
                         <div>
