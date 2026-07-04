@@ -58,7 +58,7 @@ export function Header() {
             {!loadingAuth && signed && (
               <Link to="/login" className="relative flex flex-col items-center justify-center">
                 <HiOutlineUserCircle size={28} color="#3E31FA" />
-                <p className="absolute top-7 text-sm text-purple">{user?.name}</p>
+                <p className="absolute top-6 text-sm text-purple">{user?.name}</p>
               </Link>
             )}
 
