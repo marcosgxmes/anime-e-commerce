@@ -196,7 +196,7 @@ export function Cart() {
                             <Link className="w-full" to="/payment">
                               <button
                                 onClick={() => fecharCarrinho()}
-                                className="w-full px-3 items-center justify-center rounded-xl border border-transparent  py-3 bg-gradient-to-t from-purple to-cleanPurple  text-base font-medium text-white shadow-sm hover:bg-none hover:bg-purple"
+                                className="w-full px-2 items-center justify-center rounded-xl border border-transparent  py-3 bg-gradient-to-t from-purple to-cleanPurple  text-base font-medium text-white shadow-sm hover:bg-none hover:bg-purple"
                               >
                                 Finalizar carrinho
                                 {/* <FaPix size={24} color="#00bdae" /> */}

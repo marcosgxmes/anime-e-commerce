@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useContext } from "react";
-import { BsCart } from "react-icons/bs";
 import { CartContext } from "../../context/CartContext";
 import { useSearch } from "../../context/SeachContext";
 import toast from "react-hot-toast";
@@ -69,17 +68,24 @@ export function Home() {
   }
 
   return (
-    <div className="bg-background pb-10">
+   <div className="bg-gradient-to-br from-background via-background to-purple/5 pb-10 min-h-screen relative overflow-hidden">
       <Header />
 
-      <main className="w-full min-h-screen max-w-7xl p-3 mx-auto">
-        <h1 className="font-bold text-2xl md:text-3xl  mt-4 mb-1 text-center text-color">
-          Destaques
-        </h1>
-
-        <p className="text-center text-gray-500 dark:text-gray-400 text-sm mt-1 mb-6 animate-fade-in-up animation-delay-200">
+      <main className="w-full min-h-screen max-w-7xl p-3 mx-auto relative z-10">
+        {/* Título  */}
+        <div className="relative mt-4 mb-6 md:mb-10 text-center">
+          <div className="inline-block relative">
+            <h1 className="font-bold text-3xl md:text-5xl text-color relative">
+              <span className="relative inline-block animate-fade-in-up">
+                Destaques
+              </span>
+            </h1>
+            <div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-10 animate-pulse-slow"></div>
+          </div>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1 md:mt-4 animate-fade-in-up animation-delay-200">
             Explore os mangás mais populares
           </p>
+        </div>
 
         <div className="grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
           {/* LAYOUT SHIFT */}
@@ -152,7 +158,7 @@ export function Home() {
                   </button>
                 </div>
 
-                {/* Título do produto */}
+                {/* TITULO DO PRODUTO */}
                 <p className="font-bold text-center text-sm text-text line-clamp-2 transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple group-hover:to-cleanPurple">
                   {product.title}
                 </p>
@@ -175,7 +181,6 @@ export function Home() {
                   onClick={() => handleAddCartItem(product)}
                   className="w-full bg-gradient-to-t from-purple to-cleanPurple rounded-lg flex justify-center items-center gap-2 py-2 px-4  text-white font-medium text-sm hover:bg-none hover:bg-purple"
                 >
-                  <BsCart size={20} />
                   Adicionar
                 </button>
               </div>
@@ -183,6 +188,59 @@ export function Home() {
           ))}
         </div>
       </main>
+
+      {/*  ESTILOS DO FADE-IN */}
+      <style>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        .shimmer {
+          animation: shimmer 1.5s ease-in-out infinite;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+          );
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse 3s ease-in-out infinite;
+        }
+
+        .animate-ping-slow {
+          animation: ping 2s ease-in-out infinite;
+        }
+
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+
+        .animation-delay-500 {
+          animation-delay: 500ms;
+        }
+      `}</style>
     </div>
   );
 }

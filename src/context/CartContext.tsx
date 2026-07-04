@@ -16,7 +16,6 @@ interface CartContextData {
   total: string;
 }
 
-
 interface CartProps {
   id: string;
   price: number;
@@ -32,11 +31,7 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-
-
 export const CartContext = createContext({} as CartContextData)
-
-
 
 function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartProps[]>([])

@@ -12,7 +12,6 @@ interface PrivateProps {
   children: ReactNode;
 }
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Private({ children }: PrivateProps): any {
 

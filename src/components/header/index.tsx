@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import img from "../../../public/dc_logo_gray.png";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
-import { CartContext } from "../../context/CartContext";
 import { useContext } from "react";
+import { FaUserCircle } from "react-icons/fa";
+
 import { useCarrinho } from "../../context/CarrinhoContext";
 import { useSearch } from "../../context/SeachContext";
 import { AuthContext } from "../../context/AuthContext";
-
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { CartContext } from "../../context/CartContext";
 
 export function Header() {
   const { abrirCarrinho } = useCarrinho();
@@ -30,7 +30,7 @@ export function Header() {
               alt="DC logo"
             />
             <div className="text-iconColor flex flex-col items-start justify-center px-2 font-Gow border-l border-grayText min-h-full w-full">
-              <span className="leading-none text-xl">
+              <span className="leading-none text-xl ">
                 DC <br /> STORE
               </span>
             </div>
@@ -56,9 +56,14 @@ export function Header() {
           {/* ICONS */}
           <div className="py-2 px-1 flex items-center justify-between gap-6">
             {!loadingAuth && signed && (
-              <Link to="/login" className="relative flex flex-col items-center justify-center">
-                <HiOutlineUserCircle size={28} color="#3E31FA" />
-                <p className="absolute top-6 text-sm text-purple">{user?.name}</p>
+              <Link
+                to="/login"
+                className="relative flex flex-col items-center justify-center"
+              >
+                <FaUserCircle size={24} color="#3E31FA" />
+                <p className="absolute top-6 text-sm text-purple">
+                  {user?.name}
+                </p>
               </Link>
             )}
 
@@ -82,7 +87,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* INPUT */}
+        {/* INPUT QUE SE ALOCA PARA BAIXA COM MENOR RESOLUÇÃO */}
         <div className={`md:hidden w-full border-t border-grayText`}>
           <section className="relative px-4 py-3 w-full max-w-3xl mx-auto flex justify-center items-center">
             <input

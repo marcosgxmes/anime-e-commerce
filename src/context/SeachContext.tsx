@@ -81,7 +81,6 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
         price: doc.data().price,
         cover: doc.data().cover,
         creator: doc.data().creator
-
       })
     ])
 

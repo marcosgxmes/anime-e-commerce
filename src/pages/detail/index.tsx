@@ -3,7 +3,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { BsCart } from "react-icons/bs";
 
 import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/api";
@@ -13,8 +12,6 @@ import { useCarrinho } from "../../context/CarrinhoContext";
 import { Header } from "../../components/header";
 import { ProductsProps } from "../home";
 
-
-
 export function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState<ProductsProps>();
@@ -22,6 +19,9 @@ export function ProductDetail() {
 
   const { addItemCart, scrollToTop } = useContext(CartContext);
   const { abrirCarrinho } = useCarrinho();
+
+  // No componente, adicione um estado de loading
+  const [isLoading, setIsLoading] = useState(true);
 
   // CHAMANDO PRODUTO NO DATABASE PELO ID
   useEffect(() => {
@@ -43,13 +43,15 @@ export function ProductDetail() {
         });
       });
     }
-    
+
     getProduct();
 
-
-    sugerirProdutosAleatorios(Array.from(produtosExibidos).join(',')).then((produtos) => {
-  console.log("Produtos aleatórios:", produtos);
-});
+    sugerirProdutosAleatorios(Array.from(produtosExibidos).join(",")).then(
+      (produtos) => {
+        console.log("Produtos aleatórios:", produtos);
+      },
+    );
+    setIsLoading(false);
   }, [id]);
 
   let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos
@@ -145,7 +147,7 @@ export function ProductDetail() {
       <Header />
       <main className="w-full h-full max-w-7xl p-5  mx-auto ">
         {/* LAYOUT SHIFT */}
-        {!product && (
+        {!product && isLoading && (
           <section className="w-full min-h-full">
             <div className="w-80 bg-slate-500 h-4 rounded-md animate-pulse"></div>
 
@@ -164,8 +166,15 @@ export function ProductDetail() {
           </section>
         )}
 
+        {/* Loading state */}
+        {!product && isLoading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+          </div>
+        )}
+
         {/* LAYOUT SHIFT */}
-        {!product && (
+        {!product && isLoading && (
           <section className="w-full flex-1 px-5 flex-col items-center justify-center max-w-6xl mx-auto gap-y-10 sm:my-8 my-20 animate-pulse">
             <div className="bg-slate-500 w-80 h-4 rounded-md my-4 mx-auto"></div>
 
@@ -218,7 +227,7 @@ export function ProductDetail() {
           </section>
         )}
 
-        {product && (
+        {product && !isLoading && (
           <section className="w-full min-h-full">
             <div className="w-full mb-5 flex items-start justify-start gap-2 text-sm">
               <Link
@@ -260,7 +269,6 @@ export function ProductDetail() {
                     onClick={() => handleAddItem(product)}
                     className="bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-lg flex items-center justify-center gap-2 py-2 px-8 text-white font-bold"
                   >
-                    <BsCart size={20} />
                     Adicionar ao carrinho
                   </button>
 
@@ -276,52 +284,66 @@ export function ProductDetail() {
           </section>
         )}
 
-        {/* Sugestões */}
-        {product && (
-          <section className="w-full flex-1 px-1 pt-5 flex-col items-center justify-center max-w-6xl mx-auto gap-y-8 sm:my-8 my-10 ">
-            <h1 className="font-bold text-xl text-center mb-7">
-              Sugestões para você
-            </h1>
+       {/* Sugestões */}
+{product && (
+  <section className="w-full flex-1 px-4 pt-6 flex-col items-center justify-center max-w-7xl mx-auto gap-y-8 sm:my-8 my-10">
+    <h1 className="font-bold text-2xl text-center mb-8 text-gray-800 tracking-tight">
+      Sugestões para você
+    </h1>
 
-            <div className="h-full grid grid-cols-2 md:gap-x-5 gap-x-3 gap-y-6 md:grid-cols-4 justify-evenly min-w-full">
-              {produtos.map((snap) => (
-                <section
-                  key={snap.id}
-                  className="w-full flex flex-col justify-evenly itens-center gap-2"
-                >
-                  <Link
-                    onClick={() => scrollToTop()}
-                    className=" flex flex-col gap-1 sm:gap-4 scroll-smooth"
-                    to={`/product/${snap.id}`}
-                  >
-                    <div className="flex items-center h-60 md:w-60 md:h-64 justify-center rounded-md bg-white md:py-2">
-                      <img
-                        className="h-full sm:max-h-[180px] md:max-h-[210px]  object-contain hover:scale-105 transition-all sm:rounded-sm lg:rounded-none"
-                        src={snap.cover}
-                        alt={snap.title}
-                        // onLoad={() => handleImageLoad(product.id)}
-                        // style={{ display: loadImages.includes(product.id) ? "block" : "none" }}
-                      />
-                    </div>
+    <div className="h-full grid grid-cols-2 gap-4 md:gap-6 gap-y-6 md:grid-cols-4 lg:grid-cols-4 justify-items-center min-w-full">
+      {produtos
+        ?.filter((snap) => snap?.id !== product?.id)
+        .slice(0, 8)
+        .map((snap) => (
+          <article
+            key={snap?.id}
+            className="w-full max-w-[200px] md:max-w-[220px] flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-[-4px]"
+          >
+            <Link
+              onClick={() => scrollToTop()}
+              className="flex flex-col gap-2 scroll-smooth w-full"
+              to={`/product/${snap?.id}`}
+            >
+              <div className="flex items-center justify-center w-full aspect-square rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-300 p-4 shadow-sm hover:shadow-md">
+                <img
+                  className="w-full h-full object-contain max-h-[180px] md:max-h-[200px] transition-transform duration-300 hover:scale-105"
+                  src={snap?.cover}
+                  alt={snap?.title || 'Produto'}
+                  loading="lazy"
+                />
+              </div>
 
-                    <p className="font-medium text-center text-sm">
-                      {snap.title}
-                    </p>
-                  </Link>
+              <p className="font-medium text-center text-sm text-gray-700 line-clamp-2 hover:text-gray-900 transition-colors min-h-[40px]">
+                {snap?.title || 'Produto sem nome'}
+              </p>
+            </Link>
 
-                  <div className="w-full flex flex-col md:flex items-center justify-center">
-                    <strong className="font-Roboto">
-                      {snap.price.toLocaleString("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </strong>
-                  </div>
-                </section>
-              ))}
+            <div className="w-full flex items-center justify-center">
+              <strong className="font-Roboto text-lg text-gray-900 font-semibold">
+                {snap?.price 
+                  ? snap.price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })
+                  : 'Preço indisponível'
+                }
+              </strong>
             </div>
-          </section>
-        )}
+          </article>
+        ))}
+    </div>
+
+    {/* Mensagem quando não há sugestões disponíveis */}
+    {(!produtos || produtos?.filter((snap) => snap?.id !== product?.id).length === 0) && (
+      <div className="text-center py-8">
+        <p className="text-gray-500 text-sm">
+          Nenhuma sugestão disponível no momento.
+        </p>
+      </div>
+    )}
+  </section>
+)}
       </main>
     </div>
   );
