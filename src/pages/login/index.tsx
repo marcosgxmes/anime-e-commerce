@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../../../public/dc_circle_black.png";
+import logoImg from "../../../public/dc_logo_purple.png";
 
 import { useEffect } from "react";
 
@@ -58,11 +58,11 @@ export function Login() {
 
 	return (
 		<Container>
-			<div className="min-h-screen  flex items-center justify-center md:p-4">
-				<main className="flex py-5 flex-col items-center justify-center max-w-2xl w-full bg-white md:rounded-2xl sm:shadow-xl overflow-hidden">
+			<div className="min-h-[calc(100vh-24px)]  flex items-center justify-center md:p-4 ">
+				<main className="flex flex-col items-center justify-center py-4 w-full bg-white  rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-3xl">
 					<Link
 						to="/"
-						className="mb-6 max-w-40 w-full h-34 flex items-center justify-center"
+						className="mb-6 max-w-40 w-full flex items-center justify-center"
 					>
 						<img
 							src={logoImg}
@@ -72,13 +72,13 @@ export function Login() {
 					</Link>
 
 					<h1 className="text-3xl font-medium text-texts">Bem vindo!</h1>
-					<p className="text-texts text-sm">
+					<p className="text-text text-center text-sm">
 						Faça Login ou crie uma conta para continuar
 					</p>
 
 					<form
 						onSubmit={handleSubmit(onSubmit)}
-						className="max-w-xl w-full rounded-lg px-4 mt-8 mb-4"
+						className="max-w-xl w-full rounded-lg  mt-8 mb-4"
 					>
 						<div className="mb-3">
 							<Input
@@ -101,7 +101,7 @@ export function Login() {
 						</div>
 
 						<button
-							className="bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 mb-3 font-medium"
+							className="bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 mb-3 mt-1 font-medium"
 							type="submit"
 						>
 							Entrar
@@ -112,7 +112,7 @@ export function Login() {
 						</button>
 					</form>
 
-					<Link to="/register" className="text-texts text-sm text-center mb-4">
+					<Link to="/register" className="text-texts text-sm text-center mt-4">
 						Não possui uma conta?{" "}
 						<span className="text-purple">Cadastre-se aqui!</span>
 					</Link>

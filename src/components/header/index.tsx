@@ -3,7 +3,6 @@ import img from "../../../public/dc_logo_gray.png";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 import { useContext } from "react";
-import { FaUserCircle } from "react-icons/fa";
 
 import { useCarrinho } from "../../context/CarrinhoContext";
 import { useSearch } from "../../context/SeachContext";
@@ -60,7 +59,7 @@ export function Header() {
                 to="/login"
                 className="relative flex flex-col items-center justify-center"
               >
-                <FaUserCircle size={24} color="#3E31FA" />
+                <FiUser size={24} color="#3E31FA" />
                 <p className="absolute top-6 text-sm text-purple">
                   {user?.name}
                 </p>
@@ -69,7 +68,7 @@ export function Header() {
 
             {!loadingAuth && !signed && (
               <Link to="/login">
-                <FiUser size={26} color="#607D8B" />
+                <FiUser size={24} color="#607D8B" />
               </Link>
             )}
 

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../../../public/dc_circle_black.png";
+import logoImg from "../../../public/dc_logo_purple.png";
 
 import { useContext, useEffect } from "react";
 
@@ -89,7 +89,7 @@ export function Register() {
 
   return (
     <Container>
-      <div className="bg-white w-full min-h-screen flex justify-center items-center flex-col gap-4">
+      <div className="bg-white w-full min-h-[calc(100vh-24px)] flex justify-center items-center flex-col gap-4">
         <Link
           to="/"
           className="mb-6 max-w-40 w-full h-28 flex items-center justify-center"
@@ -102,7 +102,7 @@ export function Register() {
         </Link>
 
         <h1 className="text-2xl font-medium text-texts">Cadastre-se!</h1>
-        <p className="text-texts text-sm">Crie sua conta para continuar</p>
+        <p className="text-texts text-sm">Crie sua conta ou faça login para continuar</p>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -149,14 +149,14 @@ export function Register() {
           </div>
 
           <button
-            className="bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 font-medium"
+            className="bg-gradient-to-t from-purple to-cleanPurple hover:bg-none hover:bg-purple rounded-2xl w-full text-white h-10 font-medium mt-3"
             type="submit"
           >
             Cadastrar
           </button>
         </form>
 
-        <Link to="/login" className="text-texts text-sm mb-16">
+        <Link to="/login" className="text-texts text-sm mt-4">
           Já possui uma conta?{" "}
           <span className="text-purple">Faça Login aqui!</span>
         </Link>
