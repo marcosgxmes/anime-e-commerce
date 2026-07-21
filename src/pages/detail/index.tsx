@@ -1,5 +1,5 @@
-/* eslint-disable prefer-const */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -22,71 +22,57 @@ export function ProductDetail() {
 
 	// CHAMANDO PRODUTO NO DATABASE PELO ID
 	useEffect(() => {
-		async function getProduct() {
-			if (!id) {
-				return;
+		async function loadData() {
+			if (!id || product?.id) return;
+
+			setIsLoading(true);
+
+			try {
+				// Buscar produto principal
+				const mangaRef = doc(db, "quadrinhos", id);
+				const snapshot = await getDoc(mangaRef);
+
+				if (snapshot.exists()) {
+					const productData = {
+						id: snapshot.id,
+						title: snapshot.data()?.title,
+						description: snapshot.data()?.description,
+						price: snapshot.data()?.price,
+						cover: snapshot.data()?.cover,
+						creator: snapshot.data()?.creator,
+					};
+					setProduct(productData);
+
+					// Buscar sugestões APÓS ter o produto
+					await buscarSugestoes(id);
+				}
+			} catch (error) {
+				console.error("Erro ao carregar dados:", error);
+			} finally {
+				setIsLoading(false);
 			}
-
-			const mangaRef = doc(db, "quadrinhos", id);
-
-			getDoc(mangaRef).then((snapshot) => {
-				setProduct({
-					id: snapshot.id,
-					title: snapshot.data()?.title,
-					description: snapshot.data()?.description,
-					price: snapshot.data()?.price,
-					cover: snapshot.data()?.cover,
-					creator: snapshot.data()?.creator,
-				});
-			});
 		}
 
-		getProduct();
-
-		sugerirProdutosAleatorios(Array.from(produtosExibidos).join(",")).then(
-			(produtos) => {
-				console.log("Produtos aleatórios:", produtos);
-			},
-		);
-		setIsLoading(false);
+		loadData();
 	}, [id]);
 
-	let produtosExibidos = new Set<string>(id); // Set para armazenar os IDs dos produtos exibidos
-
-	// FUNÇÃO PARA ADICIONAR ITEM NO CARRINHO
-	function handleAddItem(product: ProductsProps) {
-		toast.success("Adicionado ao carrinho", {
-			style: {
-				backgroundColor: "#000",
-				color: "#FFF",
-				borderRadius: 17,
-			},
-		});
-
-		addItemCart(product);
-	}
-
-	// FUNÇÃO PARA SUGERIR OUTROS PRODUTOS
-	async function sugerirProdutosAleatorios(produtoSelecionadoId: string) {
+	// FUNÇÃO PARA BUSCAR SUGESTÕES
+	async function buscarSugestoes(produtoId: string) {
 		try {
-			// Referência à coleção de quadrinhos
 			const produtosRef = collection(db, "quadrinhos");
-
-			// Pega todos os produtos da coleção
 			const snapshot = await getDocs(produtosRef);
 
 			if (snapshot.empty) {
 				console.log("Nenhum produto encontrado.");
-				return [];
+				setProdutos([]);
+				return;
 			}
 
 			// Lista para armazenar os produtos disponíveis (excluindo o selecionado)
 			const listaDisponivel: ProductsProps[] = [];
 
-			// Itera sobre os documentos e adiciona os dados à lista de produtos disponíveis
 			snapshot.forEach((doc) => {
-				// Verifica se o produto NÃO é o selecionado
-				if (doc.id !== produtoSelecionadoId) {
+				if (doc.id !== produtoId) {
 					listaDisponivel.push({
 						id: doc.id,
 						title: doc.data().title,
@@ -100,35 +86,27 @@ export function ProductDetail() {
 
 			if (listaDisponivel.length === 0) {
 				console.log("Não há produtos disponíveis para sugerir.");
-				return [];
+				setProdutos([]);
+				return;
 			}
 
-			// Embaralha os produtos disponíveis
+			// Embaralha e seleciona até 4 produtos
 			const produtosAleatorios = shuffleArray(listaDisponivel);
-
-			// Seleciona até 4 primeiros produtos aleatórios (ou menos se não houver 4)
 			const quantidadeMaxima = Math.min(4, produtosAleatorios.length);
 			const produtosSelecionados = produtosAleatorios.slice(
 				0,
 				quantidadeMaxima,
 			);
 
-			// Exibe ou retorna os produtos aleatórios
-			console.log("Produtos aleatórios sugeridos:", produtosSelecionados);
-
-			// Supondo que tenha uma função setProdutos para atualizar o estado (React)
-			if (typeof setProdutos === "function") {
-				setProdutos(produtosSelecionados);
-			}
-
-			return produtosSelecionados;
+			console.log("Produtos sugeridos:", produtosSelecionados.length);
+			setProdutos(produtosSelecionados);
 		} catch (error) {
 			console.error("Erro ao sugerir produtos aleatórios:", error);
-			return [];
+			setProdutos([]);
 		}
 	}
 
-	// FUNÇÃO PARA ENBARALHAR ARRAY PARA SUGESTÕES ALEATÓRIAS
+	// FUNÇÃO PARA EMBARALHAR ARRAY
 	function shuffleArray<T>(array: T[]): T[] {
 		const shuffled = [...array];
 		for (let i = shuffled.length - 1; i > 0; i--) {
@@ -138,10 +116,22 @@ export function ProductDetail() {
 		return shuffled;
 	}
 
+	// FUNÇÃO PARA ADICIONAR ITEM NO CARRINHO
+	function handleAddItem(product: ProductsProps) {
+		toast.success("Adicionado ao carrinho", {
+			style: {
+				backgroundColor: "#000",
+				color: "#FFF",
+				borderRadius: 17,
+			},
+		});
+		addItemCart(product);
+	}
+
 	return (
 		<>
 			<Header />
-      
+
 			<div className="flex-col bg-background pb-5 min-h-screen">
 				<main className="w-full h-full max-w-7xl p-5  mx-auto ">
 					{/* LOADING */}
