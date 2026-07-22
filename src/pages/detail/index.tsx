@@ -11,6 +11,7 @@ import { CartContext } from "../../context/CartContext";
 import { Header } from "../../components/header";
 import { ProductsProps } from "../home";
 import toast from "react-hot-toast";
+import { Loading } from "../../components/loading";
 
 export function ProductDetail() {
 	const { id } = useParams();
@@ -20,10 +21,10 @@ export function ProductDetail() {
 	const [produtos, setProdutos] = useState<ProductsProps[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// CHAMANDO PRODUTO NO DATABASE PELO ID
+	// CARREGAR DADOS DO PRODUTOS ATRAVÉS DO ID PASSADO PELA ROTA
 	useEffect(() => {
 		async function loadData() {
-			if (!id || product?.id) return;
+			if (!id) return;
 
 			setIsLoading(true);
 
@@ -43,18 +44,29 @@ export function ProductDetail() {
 					};
 					setProduct(productData);
 
-					// Buscar sugestões APÓS ter o produto
+					// Buscar sugestões
 					await buscarSugestoes(id);
+					setIsLoading(false);
 				}
 			} catch (error) {
 				console.error("Erro ao carregar dados:", error);
-			} finally {
-				setIsLoading(false);
 			}
 		}
 
 		loadData();
 	}, [id]);
+
+	// FUNÇÃO PARA ADICIONAR ITEM NO CARRINHO
+	function handleAddItem(product: ProductsProps) {
+		toast.success("Adicionado ao carrinho", {
+			style: {
+				backgroundColor: "#000",
+				color: "#FFF",
+				borderRadius: 17,
+			},
+		});
+		addItemCart(product);
+	}
 
 	// FUNÇÃO PARA BUSCAR SUGESTÕES
 	async function buscarSugestoes(produtoId: string) {
@@ -106,7 +118,7 @@ export function ProductDetail() {
 		}
 	}
 
-	// FUNÇÃO PARA EMBARALHAR ARRAY
+	// FUNÇÃO PARA EMBARALHAR ARRAY DE PRODUTOS SUGERIDOS
 	function shuffleArray<T>(array: T[]): T[] {
 		const shuffled = [...array];
 		for (let i = shuffled.length - 1; i > 0; i--) {
@@ -116,54 +128,17 @@ export function ProductDetail() {
 		return shuffled;
 	}
 
-	// FUNÇÃO PARA ADICIONAR ITEM NO CARRINHO
-	function handleAddItem(product: ProductsProps) {
-		toast.success("Adicionado ao carrinho", {
-			style: {
-				backgroundColor: "#000",
-				color: "#FFF",
-				borderRadius: 17,
-			},
-		});
-		addItemCart(product);
-	}
-
 	return (
 		<>
-			<Header />
+			{product && !isLoading && <Header />}
 
-			<div className="flex-col bg-background pb-5 min-h-screen">
+			<div className="flex-col bg-background pb-8 min-h-screen">
 				<main className="w-full h-full max-w-7xl p-5  mx-auto ">
-					{/* LOADING */}
-					{!product && isLoading && (
-						<div className="flex justify-center items-center py-20">
-							<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-						</div>
-					)}
-
-					{/* LAYOUT SHIFT */}
-					{product && isLoading && (
-						<section className="w-full min-h-full">
-							<div className="w-80 bg-slate-500 h-4 rounded-md animate-pulse"></div>
-
-							<div className="flex w-full max-w-6xl min-h-80 h-full mx-auto flex-col items-center md:flex-row my-8 gap-8 animate-pulse">
-								<div className="w-full max-x-lg min-h-80 h-full flex-1  rounded-md mb-8 sm:mb-0">
-									<div className="bg-slate-500 w-full h-80 rounded-xl mb-4"></div>
-								</div>
-
-								<div className="w-full h-full flex-1 border border-border rounded-md p-3 gap-3 sm:px-7 shadow-md ">
-									<div className="bg-slate-500 w-full h-60 rounded-xl mb-4"></div>
-									<div className="bg-slate-500 w-full h-4 rounded-md mb-4"></div>
-									<div className="bg-slate-500 w-full h-4 rounded-md mb-4"></div>
-									<div className="bg-slate-500 w-full h-4 rounded-md mb-4"></div>
-								</div>
-							</div>
-						</section>
-					)}
+					{!product && isLoading && <Loading />}
 
 					{/* DETALHES PRODUTO */}
 					{product && !isLoading && (
-						<section className="w-full min-h-full">
+						<section className="w-full min-h-full ">
 							<div className="w-full mb-5 flex items-start justify-start gap-2 text-sm">
 								<Link
 									className="flex items-center justify-center text-texts"
@@ -178,16 +153,16 @@ export function ProductDetail() {
 								</strong>
 							</div>
 
-							<div className="flex max-w-6xl mx-auto flex-col items-center md:flex-row my-8 sm:gap-3 md:gap-8">
-								<div className="w-full max-w-lg h-full py-4 flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0 bg-white">
+							<div className=" flex w-full mx-auto flex-col  md:flex-row my-8 sm:gap-3 md:gap-8">
+								<div className="w-full  h-full py-4 flex flex-1 items-center justify-center rounded-md mb-8 sm:mb-0 bg-white">
 									<img
-										className="h-full max-h-[400px]  object-contain shadow-md"
+										className="h-full min-h-[380px] max-h-[400px]  object-contain shadow-md"
 										src={product.cover}
 										alt={product.title}
 									/>
 								</div>
 
-								<div className="flex-1 border bg-gray-50 border-grayText rounded-md py-5 px-3 sm:px-7 shadow-md max-w-2xl">
+								<div className="flex-1 border bg-gray-50 border-grayText rounded-md py-5 px-3 sm:px-7 shadow-md ">
 									<p className="font-bold text-lg  sm:text-2xl mb-8">
 										{product?.title}
 									</p>
@@ -221,7 +196,7 @@ export function ProductDetail() {
 
 					{/* SUGESTÕES DE PRODUTOS */}
 					{product && !isLoading && (
-						<section className="w-full flex-1 px-4 pt-1 md:pt-6 flex-col items-center justify-center max-w-7xl mx-auto gap-y-8">
+						<section className="w-full flex-1 pt-1 md:pt-6 flex-col items-center justify-center max-w-7xl mx-auto gap-y-8">
 							<div className="relative mt-2 mb-6 md:mb-10 text-center">
 								<div className="inline-block relative">
 									<h1 className="font-bold text-2xl md:text-3xl text-color relative">
@@ -246,20 +221,20 @@ export function ProductDetail() {
 											className="w-full max-w-[200px] md:max-w-[220px] flex flex-col items-center gap-3 transition-all duration-300 hover:translate-y-[-4px]"
 										>
 											<Link
-												onClick={() => scrollToTop()}
-												className="flex flex-col gap-2 scroll-smooth w-full"
+												className="flex flex-col gap-4 scroll-smooth w-full hover:text-purple hover:font-semibold"
 												to={`/product/${snap?.id}`}
+												onClick={scrollToTop}
 											>
-												<div className="flex items-center justify-center w-full aspect-square rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-300 p-4 shadow-sm hover:shadow-md">
+												<div className="flex items-center justify-center w-full aspect-square rounded-md bg-gray-50 hover:bg-gray-100 transition-colors duration-300 p-4 shadow-sm hover:shadow-md">
 													<img
-														className="w-full h-full object-contain max-h-[180px] md:max-h-[200px] transition-transform duration-300 hover:scale-105"
+														className="w-full h-full object-contain max-h-[165px] md:max-h-[200px] transition-transform duration-300 hover:scale-105"
 														src={snap?.cover}
 														alt={snap?.title || "Produto"}
 														loading="lazy"
 													/>
 												</div>
 
-												<p className="font-medium text-center text-sm text-gray-700 line-clamp-2 hover:text-gray-900 transition-colors min-h-[40px]">
+												<p className=" text-center text-sm  line-clamp-2 hover:text-gray-900 transition-colors min-h-[40px]">
 													{snap?.title || "Produto sem nome"}
 												</p>
 											</Link>
@@ -277,17 +252,6 @@ export function ProductDetail() {
 										</article>
 									))}
 							</div>
-
-							{/* Mensagem quando não há sugestões disponíveis */}
-							{(!produtos ||
-								produtos?.filter((snap) => snap?.id !== product?.id).length ===
-									0) && (
-								<div className="text-center py-8">
-									<p className="text-gray-500 text-sm">
-										Nenhuma sugestão disponível no momento.
-									</p>
-								</div>
-							)}
 						</section>
 					)}
 

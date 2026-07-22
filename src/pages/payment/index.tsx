@@ -90,12 +90,12 @@ function Payment() {
                           <img src={product.cover} alt={product.title} className="w-full sm:h-full h-16 object-contain" />
                         </div>
                         <div>
-                          <p className="font-medium text-gray-800">
+                          <p className="font-medium text-gray-800 mb-1">
                             {product.title}
                           </p>
-                          <p className="text-sm text-gray-500">
-                            Quantidade: {product.amount}
-                          </p>
+                          <span className="bg-gray-100 px-2 py-0.5 rounded-full text-sm">
+															Qtd: {product.amount}
+														</span>
                         </div>
                       </div>
                       <p className="font-semibold text-gray-800">

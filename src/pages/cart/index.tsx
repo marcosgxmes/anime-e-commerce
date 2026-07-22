@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import { BsPlusCircle, BsArrowBarLeft } from "react-icons/bs";
 import { CiCircleMinus } from "react-icons/ci";
 import { BsTrash } from "react-icons/bs";
@@ -21,6 +21,7 @@ export function Cart() {
 
 	const { carrinhoAberto, fecharCarrinho } = useCarrinho();
 
+
   // FUNÇÃO PARA FECHAR O CARRINHO
 	function handleCloseAndScrollToTop() {
 		scrollToTop();
@@ -37,7 +38,7 @@ export function Cart() {
 
 			{/* Carrinho */}
 			<div
-				className={`${carrinhoAberto ? "-translate-x-0" : "translate-x-full"} min-h-screen fixed w-full md:w-3/6 top-0 right-0 transform transition-all duration-500 ease-in-out`}
+				className={`${carrinhoAberto ? "-translate-x-0" : "translate-x-full"} min-h-screen fixed w-full sm:w-3/4 md:w-2/4 lg:w-1/4 top-0 right-0 transform transition-all duration-500 ease-in-out`}
 			>
 				<div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl sm:rounded-l-3xl">
 					{/* Cabeçalho */}
@@ -99,7 +100,7 @@ export function Cart() {
 										className="flex flex-col justify-items-start w-full h-full my-5 border border-grayText rounded-3xl bg-gray-50"
 									>
 										<div className="h-full flex justify-between gap-x-2 p-1 bg-white border border-grayText rounded-3xl overflow-hidden">
-											<div className="flex items-center w-3/6 justify-center p-2">
+											<div className="flex w-3/6 justify-center p-2">
 												<Link to={`/product/${item.id}`}>
 													<img
 														src={item.cover}
@@ -111,8 +112,8 @@ export function Cart() {
 											</div>
 
 											<div className="w-full flex flex-col items-start justify-between pr-2">
-												<div className="flex flex-col justify-between gap-4 h-full pt-2">
-													<p className="font-semibold text-md">{item.title}</p>
+												<div className="flex flex-col justify-between gap-2 h-full pt-1">
+													<p className="font-semibold text-sm md:text-md">{item.title}</p>
 													<div className="flex flex-col items-start gap-1 justify-center text-sm text-texts font-medium">
 														<span className="bg-gray-100 px-2 py-0.5 rounded-full">
 															Qtd: {item.amount}
@@ -120,7 +121,7 @@ export function Cart() {
 													</div>
 												</div>
 
-												<div className="w-full flex border-t border-grayText py-4 mt-2">
+												<div className="w-full flex border-t border-grayText pt-1 mt-2">
 													<strong className="float-right text-lg font-Roboto">
 														{item.total.toLocaleString("pt-BR", {
 															style: "currency",

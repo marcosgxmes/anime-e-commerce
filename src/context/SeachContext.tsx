@@ -53,7 +53,6 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       })
   }
 
-
   // BUSCAR ITEM PELA BARRA DE PESQUISA
   async function handleSearchItem() {
     if (input === "") {
@@ -63,6 +62,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 
     setQuadrinhos([])
 
+    
     const q = query(collection(db, "quadrinhos"),
       where("title", ">=", input),
       where("title", "<=", input + "\uf8ff"),

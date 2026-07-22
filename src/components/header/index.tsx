@@ -53,7 +53,7 @@ export function Header() {
           </section>
 
           {/* ICONS */}
-          <div className="py-2 px-1 flex items-center justify-between gap-6">
+          <div className="py-2 px-1 flex items-center justify-between gap-4">
             {!loadingAuth && signed && (
               <Link
                 to="/login"
@@ -67,7 +67,8 @@ export function Header() {
             )}
 
             {!loadingAuth && !signed && (
-              <Link to="/login">
+              <Link to="/login" className="flex items-center justify-center gap-2">
+                <p className="text-[#607D8B]">Login</p>
                 <FiUser size={24} color="#607D8B" />
               </Link>
             )}

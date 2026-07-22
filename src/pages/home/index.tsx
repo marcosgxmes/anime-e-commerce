@@ -19,15 +19,15 @@ export interface ProductsProps {
 }
 
 export function Home() {
+	const [loadImages, setLoadImages] = useState<string[]>([]);	
 	const { quadrinhos, setQuadrinhos } = useSearch();
-	const [loadImages, setLoadImages] = useState<string[]>([]);
 	const { addItemCart, scrollToTop } = useContext(CartContext);
 
-	// CHAMANDO PRODUTOS DO DATABASE
+	// CARREGANDO PRODUTOS DO DATABASE
 	useEffect(() => {
 		async function getProducts() {
 			const comicRef = collection(db, "quadrinhos");
-			const queryRef = query(comicRef, orderBy("id", "asc"));
+			const queryRef = query(comicRef, orderBy("id", "desc"));
 
 			getDocs(queryRef).then((snapshot) => {
 				// eslint-disable-next-line prefer-const
@@ -89,7 +89,7 @@ export function Home() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-2 gap-x-3 md:gap-x-5 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
+					<div className="grid grid-cols-2 gap-x-3 md:gap-x-8 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
 						{/* LAYOUT SHIFT */}
 						{quadrinhos.map((product) => (
 							<section
@@ -178,7 +178,7 @@ export function Home() {
 								</Link>
 
 								{/* PREÇO E BOTAO ADICIONAR */}
-								<div className="w-full flex flex-col gap-y-2 gap-x-4 items-center justify-center sm:flex-row lg:flex-row-reverse lg:flex-nowrap">
+								<div className="w-full flex flex-col gap-2 items-center justify-center sm:flex-row lg:flex-row lg:flex-nowrap">
 									{/* Preço  */}
 									<div className="relative w-full text-center sm:text-left">
 										<strong className="font-Roboto text-base md:text-lg ">
@@ -192,7 +192,7 @@ export function Home() {
 									{/* Botão de adiconar */}
 									<button
 										onClick={() => handleAddCartItem(product)}
-										className="w-full bg-gradient-to-t from-purple to-cleanPurple rounded-lg flex justify-center items-center gap-2 py-2 px-4  text-white font-medium text-sm hover:bg-none hover:bg-purple"
+										className="w-full bg-gradient-to-t from-purple to-cleanPurple rounded-lg flex justify-center items-center py-2 px-4  text-white font-medium text-sm hover:bg-none hover:bg-purple"
 									>
 										Adicionar
 									</button>
