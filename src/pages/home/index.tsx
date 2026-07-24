@@ -23,7 +23,7 @@ export function Home() {
 	const { quadrinhos, setQuadrinhos } = useSearch();
 	const { addItemCart, scrollToTop } = useContext(CartContext);
 
-	// CARREGANDO PRODUTOS DO DATABASE
+	// CARREGA PRODUTOS DO DATABASE
 	useEffect(() => {
 		async function getProducts() {
 			const comicRef = collection(db, "quadrinhos");
@@ -50,12 +50,12 @@ export function Home() {
 		getProducts();
 	}, []);
 
-	// EVITAR LAYOUT SHIFT
+	// EVITA LAYOUT SHIFT
 	function handleImageLoad(id: string) {
 		setLoadImages((prevImagesLoaded) => [...prevImagesLoaded, id]);
 	}
 
-	// ADICONAR ITEM AO CARRINHO
+	// ADICIONA ITEM AO CARRINHO
 	function handleAddCartItem(product: ProductsProps) {
 		toast.success("Adicionado com sucesso!", {
 			style: {
@@ -127,7 +127,7 @@ export function Home() {
 							>
 								<Link
 									onClick={() => scrollToTop()}
-									className="flex flex-col z-1 sm:gap-y-3 relative"
+									className="flex flex-col z-1 gap-y-2 relative"
 									to={`/product/${product.id}`}
 								>
 									<div className="relative flex items-center h-60 md:h-72 justify-center py-8 bg-white md:px-6 px-4 rounded-2xl mb-2 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:-translate-y-1">

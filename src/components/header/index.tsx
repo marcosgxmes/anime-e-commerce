@@ -73,7 +73,7 @@ export function Header() {
               </Link>
             )}
 
-            <div className="relative" onClick={() => abrirCarrinho()}>
+            <div className="relative cursor-pointer" onClick={() => abrirCarrinho()}>
               <FiShoppingCart
                 size={24}
                 color={cartAmount != 0 ? "#3E31FA" : "#607D8B"}
