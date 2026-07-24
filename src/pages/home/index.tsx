@@ -77,16 +77,13 @@ export function Home() {
 					{/* TÍTULO  */}
 					<div className="relative mt-4 mb-6 md:mb-10 text-center">
 						<div className="inline-block relative">
-							<h1 className="font-bold text-3xl md:text-4xl text-color relative">
-								<span className="relative inline-block animate-fade-in-up">
-									Destaques
+							<h1 className="font-bold md:text-4xl text-color relative">
+								<span className="text-2xl relative inline-block animate-fade-in-up">
+									Explore os mangás mais populares
 								</span>
 							</h1>
-							<div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-10 animate-pulse-slow"></div>
-						</div>
-						<p className="text-gray-500 dark:text-gray-400 text-sm mt-1 md:mt-4 animate-fade-in-up animation-delay-200">
-							Explore os mangás mais populares
-						</p>
+							<div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-100 animate-pulse-slow"></div>
+						</div>						
 					</div>
 
 					<div className="grid grid-cols-2 gap-x-3 md:gap-x-8 gap-y-8 lg:gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">

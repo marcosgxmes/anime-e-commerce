@@ -199,16 +199,14 @@ export function ProductDetail() {
 						<section className="w-full flex-1 pt-1 md:pt-6 flex-col items-center justify-center max-w-7xl mx-auto gap-y-8">
 							<div className="relative mt-2 mb-6 md:mb-10 text-center">
 								<div className="inline-block relative">
-									<h1 className="font-bold text-2xl md:text-3xl text-color relative">
-										<span className="relative inline-block animate-fade-in-up">
-											Sugestões para você
+									<h1 className="font-bold text-xl md:text-3xl text-color relative">
+										<span className="text-2xl relative inline-block animate-fade-in-up">
+											Quem viu este produto também comprou
 										</span>
 									</h1>
-									<div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-10 animate-pulse-slow"></div>
+									<div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-100 animate-pulse-slow"></div>
 								</div>
-								<p className="text-gray-500 dark:text-gray-400 text-sm mt-1 md:mt-4 animate-fade-in-up animation-delay-200">
-									Quem viu este produto também comprou
-								</p>
+								
 							</div>
 
 							<div className="h-full grid grid-cols-2 gap-4 md:gap-6 gap-y-6 md:grid-cols-4 lg:grid-cols-4 justify-items-center min-w-full">
