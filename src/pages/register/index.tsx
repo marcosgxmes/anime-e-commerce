@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../../../public/dc_logo_purple.png";
+import logoImg from "../../../public/dc_circle_purple.png";
 
 import { useContext, useEffect } from "react";
 
@@ -89,10 +89,11 @@ export function Register() {
 
   return (
     <Container>
-      <div className="bg-white w-full min-h-[calc(100vh-24px)] flex justify-center items-center flex-col gap-4">
-        <Link
+      <div className="min-h-[calc(100vh-24px)] flex items-center justify-center md:p-4">
+				<main className="flex flex-col items-center justify-center py-8 w-full max-w-[600px] min-h-[700px] rounded-3xl overflow-hidden transition-all duration-300 md:shadow-2xl">
+					<Link
           to="/"
-          className="mb-6 max-w-40 w-full h-28 flex items-center justify-center"
+          className="mb-12 max-w-40 w-full h-28 flex items-center justify-center"
         >
           <img
             src={logoImg}
@@ -101,12 +102,12 @@ export function Register() {
           />
         </Link>
 
-        <h1 className="text-2xl font-medium text-texts">Cadastre-se!</h1>
+        <h1 className="text-3xl font-medium text-texts">Cadastre-se!</h1>
         <p className="text-texts text-sm">Crie sua conta ou faça login para continuar</p>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-xl w-full rounded-lg px-4 pt-8"
+          className="max-w-[500px] w-full rounded-lg px-1 pt-8"
         >
           <div className="mb-3.5">
             <Input
@@ -160,7 +161,8 @@ export function Register() {
           Já possui uma conta?{" "}
           <span className="text-purple">Faça Login aqui!</span>
         </Link>
-      </div>
+				</main>
+			</div>
     </Container>
   );
 }

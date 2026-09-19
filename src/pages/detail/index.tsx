@@ -21,6 +21,7 @@ export function ProductDetail() {
 	const [produtos, setProdutos] = useState<ProductsProps[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 
+
 	// CARREGAR DADOS DO PRODUTOS ATRAVÉS DO ID PASSADO PELA ROTA
 	useEffect(() => {
 		async function loadData() {
@@ -197,10 +198,10 @@ export function ProductDetail() {
 					{/* SUGESTÕES DE PRODUTOS */}
 					{product && !isLoading && (
 						<section className="w-full flex-1 pt-1 md:pt-6 flex-col items-center justify-center max-w-7xl mx-auto gap-y-8">
-							<div className="relative mt-2 mb-6 md:mb-10 text-center">
+							<div className="relative mb-6 md:mb-8 text-center">
 								<div className="inline-block relative">
 									<h1 className="font-bold text-xl md:text-3xl text-color relative">
-										<span className="text-2xl relative inline-block animate-fade-in-up">
+										<span className="text-xl relative inline-block animate-fade-in-up">
 											Quem viu este produto também comprou
 										</span>
 									</h1>
@@ -223,7 +224,7 @@ export function ProductDetail() {
 												to={`/product/${snap?.id}`}
 												onClick={scrollToTop}
 											>
-												<div className="flex items-center justify-center w-full aspect-square rounded-md bg-gray-50 hover:bg-gray-100 transition-colors duration-300 p-4 shadow-sm hover:shadow-md">
+												<div className="flex items-center justify-center w-full aspect-square rounded-md bg-white transition-colors duration-300 p-4 shadow-sm hover:shadow-md">
 													<img
 														className="w-full h-full object-contain max-h-[165px] md:max-h-[200px] transition-transform duration-300 hover:scale-105"
 														src={snap?.cover}

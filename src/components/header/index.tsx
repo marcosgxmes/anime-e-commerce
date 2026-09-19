@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import img from "../../../public/dc_logo_gray.png";
-import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { FiShoppingCart, FiUser, FiLogOut } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 import { useContext } from "react";
 
@@ -59,7 +59,7 @@ export function Header() {
                 to="/login"
                 className="relative flex flex-col items-center justify-center"
               >
-                <FiUser size={24} color="#3E31FA" />
+                <FiLogOut size={24} color="#3E31FA" />
                 <p className="absolute top-6 text-sm text-purple">
                   {user?.name}
                 </p>

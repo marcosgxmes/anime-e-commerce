@@ -31,7 +31,7 @@ export function Home() {
 
 		async function getProducts() {
 			const comicRef = collection(db, "quadrinhos");
-			const queryRef = query(comicRef, orderBy("id", "desc"));
+			const queryRef = query(comicRef, orderBy("title", "desc"));
 
 			getDocs(queryRef).then((snapshot) => {
 				// eslint-disable-next-line prefer-const
@@ -84,7 +84,7 @@ export function Home() {
 					<div className="bg-gradient-to-br from-background via-background to-purple/5 pb-10 min-h-screen relative overflow-hidden">
 						<main className="w-full min-h-screen max-w-7xl p-3 mx-auto relative">
 							{/* TÍTULO  */}
-							<div className="relative mt-4 mb-6 md:mb-10 text-center">
+							<div className="relative mt-4 mb-6 md:mb-8 text-center">
 								<div className="inline-block relative">
 									<h1 className="font-bold md:text-4xl text-color relative">
 										<span className="text-2xl relative inline-block animate-fade-in-up">
@@ -95,7 +95,7 @@ export function Home() {
 								</div>
 							</div>
 
-							<div className="grid grid-cols-2 gap-x-3 md:gap-x-6 gap-y-8 lg:gap-y-12 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
+							<div className="grid grid-cols-2 gap-x-3 md:gap-x-8 gap-y-8 lg:gap-y-12 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
 								{/* LAYOUT SHIFT */}
 								{quadrinhos.map((product) => (
 									<section
@@ -130,15 +130,15 @@ export function Home() {
 								{quadrinhos.map((product, index) => (
 									<section
 										key={product.id}
-										className="w-full h-full flex flex-col justify-between gap-3 md:gap-5 group animate-fade-in-up"
+										className="w-full h-full flex flex-col justify-between gap-3 md:gap-4 group animate-fade-in-up"
 										style={{ animationDelay: `${index * 50}ms` }}
 									>
 										<Link
 											onClick={() => scrollToTop()}
-											className="flex flex-col z-1 gap-y-2 relative"
+											className="flex flex-col z-1 gap-y-1 relative"
 											to={`/product/${product.id}`}
 										>
-											<div className="relative flex items-center sm:max-h-64 md:h-72 justify-center py-8 bg-white md:px-6 px-4 rounded-2xl mb-2 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
+											<div className="relative flex items-center sm:max-h-64 md:h-72 justify-center py-6 bg-white md:px-6 px-4 rounded-xl mb-2 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
 												{/* Zoom na imagem com overlay */}
 												<div className="relative w-full h-full flex items-center justify-center overflow-hidden">
 													<img
