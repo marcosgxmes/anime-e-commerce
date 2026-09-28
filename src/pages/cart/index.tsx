@@ -76,7 +76,7 @@ export function Cart() {
 								{cart.length === 0 && (
 									<div className="h-full flex flex-col mt-20 items-center justify-between">
 										<p className="font-medium mt-4 mb-2">
-											Seu carrinho está vazio!
+											Ops... Seu carrinho está vazio!
 										</p>
 										<img
 											src={sad_face}

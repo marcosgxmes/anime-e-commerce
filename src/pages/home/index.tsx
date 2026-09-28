@@ -1,270 +1,427 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect, useState, useContext } from "react";
+
 import { CartContext } from "../../context/CartContext";
 import { useSearch } from "../../context/SeachContext";
+
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+
 import { db } from "../../services/api";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
+
 import { Header } from "../../components/header";
 import { Loading } from "../../components/loading";
 
 // TIPAGEM DOS PRODUTOS
 export interface ProductsProps {
-	id: string;
-	title: string;
-	description: string;
-	price: number;
-	cover: string;
-	creator?: string;
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  cover: string;
+  creator?: string;
 }
 
 export function Home() {
-	const [loadImages, setLoadImages] = useState<string[]>([]);
-	const { quadrinhos, setQuadrinhos } = useSearch();
-	const { addItemCart, scrollToTop } = useContext(CartContext);
-	const [isLoading, setIsLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
-	// CARREGA PRODUTOS DO DATABASE
-	useEffect(() => {
-		setIsLoading(true);
+  const { quadrinhos, setQuadrinhos } = useSearch();
+  const { addItemCart, scrollToTop } = useContext(CartContext);
 
-		async function getProducts() {
-			const comicRef = collection(db, "quadrinhos");
-			const queryRef = query(comicRef, orderBy("title", "desc"));
+  const [isLoading, setIsLoading] = useState(true);
 
-			getDocs(queryRef).then((snapshot) => {
-				// eslint-disable-next-line prefer-const
-				let listComic = [] as ProductsProps[];
+  // CARREGA PRODUTOS DO FIREBASE
+  useEffect(() => {
+    async function getProducts() {
+      try {
+        setIsLoading(true);
 
-				snapshot.forEach((doc) => [
-					listComic.push({
-						id: doc.id,
-						title: doc.data().title,
-						description: doc.data().description,
-						price: doc.data().price,
-						cover: doc.data().cover,
-						creator: doc.data().creator,
-					}),
-				]);
+        const comicRef = collection(db, "quadrinhos");
+        const queryRef = query(comicRef, orderBy("title", "desc"));
 
-				setQuadrinhos(listComic);
-				setIsLoading(false);
-			});
-		}
-		getProducts();
-	}, []);
+        const snapshot = await getDocs(queryRef);
 
-	// EVITA LAYOUT SHIFT
-	function handleImageLoad(id: string) {
-		setLoadImages((prevImagesLoaded) => [...prevImagesLoaded, id]);
-	}
+        const listComic: ProductsProps[] = [];
 
-	// ADICIONA ITEM AO CARRINHO
-	function handleAddCartItem(product: ProductsProps) {
-		toast.success("Adicionado com sucesso!", {
-			style: {
-				backgroundColor: "#fff",
-				color: "#000",
-				borderRadius: 15,
-			},
-		});
+        snapshot.forEach((doc) => {
+          const data = doc.data();
 
-		addItemCart(product);
-	}
+          listComic.push({
+            id: doc.id,
+            title: data.title,
+            description: data.description,
+            price: data.price,
+            cover: data.cover,
+            creator: data.creator,
+          });
+        });
 
-	return (
-		<>
-			{!quadrinhos && isLoading && <Loading />}
+        setQuadrinhos(listComic);
+      } catch (error) {
+        console.error("Erro ao carregar os produtos:", error);
 
-			{quadrinhos && (
-				<>
-					<Header />
+        toast.error("Não foi possível carregar os mangás.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-					<div className="bg-gradient-to-br from-background via-background to-purple/5 pb-10 min-h-screen relative overflow-hidden">
-						<main className="w-full min-h-screen max-w-7xl p-3 mx-auto relative">
-							{/* TÍTULO  */}
-							<div className="relative mt-4 mb-6 md:mb-8 text-center">
-								<div className="inline-block relative">
-									<h1 className="font-bold md:text-4xl text-color relative">
-										<span className="text-2xl relative inline-block animate-fade-in-up">
-											Explore os mangás mais populares
-										</span>
-									</h1>
-									<div className="absolute -inset-4 bg-gradient-to-r from-purple/20 to-cleanPurple/20 blur-2xl -z-100 animate-pulse-slow"></div>
-								</div>
-							</div>
+    getProducts();
+  }, []);
 
-							<div className="grid grid-cols-2 gap-x-3 md:gap-x-8 gap-y-8 lg:gap-y-12 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 items-start justify-evenly px-2">
-								{/* LAYOUT SHIFT */}
-								{quadrinhos.map((product) => (
-									<section
-										key={product.id}
-										className="w-full flex flex-col justify-between gap-4"
-										style={{
-											display: loadImages.includes(product.id)
-												? "none"
-												: "block",
-											minHeight: "280px",
-										}}
-									>
-										{loadImages.includes(product.id) && (
-											// Skeleton loading state
-											<div className="flex flex-col gap-2 animate-pulse">
-												<div
-													className="bg-slate-200 dark:bg-slate-700 w-full rounded-xl mb-4"
-													style={{
-														aspectRatio: "16/10",
-														minHeight: "240px",
-													}}
-												></div>
-												<div className="bg-slate-200 dark:bg-slate-700 w-3/4 h-4 rounded-full"></div>
-												<div className="bg-slate-200 dark:bg-slate-700 w-1/2 h-4 rounded-full"></div>
-												<div className="bg-slate-200 dark:bg-slate-700 w-2/3 h-3 rounded-full"></div>
-											</div>
-										)}
-									</section>
-								))}
+  // IMAGEM CARREGADA
+  function handleImageLoad(id: string) {
+    setLoadedImages((prev) => {
+      if (prev.includes(id)) {
+        return prev;
+      }
 
-								{/* PRODUTOS */}
-								{quadrinhos.map((product, index) => (
-									<section
-										key={product.id}
-										className="w-full h-full flex flex-col justify-between gap-3 md:gap-4 group animate-fade-in-up"
-										style={{ animationDelay: `${index * 50}ms` }}
-									>
-										<Link
-											onClick={() => scrollToTop()}
-											className="flex flex-col z-1 gap-y-1 relative"
-											to={`/product/${product.id}`}
-										>
-											<div className="relative flex items-center sm:max-h-64 md:h-72 justify-center py-6 bg-white md:px-6 px-4 rounded-xl mb-2 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:-translate-y-1">
-												{/* Zoom na imagem com overlay */}
-												<div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-													<img
-														className={`rounded-lg w-full sm:h-full object-contain transition-all duration-700 ${
-															loadImages.includes(product.id)
-																? "opacity-100 group-hover:scale-110 group-hover:rotate-1"
-																: "opacity-0"
-														}`}
-														src={product.cover}
-														alt={product.title}
-														onLoad={() => handleImageLoad(product.id)}
-														loading="lazy"
-													/>
-													<div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-												</div>
+      return [...prev, id];
+    });
+  }
 
-												{/* Ícone de visualização rápida */}
-												<button className="absolute bottom-4 right-4 bg-transparent backdrop-blur-sm p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 hover:scale-110">
-													<svg
-														className="w-5 h-5 text-purple"
-														fill="none"
-														stroke="currentColor"
-														viewBox="0 0 24 24"
-													>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															strokeWidth="2"
-															d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-														/>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															strokeWidth="2"
-															d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-														/>
-													</svg>
-												</button>
-											</div>
+  // ADICIONA ITEM AO CARRINHO
+  function handleAddCartItem(product: ProductsProps) {
+    toast.success("Adicionado com sucesso!", {
+      style: {
+        backgroundColor: "#fff",
+        color: "#000",
+        borderRadius: 15,
+      },
+    });
 
-											{/* TITULO DO PRODUTO */}
-											<p className="font-bold mt-2 text-center text-sm text-text line-clamp-2 transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple group-hover:to-cleanPurple">
-												{product.title}
-											</p>
-										</Link>
+    addItemCart(product);
+  }
 
-										{/* PREÇO E BOTAO ADICIONAR */}
-										<div className="w-full flex flex-col gap-2 items-center justify-center sm:flex-row lg:flex-row lg:flex-nowrap">
-											{/* Preço  */}
-											<div className="relative w-full text-center sm:text-left">
-												<strong className="font-Roboto text-base md:text-lg ">
-													{product.price.toLocaleString("pt-BR", {
-														style: "currency",
-														currency: "BRL",
-													})}
-												</strong>
-											</div>
+  // LOADING
+  if (isLoading) {
+    return <Loading />;
+  }
 
-											{/* Botão de adiconar */}
-											<button
-												onClick={() => handleAddCartItem(product)}
-												className="w-full bg-gradient-to-t from-purple to-cleanPurple rounded-lg flex justify-center items-center py-2 px-4  text-white font-medium text-sm hover:bg-none hover:bg-purple"
-											>
-												Adicionar
-											</button>
-										</div>
-									</section>
-								))}
-							</div>
-						</main>
+  return (
+    <>
+      <Header />
 
-						{/*  ESTILOS DO FADE-IN */}
-						<style>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
+      <div className="min-h-screen overflow-hidden bg-gradient-to-br from-background via-background to-purple/5 pb-10">
+        <main className="relative mx-auto min-h-screen w-full max-w-7xl p-3">
+          {/* TÍTULO */}
+          <div className="relative mb-6 mt-4 text-center md:mb-8">
+            <div className="relative inline-block">
+              <h1 className="relative font-bold text-color md:text-4xl">
+                <span className="animate-fade-in-up text-2xl">
+                  Explore os mangás mais populares
+                </span>
+              </h1>
+
+              <div
+                className="
+                  absolute
+                  -inset-4
+                  -z-10
+                  bg-gradient-to-r
+                  from-purple/20
+                  to-cleanPurple/20
+                  blur-2xl
+                  animate-pulse-slow
+                "
+              />
+            </div>
+          </div>
+
+          {/* PRODUTOS */}
+          <div
+            className="
+              grid
+              grid-cols-2
+              items-start
+              justify-evenly
+              gap-x-3
+              gap-y-8
+              px-2
+              sm:grid-cols-4
+              md:grid-cols-4
+              md:gap-x-8
+              lg:grid-cols-5
+              lg:gap-y-12
+            "
+          >
+            {quadrinhos.map((product, index) => {
+              const imageLoaded = loadedImages.includes(product.id);
+
+              return (
+                <section
+                  key={product.id}
+                  className={`
+                    product-card
+                    w-full
+                    h-full
+                    flex
+                    flex-col
+                    justify-between
+                    gap-3
+                    md:gap-4										
+                  `}
+                  style={{
+                    animationDelay: `${Math.min(index * 40, 400)}ms`,
+                  }}
+                >
+                  <Link
+                    onClick={() => scrollToTop()}
+                    className="relative z-10 flex flex-col gap-y-1"
+                    to={`/product/${product.id}`}
+                  >
+                    {/* CAPA */}
+                    <div
+                      className="
+                        group
+                        relative
+                        flex
+                        items-center
+                        justify-center
+                        overflow-hidden
+                        rounded-xl
+                        bg-white
+                        px-4
+                        py-6
+                        shadow-lg
+                        transition-shadow
+                        duration-300
+                        hover:shadow-2xl
+                        sm:max-h-64
+                        md:h-72
+                        md:px-6
+												
+                      "
+                    >
+                      {/* SKELETON */}
+                      {!imageLoaded && (
+                        <div
+                          className="
+                            absolute
+                            inset-0
+                            animate-pulse
+                            bg-slate-200
+                            dark:bg-slate-700
+                          "
+                        />
+                      )}
+
+                      {/* IMAGEM */}
+                      <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+                        <img
+                          className={`
+                            h-full
+                            w-full
+                            rounded-lg
+                            object-contain
+                            transition-opacity
+                            duration-300
+                            ease-out
+														
+                            ${imageLoaded ? "opacity-100" : "opacity-0"}
+                            group-hover:scale-[1.04]
+                          `}
+                          src={product.cover}
+                          alt={product.title}
+                          onLoad={() => handleImageLoad(product.id)}
+                          loading={index < 5 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
+
+                        {/* OVERLAY */}
+                        <div
+                          className="
+                            pointer-events-none
+                            absolute
+                            inset-0
+                            bg-gradient-to-t
+                            from-black/30
+                            via-transparent
+                            to-transparent
+                            opacity-0
+                            transition-opacity
+                            duration-300
+                            group-hover:opacity-100
+                          "
+                        />
+                      </div>
+
+                      {/* VISUALIZAÇÃO */}
+                      <button
+                        type="button"
+                        aria-label={`Visualizar ${product.title}`}
+                        className="
+                          absolute
+                          bottom-4
+                          right-4
+                          rounded-full
+                          bg-white/80
+                          p-2
+                          opacity-0
+                          shadow-lg
+                          backdrop-blur-sm
+                          transition-all
+                          duration-300
+                          group-hover:translate-y-0
+                          group-hover:opacity-100
+                          hover:scale-110
+                        "
+                      >
+                        <svg
+                          className="h-5 w-5 text-purple"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* TÍTULO */}
+                    <p
+                      className="
+                        mt-2
+                        line-clamp-2
+                        text-center
+                        text-sm
+                        font-bold
+                        text-text
+                        transition-colors
+                        duration-300
+                        group-hover:text-purple
+                      "
+                    >
+                      {product.title}
+                    </p>
+                  </Link>
+
+                  {/* PREÇO + BOTÃO */}
+                  <div
+                    className="
+                      flex
+                      w-full
+                      flex-col
+                      items-center
+                      justify-center
+                      gap-2
+                      sm:flex-row
+                      lg:flex-nowrap
+                    "
+                  >
+                    {/* PREÇO */}
+                    <div className="relative w-full text-center sm:text-left">
+                      <strong className="font-Roboto text-base md:text-lg">
+                        {product.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </strong>
+                    </div>
+
+                    {/* ADICIONAR */}
+                    <button
+                      type="button"
+                      onClick={() => handleAddCartItem(product)}
+                      className="
+                        w-full
+                        rounded-lg
+                        bg-gradient-to-t
+                        from-purple
+                        to-cleanPurple
+                        px-4
+                        py-2
+                        text-sm
+                        font-medium
+                        text-white
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-lg
+                        active:translate-y-0
+                      "
+                    >
+                      Adicionar
+                    </button>
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        </main>
+
+        {/* ANIMAÇÕES */}
+        <style>{`
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translate3d(0, 12px, 0);
+            }
+
+            to {
+              opacity: 1;
+              transform: translate3d(0, 0, 0);
+            }
           }
-          100% {
-            transform: translateX(100%);
-          }
-        }
 
-        .shimmer {
-          animation: shimmer 1.5s ease-in-out infinite;
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.3) 50%,
-            transparent 100%
-          );
-        }
-
-        @keyframes fadeInUp {
-          from {
+          .product-card {
             opacity: 0;
-            transform: translateY(20px);
+            animation: fadeInUp 0.45s ease-out forwards;
+            will-change: opacity, transform;
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+
+          .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+            will-change: opacity, transform;
           }
-        }
 
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-        }
+          @keyframes pulseSlow {
+            0%,
+            100% {
+              opacity: 0.5;
+            }
 
-        .animate-pulse-slow {
-          animation: pulse 3s ease-in-out infinite;
-        }
+            50% {
+              opacity: 0.8;
+            }
+          }
 
-        .animate-ping-slow {
-          animation: ping 2s ease-in-out infinite;
-        }
+          .animate-pulse-slow {
+            animation: pulseSlow 3s ease-in-out infinite;
+          }
 
-        .animation-delay-200 {
-          animation-delay: 200ms;
-        }
+          /* Evita animações para usuários que preferem menos movimento */
+          @media (prefers-reduced-motion: reduce) {
+            .product-card,
+            .animate-fade-in-up,
+            .animate-pulse-slow {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+            }
 
-        .animation-delay-500 {
-          animation-delay: 500ms;
-        }
-      `}</style>
-					</div>
-				</>
-			)}
-		</>
-	);
+            .product-card * {
+              transition: none !important;
+            }
+          }
+
+        `}</style>
+      </div>
+    </>
+  );
 }

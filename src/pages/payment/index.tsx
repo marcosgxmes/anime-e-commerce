@@ -1,5 +1,3 @@
-// TODA ESTILIZAÇÃO DESTA PAGINA FOI FEITA POR IA, EXCETO AS FUNCIONALIDADES
-
 import { useContext } from "react";
 import { Header } from "../../components/header";
 import { CartContext } from "../../context/CartContext";
@@ -10,111 +8,301 @@ function Payment() {
   const { cart, total } = useContext(CartContext);
   const { user } = useContext(AuthContext);
 
+  if (cart.length === 0) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <Header />
-      {cart.length !==0 ? (
-        <div className="min-h-screen bg-background flex items-center justify-center md:p-4">
-        <main className="max-w-4xl w-full bg-white md:rounded-2xl shadow-xl overflow-hidden">
-          {/* Header */}
-          <div className="bg-purple px-4 md:px-8 py-6">
-            <h1 className="text-2xl font-bold text-white">Finalizar Pedido</h1>
-            <p className="text-blue-100 text-sm">
-              Revise seus dados e confirme o pagamento
-            </p>
+
+      <main className="min-h-screen bg-background text-neutral-900">
+        <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-5 sm:py-8 md:px-6 md:py-12">
+          
+          {/* Título */}
+          <div className="mb-6 sm:mb-8">
+            <div className="rounded-2xl bg-purple px-4 py-5 sm:px-6 sm:py-6 md:px-8">
+              <h1 className="text-xl font-bold text-white sm:text-2xl">
+                Finalizar Pedido
+              </h1>
+
+              <p className="mt-1 text-xs text-blue-100 sm:text-sm">
+                Revise seus dados e confirme o pagamento
+              </p>
+            </div>
           </div>
 
-          <div className="p-4 md:p-8 space-y-8">
-            {/* Endereço de entrega */}
-            <section className="border-b border-gray-200 pb-6">
-              <div className="flex items-center gap-2 mb-4">
-                <svg
-                  className="w-5 h-5 text-purple"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Endereço de entrega
-                </h2>
-              </div>
+          {/* CONTEÚDO */}
+          <div className="grid w-full gap-5 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
+            
+            {/* COLUNA PRINCIPAL */}
+            <div className="min-w-0 space-y-5">
+              
+              {/* ENDEREÇO */}
+              <section className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5 md:p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <svg
+                        className="h-5 w-5 shrink-0 text-purple"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
 
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <p className="font-medium text-gray-800">{user?.name}</p>
-                <p className="text-gray-600 text-sm">
-                  Avenida dos estados, 476, São Paulo, SP, 098430236
-                </p>
-              </div>
-            </section>
+                      <h2 className="text-base font-semibold text-gray-800 sm:text-lg">
+                        Endereço de entrega
+                      </h2>
+                    </div>
+                  </div>
+                </div>
 
-            {/* Produtos */}
-            <section className="border-b border-gray-200 pb-6">
-              <div className="flex items-center gap-2 mb-4">
-                <svg
-                  className="w-5 h-5 text-purple"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
-                </svg>
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Produtos
-                </h2>
-              </div>
+                <div className="rounded-xl border-2 bg-neutral-50 p-3 sm:p-4">
+                  <p className="break-words font-medium">
+                    {user?.name}
+                  </p>
 
-              <div className="space-y-3">
-                {cart.map((product) => (
-                  <section key={product.id}>
-                    <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3 border border-gray-200 gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center py-2">
-                          <img src={product.cover} alt={product.title} className="w-full sm:h-full h-16 object-contain" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-gray-800 mb-1">
-                            {product.title}
-                          </p>
-                          <span className="bg-gray-100 px-2 py-0.5 rounded-full text-sm">
-															Qtd: {product.amount}
-														</span>
-                        </div>
+                  <p className="mt-1 break-words text-sm leading-relaxed text-neutral-500">
+                    Avenida dos estados, 476
+                    <br />
+                    São Paulo, SP — 098430236
+                  </p>
+                </div>
+              </section>
+
+              {/* PRODUTOS */}
+              <section className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5 md:p-6">
+                <div className="mb-5">
+                  <div className="mb-4 flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5 shrink-0 text-purple"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+
+                    <h2 className="text-base font-semibold text-gray-800 sm:text-lg">
+                      Produtos
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="divide-y divide-neutral-100">
+                  {cart.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex min-w-0 items-center gap-3 py-4 first:pt-0 last:pb-0 sm:gap-4"
+                    >
+                      {/* Capa */}
+                      <div className="flex h-20 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-neutral-100 p-2 sm:h-24 sm:w-20">
+                        <img
+                          src={product.cover}
+                          alt={product.title}
+                          className="h-full w-full object-contain"
+                        />
                       </div>
-                      <p className="font-semibold text-gray-800">
+
+                      {/* Informações */}
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium sm:text-base text-wrap">
+                          {product.title}
+                        </p>
+
+                        <p className="mt-1 text-xs text-neutral-400 sm:text-sm">
+                          Quantidade: {product.amount}
+                        </p>
+                      </div>
+
+                      {/* Preço */}
+                      <p className="shrink-0 text-sm font-semibold sm:text-md">
                         {product.price.toLocaleString("pt-BR", {
                           style: "currency",
                           currency: "BRL",
                         })}
                       </p>
                     </div>
-                  </section>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
+              </section>
 
-            {/* Método de pagamento */}
-            <section className="border-b border-gray-200 pb-6">
-              <div className="flex items-center gap-2 mb-4">
+              {/* PAGAMENTO */}
+              <section className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5 md:p-6">
+                <div className="mb-5">
+                  <div className="mb-4 flex items-center gap-2">
+                    <svg
+                      className="h-5 w-5 shrink-0 text-purple"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                      />
+                    </svg>
+
+                    <h2 className="text-base font-semibold text-gray-800 sm:text-lg">
+                      Método de pagamento
+                    </h2>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {/* PIX */}
+                  <div className="relative rounded-xl border-2 border-purple bg-purple/5 p-3 sm:p-4">
+                    <div className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-purple text-xs text-white">
+                      ✓
+                    </div>
+
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple text-white">
+                      <span className="text-lg font-bold">◈</span>
+                    </div>
+
+                    <p className="font-semibold">Pix</p>
+
+                    <p className="mt-1 text-xs text-neutral-500">
+                      Pagamento instantâneo
+                    </p>
+                  </div>
+
+                  {/* CARTÃO */}
+                  <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3 opacity-50 sm:p-4">
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-200">
+                      <svg
+                        className="h-5 w-5 text-neutral-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.8"
+                          d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                        />
+                      </svg>
+                    </div>
+
+                    <p className="font-semibold text-neutral-500">
+                      Cartão
+                    </p>
+
+                    <p className="mt-1 text-xs text-neutral-400">
+                      Indisponível
+                    </p>
+                  </div>
+                </div>
+
+                {/* Informação Pix */}
+                <div className="mt-4 flex items-start gap-3 rounded-xl bg-neutral-50 p-3 sm:p-4">
+                  <div className="mt-0.5 shrink-0 text-purple">
+                    ◈
+                  </div>
+
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">
+                      Pagamento via Pix
+                    </p>
+
+                    <p className="mt-1 text-xs leading-relaxed text-neutral-500">
+                      Após confirmar o pedido, você receberá o QR Code para
+                      realizar o pagamento.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            {/* RESUMO */}
+            <aside className="min-w-0 lg:sticky lg:top-6 lg:h-fit">
+              <section className="rounded-2xl border border-neutral-200 bg-white p-4 sm:p-5 md:p-6">
+                <h2 className="text-lg font-semibold">
+                  Resumo do pedido
+                </h2>
+
+                <div className="my-5 space-y-3">
+                  <div className="flex justify-between gap-4 text-sm text-neutral-500">
+                    <span>Produtos</span>
+
+                    <span className="shrink-0">
+                      {total}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-4 text-sm text-neutral-500">
+                    <span>Frete</span>
+
+                    <span className="shrink-0 font-medium text-green-600">
+                      Grátis
+                    </span>
+                  </div>
+                </div>
+
+                <div className="border-t border-neutral-200 pt-5">
+                  <div className="flex items-end justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="text-sm text-neutral-500">
+                        Total a pagar
+                      </p>
+
+                      <p className="mt-1 text-xl font-bold sm:text-2xl">
+                        {total}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  className="
+                    mt-6
+                    w-full
+                    rounded-xl
+                    bg-purple
+                    px-5
+                    py-3.5
+                    text-sm
+                    font-semibold
+                    text-white
+                    transition
+                    hover:bg-purple/90
+                    active:scale-[0.98]
+                    sm:py-4
+                  "
+                >
+                  Confirmar pedido
+                </button>
+
+                <p className="mt-4 text-center text-xs leading-relaxed text-neutral-400">
+                  Ao confirmar, você concorda com os termos da compra.
+                </p>
+              </section>
+
+              {/* Segurança */}
+              <div className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-neutral-400">
                 <svg
-                  className="w-5 h-5 text-purple"
+                  className="h-4 w-4 shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -122,136 +310,17 @@ function Payment() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                    strokeWidth="1.8"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-7a2 2 0 00-2-2H6a2 2 0 00-2 2v7a2 2 0 002 2zm10-9V7a4 4 0 00-8 0v3h8z"
                   />
                 </svg>
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Método de pagamento
-                </h2>
+
+                Compra segura
               </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {/* Google Pay - Indisponível */}
-                <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center cursor-not-allowed opacity-50">
-                  <div className="text-2xl mb-1">📱</div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Google Pay
-                  </p>
-                  <span className="text-xs text-red-500 font-medium">
-                    Indisponível
-                  </span>
-                </div>
-
-                {/* Pix - Pré-selecionado */}
-                <div className="bg-green-50 border-2 border-green-500 rounded-lg p-3 text-center cursor-pointer transition-all duration-200 shadow-md relative">
-                  <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    ✓
-                  </div>
-                  {/* Ícone oficial do Pix */}
-                  <div className="flex justify-center mb-1">
-                    <svg
-                      width="48"
-                      height="48"
-                      viewBox="0 0 48 48"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle cx="24" cy="24" r="24" fill="#00B38F" />
-                      <path
-                        d="M14.4 20.8L12 23.2L14.4 25.6L16.8 23.2L14.4 20.8Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M16.8 23.2L19.2 20.8L21.6 23.2L19.2 25.6L16.8 23.2Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M21.6 23.2L24 20.8L26.4 23.2L24 25.6L21.6 23.2Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M26.4 23.2L28.8 20.8L31.2 23.2L28.8 25.6L26.4 23.2Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M31.2 23.2L33.6 20.8L36 23.2L33.6 25.6L31.2 23.2Z"
-                        fill="white"
-                      />
-                      <path
-                        d="M33.6 23.2L36 20.8L38.4 23.2L36 25.6L33.6 23.2Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-medium text-green-700">Pix</p>
-                  <span className="text-xs text-green-600 font-medium">
-                    Selecionado
-                  </span>
-                </div>
-
-                {/* Cartão Débito - Indisponível */}
-                <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center cursor-not-allowed opacity-50">
-                  <div className="text-2xl mb-1">💳</div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Cartão Débito
-                  </p>
-                  <span className="text-xs text-red-500 font-medium">
-                    Indisponível
-                  </span>
-                </div>
-
-                {/* Boleto Bancário - Indisponível */}
-                <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-center cursor-not-allowed opacity-50">
-                  <div className="text-2xl mb-1">📄</div>
-                  <p className="text-sm font-medium text-gray-500">
-                    Boleto Bancário
-                  </p>
-                  <span className="text-xs text-red-500 font-medium">
-                    Indisponível
-                  </span>
-                </div>
-              </div>
-
-              {/* Mensagem informativa sobre o Pix */}
-              <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
-                <p className="text-sm text-green-700 flex items-center gap-2">
-                  Pagamento via Pix selecionado. Você receberá o QR Code para
-                  pagamento.
-                </p>
-              </div>
-            </section>
-
-            {/* Resumo e botão */}
-            <section className="pt-2">
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                <div className="space-y-3">
-                  <div className="flex justify-between text-gray-600">
-                    <p>Total</p>
-                    <p className="font-medium">{total}</p>
-                  </div>
-                  <div className="flex justify-between text-gray-600">
-                    <p>Total do Frete</p>
-                    <p className="font-medium text-green-600">Grátis</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-3">
-                    <div className="flex justify-between text-lg font-bold text-gray-800">
-                      <p>Total a pagar</p>
-                      <p>{total}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <button className="w-full mt-6 bg-purple hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
-                  Fazer pedido
-                </button>
-              </div>
-            </section>
+            </aside>
           </div>
-        </main>
-      </div>
-      ) : 
-      <Navigate to="/" />}
+        </div>
+      </main>
     </>
   );
 }
